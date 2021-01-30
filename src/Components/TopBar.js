@@ -20,14 +20,14 @@ export class TopBar extends Component {
 
   render() {
     return (
-      <AppBar position="static">
+      <AppBar position="static" color="primary">
         <Toolbar>
           <IconButton edge="start" color="inherit" aria-label="menu">
             <MenuIcon />
           </IconButton>
           <Typography variant="h6">
             Lithium
-              </Typography>
+          </Typography>
           <div style={{ float: "right" }}>
             <Button color="inherit">Home</Button>
             <Button color="inherit">About</Button>

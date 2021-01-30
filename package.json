@@ -43,6 +43,9 @@
     ]
   },
   "devDependencies": {
+    "babel-eslint": "^10.1.0",
+    "eslint": "^7.18.0",
+    "eslint-plugin-flowtype": "^5.2.0",
     "flow-bin": "^0.143.1"
   }
 }
