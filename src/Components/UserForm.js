@@ -1,13 +1,28 @@
 import React, { Component } from 'react';
-import FormPriority from './FormPriority';
-import FormDishwasherUsage from './FormDishwasherUsage';
+import FormHousingInfo from './FormHousingInfo';
+import FormApplianceInfo from './FormApplianceInfo';
+import FormApplianceUsage from './FormApplianceUsage';
 import Success from './Success';
 
 export class UserForm extends Component {
   state = {
     step: 1,
-    priority: '',
-    dishwasherUsage: ''
+    location: '',
+    squareFootage: '',
+    monthlyUsage: '',
+    dishwasher: false,
+    stove: false,
+    oven: false,
+    fridge: false,
+    freezer: false,
+    washerDryer: false,
+    heat: false,
+    ac: false,
+    dishwasherUsage: '',
+    stoveUsage: '',
+    washerUsage: '',
+    dryerUsage: '',
+    acUsage: ''
   };
 
   // Proceed to next step
@@ -27,34 +42,53 @@ export class UserForm extends Component {
   };
 
   // Handle fields change
-  handleChange = input => e => {
+  handleFieldChange = input => e => {
     this.setState({ [input]: e.target.value });
+  };
+
+  // Handle checkbox change
+  handleCheckChange = input => e => {
+    this.setState({ [input]: !this.state[input] });
+    console.log(this.state)
   };
 
   render() {
     const { step } = this.state;
-    const { priority, dishwasherUsage } = this.state;
-    const values = { priority, dishwasherUsage };
+    const { priority, location, squareFootage, monthlyUsage, dishwasher, stove, oven, fridge,
+    freezer, washerDryer, ac, heat, dishwasherUsage, stoveUsage, washerUsage, dryerUsage, acUsage } = this.state;
+    const values = { priority, location, squareFootage, monthlyUsage, dishwasher, stove, oven, fridge,
+    freezer, washerDryer, ac, heat, dishwasherUsage, stoveUsage, washerUsage, dryerUsage, acUsage };
 
     switch (step) {
       case 1:
         return (
-          <FormPriority
+          <FormHousingInfo
             nextStep={this.nextStep}
-            handleChange={this.handleChange}
-            values={values}
+            handleChange={this.handleFieldChange}
           />
+            
         );
       case 2:
         return (
-          <FormDishwasherUsage
+          <FormApplianceInfo
             nextStep={this.nextStep}
             prevStep={this.prevStep}
-            handleChange={this.handleChange}
+            handleChange={this.handleCheckChange}
             values={values}
           />
         );
       case 3:
+        if(values.dishwasher || values.stove || values.washerDryer || values.ac) {
+          return (
+            <FormApplianceUsage
+              nextStep={this.nextStep}
+              prevStep={this.prevStep}
+              handleChange={this.handleFieldChange}
+              values={values}
+            />
+      )};
+          return <Success />;
+      case 4:
         return <Success />;
       default:
         (console.log('This is a multi-step form built with React.'))
