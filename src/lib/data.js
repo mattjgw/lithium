@@ -1,7 +1,9 @@
-export const device_names = ["microwave", "refrigerator", "stove", "oven", "tv",
+// @flow
+
+export const device_names: string[] = ["microwave", "refrigerator", "stove", "oven", "tv",
   "air conditioner", "hair dryer", "dishwasher", "clothes washer", "clothes dryer"]
 
-export const device_daily_freq = {
+export const device_daily_freq: { [string]: number } = {
   "microwave": 5,
   "refrigerator": 40,
   "stove": 1,
@@ -14,8 +16,8 @@ export const device_daily_freq = {
   "clothes dryer": 0.25,
 }
 
-export const device_cycle_length = {
-  "microwave": 3,
+export const device_cycle_length: { [string]: number } = {
+  "microwave": 5,
   "refrigerator": 12,
   "stove": 12,
   "oven": 30,
@@ -27,7 +29,7 @@ export const device_cycle_length = {
   "clothes dryer": 75,
 }
 
-export const device_wattage = {
+export const device_wattage: { [string]: number } = {
   "microwave": 1500,
   "refrigerator": 110,
   "stove": 2000,
