@@ -160,7 +160,7 @@ export class FormApplicanceInfo extends Component {
             <FormControlLabel
                 control={
                 <Checkbox
-                    checked={values.ac}
+                    checked={values.heat}
                     onChange={handleChange('heat')}
                     color="secondary"
                 />
