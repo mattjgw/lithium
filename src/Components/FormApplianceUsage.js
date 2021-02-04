@@ -157,7 +157,7 @@ export class FormApplicanceInfo extends Component {
             <Grid>
                 <Button
                     className={classes.back}
-                    color="secondary"
+                    color="primary"
                     variant="contained"
                     onClick={this.back}
                 >Back</Button>

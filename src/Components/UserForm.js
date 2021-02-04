@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import HomePage from './HomePage';
 import FormHousingInfo from './FormHousingInfo';
 import FormApplianceInfo from './FormApplianceInfo';
 import FormApplianceUsage from './FormApplianceUsage';
@@ -62,13 +63,20 @@ export class UserForm extends Component {
     switch (step) {
       case 1:
         return (
+          <HomePage
+            nextStep={this.nextStep}
+          />
+            
+        );
+      case 2:
+        return (
           <FormHousingInfo
             nextStep={this.nextStep}
             handleChange={this.handleFieldChange}
           />
             
         );
-      case 2:
+      case 3:
         return (
           <FormApplianceInfo
             nextStep={this.nextStep}
@@ -77,7 +85,7 @@ export class UserForm extends Component {
             values={values}
           />
         );
-      case 3:
+      case 4:
         if(values.dishwasher || values.stove || values.washerDryer || values.ac) {
           return (
             <FormApplianceUsage
@@ -88,7 +96,7 @@ export class UserForm extends Component {
             />
       )};
           return <Success />;
-      case 4:
+      case 5:
         return <Success />;
       default:
         (console.log('This is a multi-step form built with React.'))
