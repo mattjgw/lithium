@@ -42,7 +42,7 @@ function generate_device_cycles(devices: Device[]): { [Device]: number } {
   return device_cycles
 }
 
-export function generate_model(questionnaire: QuestionnaireResponse): number[] {
+export function generate_model(questionnaire: QuestionnaireResponse): { [Device]: number[] } {
   // Number of ticks to use
   let minutes = 60 * 24;
 
@@ -50,14 +50,21 @@ export function generate_model(questionnaire: QuestionnaireResponse): number[] {
   let devices = get_devices(questionnaire)
 
   // Total demand at each tick
-  let energy_demand: number[] = Array(minutes).fill(0);
+  let total_demand: number[] = Array(minutes).fill(0);
+  let device_demand: { [Device]: number[] } = {};
+  for (const device of devices) {
+    device_demand[device] = [...total_demand];
+  }
 
   let device_cycles = generate_device_cycles(devices);
+
 
   for (let i = 0; i < minutes; i++) {
     for (const device of devices) {
       if (device_cycles[device] > 0) {
-        energy_demand[i] += DEVICE_WATTAGE[device]
+        total_demand[i] += DEVICE_WATTAGE[device]
+        device_demand[device][i] += DEVICE_WATTAGE[device]
+
         device_cycles[device]--;
       } else {
         let threshold = DEVICE_DAILY_FREQ[device] / minutes;
@@ -68,7 +75,7 @@ export function generate_model(questionnaire: QuestionnaireResponse): number[] {
     }
   }
 
-  return energy_demand;
+  return device_demand;
 }
 
 export function generate_timestamps(): number[] {
