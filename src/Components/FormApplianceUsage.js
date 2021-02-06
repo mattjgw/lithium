@@ -97,9 +97,9 @@ export class FormApplicanceInfo extends Component {
 
             {values.dishwasher &&
             <RadioGroup className={classes.options} aria-label="priority" color="inherit" name="priority" value={values.dishWasherUsage} onChange={handleChange('dishWasherUsage')}>
-                <FormControlLabel value="1" control={<Radio />} label="Often" />
-                <FormControlLabel value="2" control={<Radio />} label="Sometimes" />
-                <FormControlLabel value="3" control={<Radio />} label="Almost never" />
+                <FormControlLabel value="1" control={<Radio />} label="1-2 times a week" />
+                <FormControlLabel value="2" control={<Radio />} label="3-5 times a week" />
+                <FormControlLabel value="3" control={<Radio />} label="More than 6 times a week" />
             </RadioGroup>
             }
 
@@ -108,9 +108,40 @@ export class FormApplicanceInfo extends Component {
             
             {values.stove && 
             <RadioGroup className={classes.options} aria-label="priority" color="inherit" name="priority" value={values.stoveUsage} onChange={handleChange('stoveUsage')}>
-                <FormControlLabel value="1" control={<Radio />} label="Often" />
-                <FormControlLabel value="2" control={<Radio />} label="Sometimes" />
-                <FormControlLabel value="3" control={<Radio />} label="Almost never" />
+                <FormControlLabel value="1" control={<Radio />} label="1-2 times a week" />
+                <FormControlLabel value="2" control={<Radio />} label="3-5 times a week" />
+                <FormControlLabel value="3" control={<Radio />} label="More than 6 times a week" />
+            </RadioGroup>
+            }
+
+            {values.oven && 
+            <Typography className={classes.question}>How often do you use your oven?</Typography>}
+            
+            {values.oven && 
+            <RadioGroup className={classes.options} aria-label="priority" color="inherit" name="priority" value={values.ovenUsage} onChange={handleChange('ovenUsage')}>
+                <FormControlLabel value="1" control={<Radio />} label="1-2 times a week" />
+                <FormControlLabel value="2" control={<Radio />} label="3-5 times a week" />
+                <FormControlLabel value="3" control={<Radio />} label="More than 6 times a week" />
+            </RadioGroup>
+            }
+
+            {values.fridge && 
+            <Typography className={classes.question}>Do you have a second fridge?</Typography>}
+            
+            {values.fridge && 
+            <RadioGroup className={classes.options} aria-label="priority" color="inherit" name="priority" value={values.secondFridge} onChange={handleChange('secondFridge')}>
+                <FormControlLabel value="1" control={<Radio />} label="Yes" />
+                <FormControlLabel value="2" control={<Radio />} label="No" />
+            </RadioGroup>
+            }
+
+             {values.freezer && 
+            <Typography className={classes.question}>Do you have a second freezer?</Typography>}
+            
+            {values.freezer && 
+            <RadioGroup className={classes.options} aria-label="priority" color="inherit" name="priority" value={values.secondFreezer} onChange={handleChange('secondFreezer')}>
+                <FormControlLabel value="1" control={<Radio />} label="Yes" />
+                <FormControlLabel value="2" control={<Radio />} label="No" />
             </RadioGroup>
             }
 
@@ -157,7 +188,7 @@ export class FormApplicanceInfo extends Component {
             <Grid>
                 <Button
                     className={classes.back}
-                    color="secondary"
+                    color="primary"
                     variant="contained"
                     onClick={this.back}
                 >Back</Button>
