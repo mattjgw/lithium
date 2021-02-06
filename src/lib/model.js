@@ -1,10 +1,11 @@
 // @flow
 
-import * as data from "./data";
+import "./data";
+import { DEVICE_CYCLE_LENGTH, DEVICE_DAILY_FREQ, DEVICE_NAMES, DEVICE_WATTAGE } from "./data";
 
 function generate_device_cycles(): { [string]: number } {
   let device_cycles = {};
-  for (let device of data.device_names) {
+  for (let device of DEVICE_NAMES) {
     device_cycles[device] = 0;
   }
 
@@ -20,12 +21,12 @@ export function generate_model(): number[] {
   for (let i = 0; i < minutes; i++) {
     for (const device in device_cycles) {
       if (device_cycles[device] > 0) {
-        energy_demand[i] += data.device_wattage[device]
+        energy_demand[i] += DEVICE_WATTAGE[device]
         device_cycles[device]--;
       } else {
-        let threshold = data.device_daily_freq[device] / minutes;
+        let threshold = DEVICE_DAILY_FREQ[device] / minutes;
         if (Math.random() < threshold) {
-          device_cycles[device] = data.device_cycle_length[device]
+          device_cycles[device] = DEVICE_CYCLE_LENGTH[device]
         }
       }
     }
