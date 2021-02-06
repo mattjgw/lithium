@@ -1,44 +1,49 @@
 // @flow
 
-export const DEVICE_NAMES: string[] = ["microwave", "refrigerator", "stove", "oven", "tv",
-  "air conditioner", "hair dryer", "dishwasher", "clothes washer", "clothes dryer"]
+import type { Device } from './types';
 
-export const DEVICE_DAILY_FREQ: { [string]: number } = {
-  "microwave": 5,
-  "refrigerator": 40,
+export const DEVICE_DAILY_FREQ: { [Device]: number } = {
+  "dishwasher": 1,
   "stove": 1,
   "oven": 0.45,
-  "tv": 1.62,
-  "air conditioner": 1.5,
-  "hair dryer": 1.5,
-  "dishwasher": 1,
-  "clothes washer": 0.36,
-  "clothes dryer": 0.25,
+  "washer": 0.36,
+  "dryer": 0.25,
+  "heat": 3,
+  "ac": 1.5,
+  "fridge": 40,
+  "freezer": 5,
+  "secondFridge": 40,
+  "secondFreezer": 5,
+  // "microwave": 5,
+  // "tv": 1.62,
+  // "hair dryer": 1.5,
 }
 
-export const DEVICE_CYCLE_LENGTH: { [string]: number } = {
-  "microwave": 5,
-  "refrigerator": 12,
+export const DEVICE_CYCLE_LENGTH: { [Device]: number } = {
+  "dishwasher": 75,
   "stove": 12,
   "oven": 30,
-  "tv": 90,
-  "air conditioner": 120,
-  "hair dryer": 7,
-  "dishwasher": 75,
-  "clothes washer": 55,
-  "clothes dryer": 75,
+  "washer": 55,
+  "dryer": 75,
+  "heat": 15,
+  "ac": 120,
+  "fridge": 12,
+  "freezer": 10,
+  "secondFridge": 12,
+  "secondFreezer": 10,
 }
 
-export const DEVICE_WATTAGE: { [string]: number } = {
-  "microwave": 1500,
-  "refrigerator": 110,
+export const DEVICE_WATTAGE: { [Device]: number } = {
+  "dishwasher": 1140,
   "stove": 2000,
   "oven": 3000,
-  "tv": 105,
-  "air conditioner": 1300,
-  "hair dryer": 1600,
-  "dishwasher": 1140,
-  "clothes washer": 1200,
-  "clothes dryer": 5000,
+  "washer": 1200,
+  "dryer": 5000,
+  "heat": 1000,
+  "ac": 1300,
+  "fridge": 110,
+  "freezer": 150,
+  "secondFridge": 90,
+  "secondFreezer": 80,
 }
 

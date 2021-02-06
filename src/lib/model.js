@@ -1,25 +1,61 @@
 // @flow
 
 import "./data";
-import { DEVICE_CYCLE_LENGTH, DEVICE_DAILY_FREQ, DEVICE_NAMES, DEVICE_WATTAGE } from "./data";
+import { DEVICE_CYCLE_LENGTH, DEVICE_DAILY_FREQ, DEVICE_WATTAGE } from "./data";
+import type { QuestionnaireResponse, Device } from './types'
 
-function generate_device_cycles(): { [string]: number } {
+function get_devices(questionnaire: QuestionnaireResponse): Device[] {
+  let devices: Device[] = [];
+  if (questionnaire.dishwasher) {
+    devices.push("dishwasher")
+  } if (questionnaire.stove) {
+    devices.push("stove")
+  } if (questionnaire.oven) {
+    devices.push("oven")
+  } if (questionnaire.washer) {
+    devices.push("washer")
+  } if (questionnaire.dryer) {
+    devices.push("dryer")
+  } if (questionnaire.heat) {
+    devices.push("heat")
+  } if (questionnaire.ac) {
+    devices.push("ac")
+  } if (questionnaire.fridge) {
+    devices.push("fridge")
+  } if (questionnaire.freezer) {
+    devices.push("freezer")
+  } if (questionnaire.secondFridge) {
+    devices.push("secondFridge")
+  } if (questionnaire.secondFreezer) {
+    devices.push("secondFreezer")
+  }
+
+  return devices;
+}
+
+function generate_device_cycles(devices: Device[]): { [Device]: number } {
   let device_cycles = {};
-  for (let device of DEVICE_NAMES) {
+  for (let device of devices) {
     device_cycles[device] = 0;
   }
 
   return device_cycles
 }
 
-export function generate_model(): number[] {
+export function generate_model(questionnaire: QuestionnaireResponse): number[] {
+  // Number of ticks to use
   let minutes = 60 * 24;
+
+  // Relevant devices
+  let devices = get_devices(questionnaire)
+
+  // Total demand at each tick
   let energy_demand: number[] = Array(minutes).fill(0);
 
-  let device_cycles = generate_device_cycles();
+  let device_cycles = generate_device_cycles(devices);
 
   for (let i = 0; i < minutes; i++) {
-    for (const device in device_cycles) {
+    for (const device of devices) {
       if (device_cycles[device] > 0) {
         energy_demand[i] += DEVICE_WATTAGE[device]
         device_cycles[device]--;

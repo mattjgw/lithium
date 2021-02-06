@@ -1,5 +1,17 @@
 // @flow
 
+export type Device = "dishwasher" |
+  "stove" |
+  "oven" |
+  "washer" |
+  "dryer" |
+  "heat" |
+  "ac" |
+  "fridge" |
+  "freezer" |
+  "secondFridge" |
+  "secondFreezer"
+
 export type QuestionnaireResponse = {
   location: string,
   // used to identify outage patterns
@@ -10,16 +22,17 @@ export type QuestionnaireResponse = {
 
   monthlySummerUsage: number, // kWh per month
   monthlyWinterUsage: number, // kWh per month
-  // used to scale 
+  // used to scale total energy consumption
 
   dishwasher: boolean,
   stove: boolean,
   oven: boolean,
-  fridge: boolean,
-  freezer: boolean,
-  washerDryer: boolean,
+  washer: boolean,
+  dryer: boolean,
   heat: boolean,
   ac: boolean,
+  fridge: boolean,
+  freezer: boolean,
   secondFridge: boolean,
   secondFreezer: boolean,
   // indicates whether the user owns each device,
