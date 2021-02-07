@@ -6,7 +6,7 @@ import C3Chart from 'react-c3js';
 import 'c3/c3.css';
 import type { Device } from '../lib/types';
 
-export const UsageGraph = (props: { data: { [Device]: number[] }, axis: number[] }): React.Node => {
+export const UsageGraph = (props: { data: { [any]: number[] }, axis: number[] }): React.Node => {
   let { data, axis } = props;
 
   let cols = [['x'].concat(axis)];
@@ -14,8 +14,6 @@ export const UsageGraph = (props: { data: { [Device]: number[] }, axis: number[]
   for (const [device, usage] of Object.entries(data)) {
     cols.push([device].concat(usage));
   }
-
-
 
   let ticks = [];
   for (let i = 0; i < 60 * 24; i += 60) {
@@ -29,18 +27,14 @@ export const UsageGraph = (props: { data: { [Device]: number[] }, axis: number[]
         xFormat: '%H:%M:%S',
         columns: cols,
         type: 'area',
-        groups: [["dishwasher",
-          "stove",
-          "oven",
-          "washer",
-          "dryer",
-          "heat",
-          "ac",
-          "fridge",
-          "freezer",
-          "secondFridge",
-          "secondFreezer"]],
+        groups: [[...Object.keys(data)]],
         order: 'desc',
+      }}
+      interaction={{
+        enabled: false
+      }}
+      transition={{
+        duration: 0
       }}
       point={{
         show: false

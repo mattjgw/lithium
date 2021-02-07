@@ -42,7 +42,10 @@ function generate_device_cycles(devices: Device[]): { [Device]: number } {
   return device_cycles
 }
 
-export function generate_model(questionnaire: QuestionnaireResponse): { [Device]: number[] } {
+export function generate_model(questionnaire: QuestionnaireResponse): {
+  total_demand: number[],
+  device_demand: { [Device]: number[] }
+} {
   // Number of ticks to use
   let minutes = 60 * 24;
 
@@ -75,7 +78,7 @@ export function generate_model(questionnaire: QuestionnaireResponse): { [Device]
     }
   }
 
-  return device_demand;
+  return { total_demand, device_demand };
 }
 
 export function generate_timestamps(): number[] {
