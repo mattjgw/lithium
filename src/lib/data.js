@@ -2,6 +2,9 @@
 
 import type { Device } from './types';
 
+export const DEVICE_NAMES: Device[] = ["dishwasher", "stove", "oven", "washer",
+  "dryer", "heat", "ac", "fridge", "freezer", "secondFridge", "secondFreezer"]
+
 export const DEVICE_DAILY_FREQ: { [Device]: number } = {
   "dishwasher": 1,
   "stove": 1,
@@ -46,4 +49,3 @@ export const DEVICE_WATTAGE: { [Device]: number } = {
   "secondFridge": 90,
   "secondFreezer": 80,
 }
-

@@ -5,6 +5,7 @@ import * as React from 'react';
 import { useEffect, useState } from "react";
 import UsageGraph from '../Components/UsageGraph';
 import { generate_model, generate_timestamps } from '../lib/model';
+import type { Model } from '../lib/types'
 
 export const GraphTest = (): React.Node => {
   let [totalDemand: { [string]: number[]}, setTotalDemand] = useState({});
@@ -13,7 +14,7 @@ export const GraphTest = (): React.Node => {
   let [showDevices, setShowDevices] = useState(false);
 
   useEffect(() => {
-    let data = generate_model({
+    let data: Model = generate_model({
       location: "Canada",
       squareFootage: 450,
       monthlySummerUsage: 100,
