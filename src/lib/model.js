@@ -1,10 +1,22 @@
 // @flow
 
 import { DEVICE_CYCLE_LENGTH, DEVICE_DAILY_FREQ, DEVICE_NAMES, DEVICE_WATTAGE } from "./data";
-import type { QuestionnaireResponse, Device, Model } from './types'
+import type { QuestionnaireResponse, Device, Model, ModelParams } from './types'
 
-function get_devices(questionnaire: QuestionnaireResponse): Device[] {
-  return DEVICE_NAMES.filter(device => questionnaire[device])
+function get_devices(questionnaire: QuestionnaireResponse, params: ModelParams): Device[] {
+  return DEVICE_NAMES.filter(device => (
+    questionnaire[device] && ((device) => {
+      // Special cases
+      switch (device) {
+        case "ac":
+          return params.summer
+        case "heat":
+          return !params.summer
+        default:
+          return true
+      }
+    })(device)
+  ))
 }
 
 function init_device_cycles(devices: Device[]): { [Device]: number } {
@@ -16,12 +28,12 @@ function init_device_cycles(devices: Device[]): { [Device]: number } {
   return device_cycles
 }
 
-export function generate_model(questionnaire: QuestionnaireResponse): Model {
+export function generate_model(questionnaire: QuestionnaireResponse, params: ModelParams): Model {
   // Number of ticks to use
   let minutes = 60 * 24;
 
   // Relevant devices
-  let devices = get_devices(questionnaire)
+  let devices = get_devices(questionnaire, params)
 
   // Total demand at each tick
   let total_demand: number[] = Array(minutes).fill(0);
@@ -50,6 +62,23 @@ export function generate_model(questionnaire: QuestionnaireResponse): Model {
       }
     }
   }
+
+  // Scale demand to match actual amount
+  let daily_target_demand = (params.summer
+    ? questionnaire.monthlySummerUsage
+    : questionnaire.monthlyWinterUsage)
+    * 1000 // kWh to Wh
+    / 30.5; // monthly -> daily
+
+  // Divide by 60 to convert watt-minutes to watt-hours
+  let daily_actual_demand = total_demand.reduce((a, b) => a + b, 0) / 60;
+  let scaling_factor = daily_target_demand / daily_actual_demand;
+
+  total_demand = total_demand.map((watts) => watts * scaling_factor);
+  for (let device of devices) {
+    device_demand[device] = device_demand[device].map((watts) => watts * scaling_factor)
+  }
+
 
   return { total_demand, device_demand };
 }

@@ -17,8 +17,8 @@ export const GraphTest = (): React.Node => {
     let data: Model = generate_model({
       location: "Canada",
       squareFootage: 450,
-      monthlySummerUsage: 100,
-      monthlyWinterUsage: 80,
+      monthlySummerUsage: 600,
+      monthlyWinterUsage: 800,
       dishwasher: true,
       stove: true,
       oven: true,
@@ -36,7 +36,7 @@ export const GraphTest = (): React.Node => {
       washerUsage: 2,
       dryerUsage: 2,
       acUsage: 15,
-    });
+    }, { summer: true });
 
     setTotalDemand({ total: data.total_demand });
     setDeviceDemand(data.device_demand);

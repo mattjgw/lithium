@@ -16,8 +16,8 @@ export const SimulatorTest = (): React.Node => {
       generate_model({
         location: "Canada",
         squareFootage: 450,
-        monthlySummerUsage: 100,
-        monthlyWinterUsage: 80,
+        monthlySummerUsage: 600,
+        monthlyWinterUsage: 800,
         dishwasher: true,
         stove: true,
         oven: true,
@@ -35,7 +35,10 @@ export const SimulatorTest = (): React.Node => {
         washerUsage: 2,
         dryerUsage: 2,
         acUsage: 15,
-      })
+      },
+        {
+          summer: true
+        })
     }
     setDone(new Date().getTime() - start.getTime());
   }, [])

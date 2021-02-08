@@ -51,6 +51,10 @@ export type QuestionnaireResponse = {
   // in the summer
 }
 
+export type ModelParams = {
+  summer: boolean
+}
+
 export type Model = {
   total_demand: number[],
   device_demand: { [Device]: number[] },
