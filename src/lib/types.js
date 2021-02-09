@@ -47,8 +47,7 @@ export type QuestionnaireResponse = {
   // used to scale the hourly probability of each cycle
 
   acUsage: number,
-  // estimated days of air conditioning per month
-  // in the summer
+  // estimated days of air conditioning per month in the summer
 }
 
 export type ModelParams = {
@@ -56,6 +55,16 @@ export type ModelParams = {
 }
 
 export type Model = {
-  total_demand: number[],
+  total_demand: number[], // watts at a given point in time
   device_demand: { [Device]: number[] },
+}
+
+export type Outage = {
+  start: number, // minutes after midnight
+  end: number,
+}
+
+export type SimulatorResult = {
+  peak_demand: number, // watts
+  total_demand: number, // watt-hours
 }
