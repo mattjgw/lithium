@@ -1,11 +1,8 @@
 // @flow
 
-import { Button } from '@material-ui/core';
 import * as React from 'react';
 import { useEffect, useState } from "react";
-import UsageGraph from '../Components/UsageGraph';
-import { generate_model, generate_timestamps } from '../lib/model';
-import type { Model } from '../lib/types'
+import { generate_model } from '../lib/model';
 
 export const SimulatorTest = (): React.Node => {
   let [done, setDone] = useState(false)

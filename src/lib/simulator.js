@@ -1,5 +1,4 @@
-import { DEVICE_CYCLE_LENGTH, DEVICE_DAILY_FREQ, DEVICE_NAMES, DEVICE_WATTAGE } from "./data";
-import type { QuestionnaireResponse, Device, Model, Outage, SimulatorResult } from './types'
+import type { Model, Outage, SimulatorResult } from './types'
 
 export function simulate_outage(model: Model, outage: Outage): SimulatorResult {
   let result = {
