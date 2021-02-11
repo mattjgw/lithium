@@ -1,20 +1,24 @@
 // @flow
 
+import { Button } from '@material-ui/core';
 import * as React from 'react';
 import { useEffect, useState } from "react";
 import UsageGraph from '../Components/UsageGraph';
 import { generate_model, generate_timestamps } from '../lib/model';
+import type { Model } from '../lib/types'
 
 export const GraphTest = (): React.Node => {
-  let [data, setData] = useState({});
+  let [totalDemand: { [string]: number[]}, setTotalDemand] = useState({});
+  let [deviceDemand: { [string]: number[]}, setDeviceDemand] = useState({});
   let [axis, setAxis] = useState([]);
+  let [showDevices, setShowDevices] = useState(false);
 
   useEffect(() => {
-    setData(generate_model({
+    let data: Model = generate_model({
       location: "Canada",
       squareFootage: 450,
-      monthlySummerUsage: 100,
-      monthlyWinterUsage: 80,
+      monthlySummerUsage: 600,
+      monthlyWinterUsage: 800,
       dishwasher: true,
       stove: true,
       oven: true,
@@ -32,11 +36,24 @@ export const GraphTest = (): React.Node => {
       washerUsage: 2,
       dryerUsage: 2,
       acUsage: 15,
-    }));
+    }, { summer: true });
+
+    setTotalDemand({ total: data.total_demand });
+    setDeviceDemand(data.device_demand);
     setAxis(generate_timestamps());
   }, [])
 
-  return <UsageGraph data={data} axis={axis} />
+  if (showDevices) {
+    return <div key="show">
+      <UsageGraph data={deviceDemand} axis={axis} />
+      <Button variant="contained" onClick={() => setShowDevices(false)}>Hide devices</Button>
+    </div>
+  } else {
+    return <div key="hide">
+      <UsageGraph data={totalDemand} axis={axis} />
+      <Button variant="contained" onClick={() => setShowDevices(true)}>Show devices</Button>
+    </div>
+  }
 }
 
 export default GraphTest;

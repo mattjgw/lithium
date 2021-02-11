@@ -50,3 +50,12 @@ export type QuestionnaireResponse = {
   // estimated days of air conditioning per month
   // in the summer
 }
+
+export type ModelParams = {
+  summer: boolean
+}
+
+export type Model = {
+  total_demand: number[],
+  device_demand: { [Device]: number[] },
+}
