@@ -31,7 +31,7 @@ const styles = {
   subTitle: {
     height: 60,
     fontFamily: "sans-serif",
-    fontWeight: 30,
+    fontWeight: 'bold',
     fontSize: 24,
     color: '#2e7d32',
   },
@@ -73,7 +73,7 @@ export class FormPriority extends Component {
             <Typography className={classes.title}>Questionnaire</Typography>
             <Typography className={classes.subTitle}>Housing Information</Typography>
 
-            <Typography className={classes.question}>Where do you live?</Typography>
+            <Typography className={classes.question}>What province do you live in?</Typography>
             <br />
                 <TextField
                 className={classes.textBox}
@@ -97,7 +97,7 @@ export class FormPriority extends Component {
                 />
             <br />
 
-            <Typography className={classes.question}>What is your average monthly power usage during the summer (kWh)?</Typography>
+            <Typography className={classes.question}>Check your hydro bill. What was your average monthly power usage during the summer (kWh)?</Typography>
             <br />
                 <TextField
                 className={classes.textBox}
@@ -109,7 +109,7 @@ export class FormPriority extends Component {
                 />
             <br />
 
-            <Typography className={classes.question}>What is your average monthly power usage during the winter (kWh)?</Typography>
+            <Typography className={classes.question}>Check your hydro bill. What was your average monthly power usage during the winter (kWh)?</Typography>
             <br />
                 <TextField
                 className={classes.textBox}

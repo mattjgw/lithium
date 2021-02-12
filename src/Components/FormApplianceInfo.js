@@ -36,7 +36,7 @@ const styles = {
   subTitle: {
     height: 60,
     fontFamily: "sans-serif",
-    fontWeight: 30,
+    fontWeight: 'bold',
     fontSize: 24,
     color: '#2e7d32',
   },

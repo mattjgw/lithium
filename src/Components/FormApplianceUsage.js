@@ -38,7 +38,7 @@ const styles = {
   subTitle: {
     height: 60,
     fontFamily: "sans-serif",
-    fontWeight: 30,
+    fontWeight: 'bold',
     fontSize: 24,
     color: '#2e7d32',
   },
@@ -51,11 +51,11 @@ const styles = {
     marginBottom: 20
   },
   textBox: {
-    height: 120,
+    height: 60,
     width: 300
   },
   options: {
-    height: 140,
+    height: 90,
   },
   shift: {
     marginLeft: 20,
@@ -92,37 +92,43 @@ export class FormApplicanceInfo extends Component {
             <Typography className={classes.subTitle}>Appliance Usage</Typography>
 
             {values.dishwasher && 
-            <Typography className={classes.question}>How often do you use your dishwasher?</Typography>
+            <Typography className={classes.question}>How many times is your dishwasher used each week?</Typography>
             }
 
             {values.dishwasher &&
-            <RadioGroup className={classes.options} aria-label="priority" color="inherit" name="priority" value={values.dishWasherUsage} onChange={handleChange('dishWasherUsage')}>
-                <FormControlLabel value="1" control={<Radio />} label="1-2 times a week" />
-                <FormControlLabel value="2" control={<Radio />} label="3-5 times a week" />
-                <FormControlLabel value="3" control={<Radio />} label="More than 6 times a week" />
-            </RadioGroup>
+            <TextField
+              className={classes.textBox}
+              placeholder="Weekly usage"
+              onChange={handleChange('dishwasherUsage')}
+              margin="normal"
+              fullWidth
+            />
             }
 
             {values.stove && 
-            <Typography className={classes.question}>How often do you use your stove?</Typography>}
+            <Typography className={classes.question}>How many times is your stove used each week?</Typography>}
             
             {values.stove && 
-            <RadioGroup className={classes.options} aria-label="priority" color="inherit" name="priority" value={values.stoveUsage} onChange={handleChange('stoveUsage')}>
-                <FormControlLabel value="1" control={<Radio />} label="1-2 times a week" />
-                <FormControlLabel value="2" control={<Radio />} label="3-5 times a week" />
-                <FormControlLabel value="3" control={<Radio />} label="More than 6 times a week" />
-            </RadioGroup>
+            <TextField
+              className={classes.textBox}
+              placeholder="Weekly usage"
+              onChange={handleChange('stoveUsage')}
+              margin="normal"
+              fullWidth
+            />
             }
 
             {values.oven && 
-            <Typography className={classes.question}>How often do you use your oven?</Typography>}
+            <Typography className={classes.question}>How many times is your oven used each week?</Typography>}
             
             {values.oven && 
-            <RadioGroup className={classes.options} aria-label="priority" color="inherit" name="priority" value={values.ovenUsage} onChange={handleChange('ovenUsage')}>
-                <FormControlLabel value="1" control={<Radio />} label="1-2 times a week" />
-                <FormControlLabel value="2" control={<Radio />} label="3-5 times a week" />
-                <FormControlLabel value="3" control={<Radio />} label="More than 6 times a week" />
-            </RadioGroup>
+            <TextField
+              className={classes.textBox}
+              placeholder="Weekly usage"
+              onChange={handleChange('ovenUsage')}
+              margin="normal"
+              fullWidth
+            />
             }
 
             {values.fridge && 
@@ -146,29 +152,29 @@ export class FormApplicanceInfo extends Component {
             }
 
             {values.washerDryer && 
-            <Typography className={classes.question}>How many loads of laundry do you do each week?</Typography>}
+            <Typography className={classes.question}>How many times is your washer used each week?</Typography>}
 
             {values.washerDryer && 
-            <Typography className={classes.question}>How many loads of laundry do you do each week?</Typography>
-            &&
-            <RadioGroup className={classes.options} aria-label="priority" color="inherit" name="priority" value={values.washerUsage} onChange={handleChange('washerUsage')}>
-                <FormControlLabel value="1" control={<Radio />} label="1-2" />
-                <FormControlLabel value="2" control={<Radio />} label="3-5" />
-                <FormControlLabel value="3" control={<Radio />} label="6+" />
-            </RadioGroup>
+            <TextField
+              className={classes.textBox}
+              placeholder="Weekly usage"
+              onChange={handleChange('washerUsage')}
+              margin="normal"
+              fullWidth
+            />
             }
 
             {values.washerDryer && 
-            <Typography className={classes.question}>How times do you use the dryer each week?</Typography>}
+            <Typography className={classes.question}>How many times is your dryer used each week?</Typography>}
 
             {values.washerDryer && 
-            <Typography className={classes.question}>How times do you use the dryer each week?</Typography>
-            &&
-            <RadioGroup className={classes.options} aria-label="priority" color="inherit" name="priority" value={values.dryerUsage} onChange={handleChange('dryerUsage')}>
-                <FormControlLabel value="1" control={<Radio />} label="1-2" />
-                <FormControlLabel value="2" control={<Radio />} label="3-5" />
-                <FormControlLabel value="3" control={<Radio />} label="6+" />
-            </RadioGroup>
+            <TextField
+              className={classes.textBox}
+              placeholder="Weekly usage"
+              onChange={handleChange('dryerUsage')}
+              margin="normal"
+              fullWidth
+            />
             }
 
             {values.ac && 
@@ -178,7 +184,6 @@ export class FormApplicanceInfo extends Component {
             <TextField
                 className={classes.textBox}
                 placeholder="Days per month"
-                label="Days per month"
                 onChange={handleChange('acUsage')}
                 margin="normal"
                 fullWidth
