@@ -49,3 +49,12 @@ export const DEVICE_WATTAGE: { [Device]: number } = {
   "secondFridge": 90,
   "secondFreezer": 80,
 }
+
+export const HOURLY_FREQ = {
+  "meals": [
+    0.01, 0.005, 0.005, 0.005, 0.005, 0.01,
+    0.03, 0.06, 0.07, 0.06, 0.04, 0.075,
+    0.08, 0.07, 0.06, 0.02, 0.03, 0.05,
+    0.08, 0.1, 0.08, 0.04, 0.01, 0.005
+  ],
+}
