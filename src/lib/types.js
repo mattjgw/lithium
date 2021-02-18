@@ -20,6 +20,8 @@ export type QuestionnaireResponse = {
   // square feet of house: used to estimate air conditioning
   // and heating usage (cycle length and frequency)
 
+  residents: number, // number of people who live in the house
+
   monthlySummerUsage: number, // kWh per month
   monthlyWinterUsage: number, // kWh per month
   // used to scale total energy consumption
@@ -48,6 +50,8 @@ export type QuestionnaireResponse = {
 
   acUsage: number,
   // estimated days of air conditioning per month in the summer
+
+  additionalDevices: DeviceDefinition[],
 }
 
 export type ModelParams = {
@@ -67,4 +71,17 @@ export type Outage = {
 export type SimulatorResult = {
   peak_demand: number, // watts
   total_demand: number, // watt-hours
+}
+
+export type DeviceDefinition = {
+  name: string,
+  freq: number, // cycles per day
+  cycle_length: number, // length of cycle
+  wattage: number, // nominal watts when turned on
+}
+
+export type StorageSolution = {
+  name: string,
+  capacity: number, // watt-hours
+  peak_discharge: number, // watts
 }

@@ -13,6 +13,7 @@ export const SimulatorTest = (): React.Node => {
       generate_model({
         location: "Canada",
         squareFootage: 450,
+        residents: 4,
         monthlySummerUsage: 600,
         monthlyWinterUsage: 800,
         dishwasher: true,
@@ -32,6 +33,7 @@ export const SimulatorTest = (): React.Node => {
         washerUsage: 2,
         dryerUsage: 2,
         acUsage: 15,
+        additionalDevices: []
       },
         {
           summer: true
