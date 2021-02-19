@@ -79,7 +79,6 @@ export function generate_model(questionnaire: QuestionnaireResponse, params: Mod
     device_demand[device] = device_demand[device].map((watts) => watts * scaling_factor)
   }
 
-
   return { total_demand, device_demand };
 }
 

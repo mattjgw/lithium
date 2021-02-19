@@ -1,11 +1,8 @@
 // @flow
 
-import { Button } from '@material-ui/core';
 import * as React from 'react';
 import { useEffect, useState } from "react";
-import UsageGraph from '../Components/UsageGraph';
-import { generate_model, generate_timestamps } from '../lib/model';
-import type { Model } from '../lib/types'
+import { generate_model } from '../lib/model';
 
 export const SimulatorTest = (): React.Node => {
   let [done, setDone] = useState(false)
@@ -16,6 +13,7 @@ export const SimulatorTest = (): React.Node => {
       generate_model({
         location: "Canada",
         squareFootage: 450,
+        residents: 4,
         monthlySummerUsage: 600,
         monthlyWinterUsage: 800,
         dishwasher: true,
@@ -35,6 +33,7 @@ export const SimulatorTest = (): React.Node => {
         washerUsage: 2,
         dryerUsage: 2,
         acUsage: 15,
+        additionalDevices: []
       },
         {
           summer: true

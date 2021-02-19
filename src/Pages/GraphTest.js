@@ -5,6 +5,7 @@ import * as React from 'react';
 import { useEffect, useState } from "react";
 import UsageGraph from '../Components/UsageGraph';
 import { generate_model, generate_timestamps } from '../lib/model';
+import { simulate_outage } from '../lib/simulator';
 import type { Model } from '../lib/types'
 
 export const GraphTest = (): React.Node => {
@@ -14,9 +15,10 @@ export const GraphTest = (): React.Node => {
   let [showDevices, setShowDevices] = useState(false);
 
   useEffect(() => {
-    let data: Model = generate_model({
+    let model: Model = generate_model({
       location: "Canada",
       squareFootage: 450,
+      residents: 4,
       monthlySummerUsage: 600,
       monthlyWinterUsage: 800,
       dishwasher: true,
@@ -36,11 +38,14 @@ export const GraphTest = (): React.Node => {
       washerUsage: 2,
       dryerUsage: 2,
       acUsage: 15,
+      additionalDevices: [],
     }, { summer: true });
 
-    setTotalDemand({ total: data.total_demand });
-    setDeviceDemand(data.device_demand);
+    setTotalDemand({ total: model.total_demand });
+    setDeviceDemand(model.device_demand);
     setAxis(generate_timestamps());
+
+    console.log(simulate_outage(model, { start: 60, end: 120 }));
   }, [])
 
   if (showDevices) {

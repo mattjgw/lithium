@@ -1,10 +1,8 @@
 // @flow
 
 import * as React from 'react';
-import { useEffect, useState } from "react";
 import C3Chart from 'react-c3js';
 import 'c3/c3.css';
-import type { Device } from '../lib/types';
 
 export const UsageGraph = (props: { data: { [any]: number[] }, axis: number[] }): React.Node => {
   let { data, axis } = props;
