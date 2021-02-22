@@ -1,12 +1,10 @@
 // @flow
-
-import { Button } from '@material-ui/core';
 import * as React from 'react';
 import { useEffect, useState } from "react";
 import PerformanceGraph from '../Components/PerformanceGraph';
-import { generate_model, generate_timestamps } from '../lib/model';
+import { generate_model } from '../lib/model';
 import { simulate_outage } from '../lib/simulator';
-import type { Model, Outage } from '../lib/types'
+import type { Model } from '../lib/types'
 
 export const PerformanceTest = (): React.Node => {
   let [data, setData] = useState({});

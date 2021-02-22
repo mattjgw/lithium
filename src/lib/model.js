@@ -1,28 +1,35 @@
 // @flow
 
 import { DEVICE_CYCLE_LENGTH, DEVICE_DAILY_FREQ, DEVICE_NAMES, DEVICE_WATTAGE } from "./data";
-import type { QuestionnaireResponse, Device, Model, ModelParams } from './types'
+import type { QuestionnaireResponse, Model, ModelParams, DeviceDefinition } from './types'
 
-function get_devices(questionnaire: QuestionnaireResponse, params: ModelParams): Device[] {
-  return DEVICE_NAMES.filter(device => (
-    questionnaire[device] && ((device) => {
-      // Special cases
-      switch (device) {
-        case "ac":
-          return params.summer
-        case "heat":
-          return !params.summer
-        default:
-          return true
-      }
-    })(device)
-  ))
+function get_devices(questionnaire: QuestionnaireResponse, params: ModelParams): DeviceDefinition[] {
+  let devices = [...questionnaire.additionalDevices];
+
+  for (let name of DEVICE_NAMES) {
+    // special cases
+    if (name === "ac" && !params.summer) {
+      continue;
+    } else if (name === "heat" && params.summer) {
+      continue;
+    }
+
+    devices.push({
+      name: name,
+      freq: DEVICE_DAILY_FREQ[name],
+      cycle_length: DEVICE_CYCLE_LENGTH[name],
+      wattage: DEVICE_WATTAGE[name],
+      pattern: null
+    })
+  }
+
+  return devices;
 }
 
-function init_device_cycles(devices: Device[]): { [Device]: number } {
+function init_device_cycles(devices: DeviceDefinition[]): { [string]: number } {
   let device_cycles = {};
   for (let device of devices) {
-    device_cycles[device] = 0;
+    device_cycles[device.name] = 0;
   }
 
   return device_cycles
@@ -37,9 +44,9 @@ export function generate_model(questionnaire: QuestionnaireResponse, params: Mod
 
   // Total demand at each tick
   let total_demand: number[] = Array(minutes).fill(0);
-  let device_demand: { [Device]: number[] } = {};
+  let device_demand: { [string]: number[] } = {};
   for (const device of devices) {
-    device_demand[device] = [...total_demand];
+    device_demand[device.name] = [...total_demand];
   }
 
   // Track cycle progression for each device, indicates remaining ticks
@@ -47,17 +54,17 @@ export function generate_model(questionnaire: QuestionnaireResponse, params: Mod
 
   for (let i = 0; i < minutes; i++) {
     for (const device of devices) {
-      if (device_cycles[device] > 0) {
+      if (device_cycles[device.name] > 0) {
         // Decrement cycle length and add wattage to demand
-        device_cycles[device]--;
+        device_cycles[device.name]--;
 
-        total_demand[i] += DEVICE_WATTAGE[device]
-        device_demand[device][i] += DEVICE_WATTAGE[device]
+        total_demand[i] += device.wattage
+        device_demand[device.name][i] += device.wattage
       } else {
         // Start a new cycle if random value is above threshold
-        let threshold = DEVICE_DAILY_FREQ[device] / minutes;
+        let threshold = device.freq / minutes;
         if (Math.random() < threshold) {
-          device_cycles[device] = DEVICE_CYCLE_LENGTH[device]
+          device_cycles[device.name] = device.cycle_length
         }
       }
     }
@@ -72,11 +79,12 @@ export function generate_model(questionnaire: QuestionnaireResponse, params: Mod
 
   // Divide by 60 to convert watt-minutes to watt-hours
   let daily_actual_demand = total_demand.reduce((a, b) => a + b, 0) / 60;
-  let scaling_factor = daily_target_demand / daily_actual_demand;
 
+  // Scale values to match power bill
+  let scaling_factor = daily_target_demand / daily_actual_demand;
   total_demand = total_demand.map((watts) => watts * scaling_factor);
   for (let device of devices) {
-    device_demand[device] = device_demand[device].map((watts) => watts * scaling_factor)
+    device_demand[device.name] = device_demand[device.name].map((watts) => watts * scaling_factor)
   }
 
   return { total_demand, device_demand };
