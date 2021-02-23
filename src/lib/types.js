@@ -10,7 +10,8 @@ export type Device = "dishwasher" |
   "fridge" |
   "freezer" |
   "secondFridge" |
-  "secondFreezer"
+  "secondFreezer" |
+  "custom"
 
 export type QuestionnaireResponse = {
   location: string,
@@ -60,7 +61,7 @@ export type ModelParams = {
 
 export type Model = {
   total_demand: number[], // watts at a given point in time
-  device_demand: { [Device]: number[] },
+  device_demand: { [string]: number[] },
 }
 
 export type Outage = {
@@ -78,6 +79,7 @@ export type DeviceDefinition = {
   freq: number, // cycles per day
   cycle_length: number, // length of cycle
   wattage: number, // nominal watts when turned on
+  pattern: ?string
 }
 
 export type StorageSolution = {

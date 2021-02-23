@@ -50,7 +50,7 @@ export const DEVICE_WATTAGE: { [Device]: number } = {
   "secondFreezer": 80,
 }
 
-export const HOURLY_FREQ = {
+export const HOURLY_PATTERNS = {
   "meals": [
     0.01, 0.005, 0.005, 0.005, 0.005, 0.01,
     0.03, 0.06, 0.07, 0.06, 0.04, 0.075,
