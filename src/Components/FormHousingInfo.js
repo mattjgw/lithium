@@ -55,7 +55,7 @@ const styles = {
 };
 
 
-export class FormPriority extends Component {
+export class FormHousingInfo extends Component {
   continue = e => {
     e.preventDefault();
     this.props.nextStep();
@@ -132,4 +132,4 @@ export class FormPriority extends Component {
   }
 }
 
-export default withStyles(styles)(FormPriority);
+export default withStyles(styles)(FormHousingInfo);

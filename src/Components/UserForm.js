@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import FormHousingInfo from './FormHousingInfo';
 import FormApplianceInfo from './FormApplianceInfo';
 import FormApplianceUsage from './FormApplianceUsage';
-import Success from './Success';
+import Recommendations from './Recommendations';
 
 export class UserForm extends Component {
   state = {
@@ -92,9 +92,9 @@ export class UserForm extends Component {
               values={values}
             />
       )};
-          return <Success />;
+          return <Recommendations />;
       case 4:
-        return <Success />;
+        return <Recommendations />;
       default:
         (console.log('This is a multi-step form built with React.'))
     }

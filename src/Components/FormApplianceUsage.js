@@ -68,7 +68,7 @@ const styles = {
 };
 
 
-export class FormApplicanceInfo extends Component {
+export class FormApplicanceUsage extends Component {
   continue = e => {
     e.preventDefault();
     this.props.nextStep();
@@ -206,4 +206,4 @@ export class FormApplicanceInfo extends Component {
   }
 }
 
-export default withStyles(styles)(FormApplicanceInfo);
+export default withStyles(styles)(FormApplicanceUsage);
