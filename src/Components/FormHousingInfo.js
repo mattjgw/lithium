@@ -8,6 +8,10 @@ import green from '@material-ui/core/colors/green';
 import { Typography } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
+import InputLabel from '@material-ui/core/InputLabel';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+
 
 const theme = createMuiTheme({
   palette: {
@@ -62,7 +66,7 @@ export class FormPriority extends Component {
   };
 
   render() {
-    const { handleChange } = this.props;
+    const { values, handleChange } = this.props;
     const { classes } = this.props;
     return (
       <MuiThemeProvider theme= {theme}> 
@@ -73,16 +77,34 @@ export class FormPriority extends Component {
             <Typography className={classes.title}>Questionnaire</Typography>
             <Typography className={classes.subTitle}>Housing Information</Typography>
 
-            <Typography className={classes.question}>Where do you live?</Typography>
+            <Typography className={classes.question}>What province/territory do you live in?</Typography>
             <br />
-                <TextField
-                className={classes.textBox}
-                placeholder="Location"
-                label="Location"
+            <FormControl>
+              <InputLabel htmlFor="age-native-simple"></InputLabel>
+              <Select
+                native
                 onChange={handleChange('location')}
-                margin="normal"
-                fullWidth
-                />
+                inputProps={{
+                  id: 'age-native-simple',
+                }}
+              >
+                <option aria-label="None" value="" />
+                <option value={10}>Ontario</option>
+                <option value={20}>Quebec</option>
+                <option value={40}>Manitoba</option>
+                <option value={50}>Saskatchewan</option>
+                <option value={60}>Alberta</option>
+                <option value={70}>British Columbia</option>
+                <option value={80}>Newfoundland and Labrador</option>
+                <option value={90}>Nova Scotia</option>
+                <option value={100}>New Brunswick</option>
+                <option value={110}>Prince Edward Island</option>
+                <option value={120}>Nunavut</option>
+                <option value={130}>Northwest Territories</option>
+                <option value={140}>Yukon</option>
+
+              </Select>
+            </FormControl>
             <br />
 
             <Typography className={classes.question}>What is the square footage of your home?</Typography>
@@ -92,6 +114,18 @@ export class FormPriority extends Component {
                 placeholder="Square Footage"
                 label="Square Footage"
                 onChange={handleChange('squareFootage')}
+                margin="normal"
+                fullWidth
+                />
+            <br />
+
+            <Typography className={classes.question}>How many people live in your home?</Typography>
+            <br />
+                <TextField
+                className={classes.textBox}
+                placeholder="Size of houshold"
+                label="Size of houshold"
+                onChange={handleChange('numberOfPeopleInHousehold')}
                 margin="normal"
                 fullWidth
                 />
