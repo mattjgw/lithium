@@ -9,6 +9,10 @@ import green from '@material-ui/core/colors/green';
 import { Typography } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import Checkbox from '@material-ui/core/Checkbox';
+import TextField from '@material-ui/core/TextField';
+import InputLabel from '@material-ui/core/InputLabel';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
 
 
 const theme = createMuiTheme({
@@ -24,8 +28,8 @@ const theme = createMuiTheme({
 });
 
 const styles = {
-    buttons: {
-        marginTop: 60
+  buttons: {
+    marginTop: 60
   },
   title: {
     height: 80,
@@ -56,13 +60,20 @@ const styles = {
     height: 140,
   },
   shift: {
+    height: 1000,
     marginLeft: 20,
     marginTop: 20
   },
   back: {
-      marginTop: -10,
-      marginRight: 10
-  }
+    marginTop: -10,
+    marginRight: 10
+  },
+  quantity: {
+    width: 40
+  },
+  windOrCentral: {
+    width: 150
+}
 };
 
 
@@ -78,7 +89,7 @@ export class FormApplicanceInfo extends Component {
   };
 
   render() {
-    const { values, handleChange } = this.props;
+    const { values, handleCheckChange, handleFieldChange } = this.props;
     const { classes } = this.props;
     return (
       <MuiThemeProvider theme= {theme}> 
@@ -95,73 +106,133 @@ export class FormApplicanceInfo extends Component {
                 control={
                 <Checkbox
                     checked={values.dishwasher}
-                    onChange={handleChange('dishwasher')}
+                    onChange={handleCheckChange('dishwasher')}
                     color="secondary"
                 />
                 }
                 label="Dishwasher"
             />
+            {!!values.dishwasher &&
+              <TextField
+                className={classes.quantity}
+                id="standard-number"
+                label="Quantity"
+                type="number"
+                value={values.dishwasher}
+                onChange={handleFieldChange('dishwasher')}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+            />}
             <br />
             <FormControlLabel
                 control={
                 <Checkbox
                     checked={values.stove}
-                    onChange={handleChange('stove')}
+                    onChange={handleCheckChange('stove')}
                     color="secondary"
                 />
                 }
                 label="Electric Stove"
             />
+            {!!values.stove &&
+              <TextField
+                className={classes.quantity}
+                id="standard-number"
+                label="Quantity"
+                type="number"
+                value={values.stove}
+                onChange={handleFieldChange('stove')}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+            />}
              <br />
             <FormControlLabel
                 control={
                 <Checkbox
                     checked={values.oven}
-                    onChange={handleChange('oven')}
+                    onChange={handleCheckChange('oven')}
                     color="secondary"
                 />
                 }
                 label="Electric Oven"
             />
+            {!!values.oven &&
+              <TextField
+                className={classes.quantity}
+                id="standard-number"
+                label="Quantity"
+                type="number"
+                value={values.oven}
+                onChange={handleFieldChange('oven')}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+            />}
             <br />
             <FormControlLabel
                 control={
                 <Checkbox
                     checked={values.fridge}
-                    onChange={handleChange('fridge')}
+                    onChange={handleCheckChange('fridge')}
                     color="secondary"
                 />
                 }
                 label="Refrigerator"
             />
+            {!!values.fridge &&
+              <TextField
+                className={classes.quantity}
+                id="standard-number"
+                label="Quantity"
+                type="number"
+                value={values.fridge}
+                onChange={handleFieldChange('fridge')}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+            />}
             <br />
             <FormControlLabel
                 control={
                 <Checkbox
                     checked={values.freezer}
-                    onChange={handleChange('freezer')}
+                    onChange={handleCheckChange('freezer')}
                     color="secondary"
                 />
                 }
                 label="Freezer"
             />
+            {!!values.freezer &&
+              <TextField
+                className={classes.quantity}
+                id="standard-number"
+                label="Quantity"
+                type="number"
+                value={values.freezer}
+                onChange={handleFieldChange('freezer')}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+            />}
             <br />
             <FormControlLabel
                 control={
                 <Checkbox
                     checked={values.washerDryer}
-                    onChange={handleChange('washerDryer')}
+                    onChange={handleCheckChange('washerDryer')}
                     color="secondary"
                 />
                 }
                 label="Washer/Dryer"
             />
-             <br />
+            <br />
             <FormControlLabel
                 control={
                 <Checkbox
                     checked={values.heat}
-                    onChange={handleChange('heat')}
+                    onChange={handleCheckChange('heat')}
                     color="secondary"
                 />
                 }
@@ -172,14 +243,53 @@ export class FormApplicanceInfo extends Component {
                 control={
                 <Checkbox
                     checked={values.ac}
-                    onChange={handleChange('ac')}
+                    onChange={handleCheckChange('ac')}
                     color="secondary"
                 />
                 }
                 label="Air Conditioning"
             />
+            {!!values.ac &&
+              <FormControl className={classes.windOrCentral} >
+              <InputLabel htmlFor="age-native-simple">Wind or Central?</InputLabel>
+              <Select
+                style={{width: 120}}
+                native
+                label="Wind or Central?"
+                onChange={handleFieldChange('windOrCentral')}
+                inputProps={{
+                  id: 'age-native-simple',
+                }}
+              >
+                <option value={0}>Central</option>
+                <option value={1}>Wind</option>
+              </Select>
+              </FormControl>
+            }
+            {(values.windOrCentral === '1' && !!values.ac) &&
+              <TextField
+              className={classes.quantity}
+              id="standard-number"
+              label="Quantity"
+              type="number"
+              value={values.windowUnits}
+              onChange={handleFieldChange('windowUnits')}
+              InputLabelProps={{
+                shrink: true,
+              }} 
+            />}
             <br />
-
+            <FormControlLabel
+                control={
+                <Checkbox
+                    checked={values.eeBulbs}
+                    onChange={handleCheckChange('eeBulbs')}
+                    color="secondary"
+                />
+                }
+                label="Energy efficient light bulbs"
+            />
+            <br />
             <Grid>
                 <Button
                     className={classes.back}

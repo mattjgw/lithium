@@ -8,6 +8,10 @@ import green from '@material-ui/core/colors/green';
 import { Typography } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
+import InputLabel from '@material-ui/core/InputLabel';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+
 
 const theme = createMuiTheme({
   palette: {
@@ -62,7 +66,7 @@ export class FormPriority extends Component {
   };
 
   render() {
-    const { handleChange } = this.props;
+    const { values, handleChange } = this.props;
     const { classes } = this.props;
     return (
       <MuiThemeProvider theme= {theme}> 
@@ -73,16 +77,34 @@ export class FormPriority extends Component {
             <Typography className={classes.title}>Questionnaire</Typography>
             <Typography className={classes.subTitle}>Housing Information</Typography>
 
-            <Typography className={classes.question}>Where do you live?</Typography>
+            <Typography className={classes.question}>What province/territory do you live in?</Typography>
             <br />
-                <TextField
-                className={classes.textBox}
-                placeholder="Location"
-                label="Location"
+            <FormControl>
+              <InputLabel htmlFor="age-native-simple"></InputLabel>
+              <Select
+                native
                 onChange={handleChange('location')}
-                margin="normal"
-                fullWidth
-                />
+                inputProps={{
+                  id: 'age-native-simple',
+                }}
+              >
+                <option aria-label="None" value="" />
+                <option value={'ON'}>Ontario</option>
+                <option value={'QC'}>Quebec</option>
+                <option value={'MB'}>Manitoba</option>
+                <option value={'SK'}>Saskatchewan</option>
+                <option value={'AB'}>Alberta</option>
+                <option value={'BC'}>British Columbia</option>
+                <option value={'NL'}>Newfoundland and Labrador</option>
+                <option value={'NS'}>Nova Scotia</option>
+                <option value={'NB'}>New Brunswick</option>
+                <option value={'PE'}>Prince Edward Island</option>
+                <option value={'NU'}>Nunavut</option>
+                <option value={'NT'}>Northwest Territories</option>
+                <option value={'YT'}>Yukon</option>
+
+              </Select>
+            </FormControl>
             <br />
 
             <Typography className={classes.question}>What is the square footage of your home?</Typography>
@@ -90,8 +112,22 @@ export class FormPriority extends Component {
                 <TextField
                 className={classes.textBox}
                 placeholder="Square Footage"
+                type='number'
                 label="Square Footage"
                 onChange={handleChange('squareFootage')}
+                margin="normal"
+                fullWidth
+                />
+            <br />
+
+            <Typography className={classes.question}>How many people live in your home?</Typography>
+            <br />
+                <TextField
+                className={classes.textBox}
+                placeholder="Size of houshold"
+                type='number'
+                label="Size of houshold"
+                onChange={handleChange('numberOfPeopleInHousehold')}
                 margin="normal"
                 fullWidth
                 />
@@ -102,8 +138,9 @@ export class FormPriority extends Component {
                 <TextField
                 className={classes.textBox}
                 placeholder="Monthly usage"
+                type='number'
                 label="Monthly usage"
-                onChange={handleChange('monthlyUsage')}
+                onChange={handleChange('summerUsage')}
                 margin="normal"
                 fullWidth
                 />
@@ -114,8 +151,9 @@ export class FormPriority extends Component {
                 <TextField
                 className={classes.textBox}
                 placeholder="Monthly usage"
+                type='number'
                 label="Monthly usage"
-                onChange={handleChange('monthlyUsage')}
+                onChange={handleChange('winterUsage')}
                 margin="normal"
                 fullWidth
                 />

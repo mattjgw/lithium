@@ -11,6 +11,7 @@ import green from '@material-ui/core/colors/green';
 import { Typography } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
+import ApplianceUsageQuestion from './ApplianceUsageQuestion';
 
 
 const theme = createMuiTheme({
@@ -91,90 +92,51 @@ export class FormApplicanceInfo extends Component {
             <Typography className={classes.title}>Questionnaire</Typography>
             <Typography className={classes.subTitle}>Appliance Usage</Typography>
 
-            {values.dishwasher && 
-            <Typography className={classes.question}>How often do you use your dishwasher?</Typography>
+            {!!values.dishwasher && 
+            <ApplianceUsageQuestion 
+              applianceName='dishwasher'
+              applianceKey='dishwasherUsage'
+              handleChange={handleChange}
+              usage={values.dishwasherUsage}
+            />
+            }
+            {!!values.stove && 
+              <ApplianceUsageQuestion 
+              applianceName='stove'
+              applianceKey='stoveUsage'
+              handleChange={handleChange}
+              usage={values.stoveUsage}
+            />
+            }
+            {!!values.oven && 
+              <ApplianceUsageQuestion 
+              applianceName='oven'
+              applianceKey='ovenUsage'
+              handleChange={handleChange}
+              usage={values.ovenUsage}
+            />
             }
 
-            {values.dishwasher &&
-            <RadioGroup className={classes.options} aria-label="priority" color="inherit" name="priority" value={values.dishWasherUsage} onChange={handleChange('dishWasherUsage')}>
-                <FormControlLabel value="1" control={<Radio />} label="1-2 times a week" />
-                <FormControlLabel value="2" control={<Radio />} label="3-5 times a week" />
-                <FormControlLabel value="3" control={<Radio />} label="More than 6 times a week" />
-            </RadioGroup>
+            {!!values.washerDryer && 
+            <ApplianceUsageQuestion 
+              applianceName='washer'
+              applianceKey='washerUsage'
+              handleChange={handleChange}
+              usage={values.washerUsage}
+            />
             }
-
-            {values.stove && 
-            <Typography className={classes.question}>How often do you use your stove?</Typography>}
-            
-            {values.stove && 
-            <RadioGroup className={classes.options} aria-label="priority" color="inherit" name="priority" value={values.stoveUsage} onChange={handleChange('stoveUsage')}>
-                <FormControlLabel value="1" control={<Radio />} label="1-2 times a week" />
-                <FormControlLabel value="2" control={<Radio />} label="3-5 times a week" />
-                <FormControlLabel value="3" control={<Radio />} label="More than 6 times a week" />
-            </RadioGroup>
+            {!!values.washerDryer && 
+            <ApplianceUsageQuestion 
+              applianceName='dryer'
+              applianceKey='dryerUsage'
+              handleChange={handleChange}
+              usage={values.dryerUsage}
+            />
             }
-
-            {values.oven && 
-            <Typography className={classes.question}>How often do you use your oven?</Typography>}
-            
-            {values.oven && 
-            <RadioGroup className={classes.options} aria-label="priority" color="inherit" name="priority" value={values.ovenUsage} onChange={handleChange('ovenUsage')}>
-                <FormControlLabel value="1" control={<Radio />} label="1-2 times a week" />
-                <FormControlLabel value="2" control={<Radio />} label="3-5 times a week" />
-                <FormControlLabel value="3" control={<Radio />} label="More than 6 times a week" />
-            </RadioGroup>
-            }
-
-            {values.fridge && 
-            <Typography className={classes.question}>Do you have a second fridge?</Typography>}
-            
-            {values.fridge && 
-            <RadioGroup className={classes.options} aria-label="priority" color="inherit" name="priority" value={values.secondFridge} onChange={handleChange('secondFridge')}>
-                <FormControlLabel value="1" control={<Radio />} label="Yes" />
-                <FormControlLabel value="2" control={<Radio />} label="No" />
-            </RadioGroup>
-            }
-
-             {values.freezer && 
-            <Typography className={classes.question}>Do you have a second freezer?</Typography>}
-            
-            {values.freezer && 
-            <RadioGroup className={classes.options} aria-label="priority" color="inherit" name="priority" value={values.secondFreezer} onChange={handleChange('secondFreezer')}>
-                <FormControlLabel value="1" control={<Radio />} label="Yes" />
-                <FormControlLabel value="2" control={<Radio />} label="No" />
-            </RadioGroup>
-            }
-
-            {values.washerDryer && 
-            <Typography className={classes.question}>How many loads of laundry do you do each week?</Typography>}
-
-            {values.washerDryer && 
-            <Typography className={classes.question}>How many loads of laundry do you do each week?</Typography>
-            &&
-            <RadioGroup className={classes.options} aria-label="priority" color="inherit" name="priority" value={values.washerUsage} onChange={handleChange('washerUsage')}>
-                <FormControlLabel value="1" control={<Radio />} label="1-2" />
-                <FormControlLabel value="2" control={<Radio />} label="3-5" />
-                <FormControlLabel value="3" control={<Radio />} label="6+" />
-            </RadioGroup>
-            }
-
-            {values.washerDryer && 
-            <Typography className={classes.question}>How times do you use the dryer each week?</Typography>}
-
-            {values.washerDryer && 
-            <Typography className={classes.question}>How times do you use the dryer each week?</Typography>
-            &&
-            <RadioGroup className={classes.options} aria-label="priority" color="inherit" name="priority" value={values.dryerUsage} onChange={handleChange('dryerUsage')}>
-                <FormControlLabel value="1" control={<Radio />} label="1-2" />
-                <FormControlLabel value="2" control={<Radio />} label="3-5" />
-                <FormControlLabel value="3" control={<Radio />} label="6+" />
-            </RadioGroup>
-            }
-
-            {values.ac && 
+            {!!values.ac && 
             <Typography className={classes.question}>In the summer, how many days a month do you use your air conditioner?</Typography>}
 
-            {values.ac && 
+            {!!values.ac && 
             <TextField
                 className={classes.textBox}
                 placeholder="Days per month"
