@@ -261,19 +261,19 @@ export class FormApplicanceInfo extends Component {
                   id: 'age-native-simple',
                 }}
               >
-                <option value={20}>Central</option>
-                <option value={10}>Wind</option>
+                <option value={0}>Central</option>
+                <option value={1}>Wind</option>
               </Select>
               </FormControl>
             }
-            {(values.windOrCentral === '10' && !!values.ac) &&
+            {(values.windOrCentral === '1' && !!values.ac) &&
               <TextField
               className={classes.quantity}
               id="standard-number"
               label="Quantity"
               type="number"
-              value={values.windUnits}
-              onChange={handleFieldChange('windUnits')}
+              value={values.windowUnits}
+              onChange={handleFieldChange('windowUnits')}
               InputLabelProps={{
                 shrink: true,
               }} 

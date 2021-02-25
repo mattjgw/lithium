@@ -89,19 +89,19 @@ export class FormPriority extends Component {
                 }}
               >
                 <option aria-label="None" value="" />
-                <option value={10}>Ontario</option>
-                <option value={20}>Quebec</option>
-                <option value={40}>Manitoba</option>
-                <option value={50}>Saskatchewan</option>
-                <option value={60}>Alberta</option>
-                <option value={70}>British Columbia</option>
-                <option value={80}>Newfoundland and Labrador</option>
-                <option value={90}>Nova Scotia</option>
-                <option value={100}>New Brunswick</option>
-                <option value={110}>Prince Edward Island</option>
-                <option value={120}>Nunavut</option>
-                <option value={130}>Northwest Territories</option>
-                <option value={140}>Yukon</option>
+                <option value={'ON'}>Ontario</option>
+                <option value={'QC'}>Quebec</option>
+                <option value={'MB'}>Manitoba</option>
+                <option value={'SK'}>Saskatchewan</option>
+                <option value={'AB'}>Alberta</option>
+                <option value={'BC'}>British Columbia</option>
+                <option value={'NL'}>Newfoundland and Labrador</option>
+                <option value={'NS'}>Nova Scotia</option>
+                <option value={'NB'}>New Brunswick</option>
+                <option value={'PE'}>Prince Edward Island</option>
+                <option value={'NU'}>Nunavut</option>
+                <option value={'NT'}>Northwest Territories</option>
+                <option value={'YT'}>Yukon</option>
 
               </Select>
             </FormControl>
@@ -112,6 +112,7 @@ export class FormPriority extends Component {
                 <TextField
                 className={classes.textBox}
                 placeholder="Square Footage"
+                type='number'
                 label="Square Footage"
                 onChange={handleChange('squareFootage')}
                 margin="normal"
@@ -124,6 +125,7 @@ export class FormPriority extends Component {
                 <TextField
                 className={classes.textBox}
                 placeholder="Size of houshold"
+                type='number'
                 label="Size of houshold"
                 onChange={handleChange('numberOfPeopleInHousehold')}
                 margin="normal"
@@ -136,8 +138,9 @@ export class FormPriority extends Component {
                 <TextField
                 className={classes.textBox}
                 placeholder="Monthly usage"
+                type='number'
                 label="Monthly usage"
-                onChange={handleChange('monthlyUsage')}
+                onChange={handleChange('summerUsage')}
                 margin="normal"
                 fullWidth
                 />
@@ -148,8 +151,9 @@ export class FormPriority extends Component {
                 <TextField
                 className={classes.textBox}
                 placeholder="Monthly usage"
+                type='number'
                 label="Monthly usage"
-                onChange={handleChange('monthlyUsage')}
+                onChange={handleChange('winterUsage')}
                 margin="normal"
                 fullWidth
                 />

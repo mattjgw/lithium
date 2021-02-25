@@ -8,9 +8,10 @@ export class UserForm extends Component {
   state = {
     step: 1,
     location: '',
-    squareFootage: '',
-    numberOfPeopleInHousehold: '',
-    monthlyUsage: '',
+    squareFootage: 0,
+    numberOfPeopleInHousehold: 0,
+    summerUsage: 0,
+    winterUsage: 0,
     dishwasher: 0,
     stove: 0,
     oven: 0,
@@ -26,7 +27,7 @@ export class UserForm extends Component {
     dryerUsage: 0,
     acUsage: 0,
     windOrCentral: 0,
-    windUnits: 0
+    windowUnits: 0
   };
 
   // Proceed to next step
@@ -47,7 +48,7 @@ export class UserForm extends Component {
 
   // Handle fields change
   handleFieldChange = input => e => {
-    this.setState({ [input]: e.target.value });
+    this.setState({ [input]: e.target.type === 'number' ? parseInt(e.target.value) : e.target.value });
     console.log(this.state)
   };
 
@@ -61,12 +62,12 @@ export class UserForm extends Component {
 
   render() {
     const { step } = this.state;
-    const { priority, location, squareFootage, monthlyUsage, dishwasher, stove, oven, fridge,
+    const { priority, location, squareFootage, summerUsage, winterUsage, dishwasher, stove, oven, fridge,
     freezer, washerDryer, ac, heat, dishwasherUsage, stoveUsage, ovenUsage, secondFridge, secondFreezer, 
-    washerUsage, dryerUsage, acUsage, windOrCentral } = this.state;
-    const values = { priority, location, squareFootage, monthlyUsage, dishwasher, stove, oven, fridge,
+    washerUsage, dryerUsage, acUsage, windOrCentral, windowUnits } = this.state;
+    const values = { priority, location, squareFootage, summerUsage, winterUsage, dishwasher, stove, oven, fridge,
     freezer, washerDryer, ac, heat, dishwasherUsage, stoveUsage, ovenUsage, secondFridge, secondFreezer, 
-    washerUsage, dryerUsage, acUsage, windOrCentral };
+    washerUsage, dryerUsage, acUsage, windOrCentral, windowUnits };
 
     switch (step) {
       case 1:
