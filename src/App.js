@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { HashRouter, Route, Switch } from 'react-router-dom';
 import { UserForm } from './Components/UserForm';
 import { AirtableTest } from './Pages/AirtableTest';
 import GraphTest from './Pages/GraphTest';
@@ -9,15 +9,15 @@ import SimulatorTest from './Pages/SimulatorTest';
 const App = () => {
   return (
     <div className="App">
-      <BrowserRouter>
+      <HashRouter>
         <Switch>
           <Route exact path="/" component={UserForm}></Route>
-          <Route exact path="/airtable" component={AirtableTest}></Route>
-          <Route exact path="/graph" component={GraphTest}></Route>
-          <Route exact path="/simulator" component={SimulatorTest}></Route>
-          <Route exact path="/performance" component={PerformanceTest}></Route>
+          <Route path="/airtable" component={AirtableTest}></Route>
+          <Route path="/graph" component={GraphTest}></Route>
+          <Route path="/simulator" component={SimulatorTest}></Route>
+          <Route path="/performance" component={PerformanceTest}></Route>
         </Switch>
-      </BrowserRouter>
+      </HashRouter>
     </div>
   );
 }

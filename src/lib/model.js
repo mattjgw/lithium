@@ -3,7 +3,9 @@
 import { DEVICE_CYCLE_LENGTH, DEVICE_DAILY_FREQ, DEVICE_NAMES, DEVICE_WATTAGE } from "./data";
 import type { QuestionnaireResponse, Model, ModelParams, DeviceDefinition } from './types'
 
-function get_devices(questionnaire: QuestionnaireResponse, params: ModelParams): DeviceDefinition[] {
+// parses questionnaire and params into a list of devices to simulate
+// result should be passed to generate_model
+export function get_devices(questionnaire: QuestionnaireResponse, params: ModelParams): DeviceDefinition[] {
   let devices = [...questionnaire.additionalDevices];
 
   for (let name of DEVICE_NAMES) {
@@ -23,6 +25,17 @@ function get_devices(questionnaire: QuestionnaireResponse, params: ModelParams):
     })
   }
 
+  // lights
+  for (let i = 0; i < questionnaire.residents; i++) {
+    devices.push({
+      name: `lights${i}`,
+      freq: 6,
+      cycle_length: 1,
+      wattage: questionnaire.efficientLights ? 20 : 100,
+      pattern: null,
+    })
+  }
+
   return devices;
 }
 
@@ -35,12 +48,10 @@ function init_device_cycles(devices: DeviceDefinition[]): { [string]: number } {
   return device_cycles
 }
 
-export function generate_model(questionnaire: QuestionnaireResponse, params: ModelParams): Model {
+// generates a demand model over the course of a day
+export function generate_model(devices: DeviceDefinition[], daily_target_demand: number): Model {
   // Number of ticks to use
   let minutes = 60 * 24;
-
-  // Relevant devices
-  let devices = get_devices(questionnaire, params)
 
   // Total demand at each tick
   let total_demand: number[] = Array(minutes).fill(0);
@@ -71,11 +82,6 @@ export function generate_model(questionnaire: QuestionnaireResponse, params: Mod
   }
 
   // Scale demand to match actual amount
-  let daily_target_demand = (params.summer
-    ? questionnaire.monthlySummerUsage
-    : questionnaire.monthlyWinterUsage)
-    * 1000 // kWh to Wh
-    / 30.5; // monthly -> daily
 
   // Divide by 60 to convert watt-minutes to watt-hours
   let daily_actual_demand = total_demand.reduce((a, b) => a + b, 0) / 60;
