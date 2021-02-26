@@ -56,7 +56,7 @@ export const PerformanceTest = (props: {
       end: 1425,
     }
   });
-  let [recommendations, useRecommendations] = useState([
+  let [recommendations, setRecommendations] = useState([
     {
       name: "nothing",
       capacity: 0,
@@ -90,15 +90,12 @@ export const PerformanceTest = (props: {
   })
 
   useEffect(() => {
-
-
     let perf_data = {};
-    let rec_data = {};
 
     for (let rec of recommendations) {
       perf_data[rec.name] = [];
 
-      for (let [outage_name, outage] of Object.entries(outages)) {
+      for (let [_, outage] of Object.entries(outages)) {
         let total = 0;
         for (let model of models) {
           let result = simulate_outage(model, outage);
@@ -112,7 +109,7 @@ export const PerformanceTest = (props: {
     }
 
     setData(perf_data);
-  }, [])
+  }, [models, outages, recommendations])
 
   return <>
     <h2>Outages prevented (out of 30) per recommendation and outage type</h2>

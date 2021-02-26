@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
-import FormHousingInfo from '../Components/FormHousingInfo';
 import FormApplianceInfo from '../Components/FormApplianceInfo';
 import FormApplianceUsage from '../Components/FormApplianceUsage';
+import FormHousingInfo from '../Components/FormHousingInfo';
 import Success from '../Components/Success';
-import { Link } from 'react-router-dom';
-import { Button } from '@material-ui/core';
 
 export class UserForm extends Component {
   state = {
@@ -106,21 +104,9 @@ export class UserForm extends Component {
             />
           )
         };
-        return <Link to={{ pathname: "/performance", state: { response: this.state } }}>
-          <Button
-            color="secondary"
-            variant="contained"
-            onClick={this.continue}
-          >Continue</Button>
-        </Link>
+        return <Success />
       case 4:
-        return <Link to={{ pathname: "/performance", state: { response: this.state } }}>
-          <Button
-            color="secondary"
-            variant="contained"
-            onClick={this.continue}
-          >Get recommendations</Button>
-        </Link>
+        return <Success />
       default:
         (console.log('This is a multi-step form built with React.'))
     }
