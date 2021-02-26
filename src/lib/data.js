@@ -2,6 +2,7 @@
 
 import type { Device, QuestionnaireResponse } from './types';
 
+// defined devices that we know the duty cycle and wattages of
 export const DEVICE_NAMES: Device[] = ["dishwasher", "stove", "oven", "washer",
   "dryer", "heat", "ac", "fridge", "freezer"]
 

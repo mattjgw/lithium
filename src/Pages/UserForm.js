@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import FormHousingInfo from './FormHousingInfo';
-import FormApplianceInfo from './FormApplianceInfo';
-import FormApplianceUsage from './FormApplianceUsage';
-import Success from './Success';
+import FormHousingInfo from '../Components/FormHousingInfo';
+import FormApplianceInfo from '../Components/FormApplianceInfo';
+import FormApplianceUsage from '../Components/FormApplianceUsage';
+import Success from '../Components/Success';
 import { Link } from 'react-router-dom';
 import { Button } from '@material-ui/core';
 
