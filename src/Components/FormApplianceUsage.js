@@ -27,8 +27,8 @@ const theme = createMuiTheme({
 });
 
 const styles = {
-    buttons: {
-        marginTop: 60
+  buttons: {
+    marginTop: 60
   },
   title: {
     height: 80,
@@ -63,13 +63,13 @@ const styles = {
     marginTop: 20
   },
   back: {
-      marginTop: -10,
-      marginRight: 10
+    marginTop: -10,
+    marginRight: 10
   }
 };
 
 
-export class FormApplicanceInfo extends Component {
+export class FormApplianceInfo extends Component {
   continue = e => {
     e.preventDefault();
     this.props.nextStep();
@@ -84,83 +84,83 @@ export class FormApplicanceInfo extends Component {
     const { values, handleChange } = this.props;
     const { classes } = this.props;
     return (
-      <MuiThemeProvider theme= {theme}> 
-        <TopBar/>
+      <MuiThemeProvider theme={theme}>
+        <TopBar />
 
         <Grid className={classes.shift}>
 
-            <Typography className={classes.title}>Questionnaire</Typography>
-            <Typography className={classes.subTitle}>Appliance Usage</Typography>
+          <Typography className={classes.title}>Questionnaire</Typography>
+          <Typography className={classes.subTitle}>Appliance Usage</Typography>
 
-            {!!values.dishwasher && 
-            <ApplianceUsageQuestion 
+          {!!values.dishwasher &&
+            <ApplianceUsageQuestion
               applianceName='dishwasher'
               applianceKey='dishwasherUsage'
               handleChange={handleChange}
               usage={values.dishwasherUsage}
             />
-            }
-            {!!values.stove && 
-              <ApplianceUsageQuestion 
+          }
+          {!!values.stove &&
+            <ApplianceUsageQuestion
               applianceName='stove'
               applianceKey='stoveUsage'
               handleChange={handleChange}
               usage={values.stoveUsage}
             />
-            }
-            {!!values.oven && 
-              <ApplianceUsageQuestion 
+          }
+          {!!values.oven &&
+            <ApplianceUsageQuestion
               applianceName='oven'
               applianceKey='ovenUsage'
               handleChange={handleChange}
               usage={values.ovenUsage}
             />
-            }
+          }
 
-            {!!values.washerDryer && 
-            <ApplianceUsageQuestion 
+          {!!values.washerDryer &&
+            <ApplianceUsageQuestion
               applianceName='washer'
               applianceKey='washerUsage'
               handleChange={handleChange}
               usage={values.washerUsage}
             />
-            }
-            {!!values.washerDryer && 
-            <ApplianceUsageQuestion 
+          }
+          {!!values.washerDryer &&
+            <ApplianceUsageQuestion
               applianceName='dryer'
               applianceKey='dryerUsage'
               handleChange={handleChange}
               usage={values.dryerUsage}
             />
-            }
-            {!!values.ac && 
+          }
+          {!!values.ac &&
             <Typography className={classes.question}>In the summer, how many days a month do you use your air conditioner?</Typography>}
 
-            {!!values.ac && 
+          {!!values.ac &&
             <TextField
-                className={classes.textBox}
-                placeholder="Days per month"
-                label="Days per month"
-                onChange={handleChange('acUsage')}
-                margin="normal"
-                fullWidth
+              className={classes.textBox}
+              placeholder="Days per month"
+              label="Days per month"
+              onChange={handleChange('acUsage')}
+              margin="normal"
+              fullWidth
             />
-            }
+          }
 
-            <Grid>
-                <Button
-                    className={classes.back}
-                    color="primary"
-                    variant="contained"
-                    onClick={this.back}
-                >Back</Button>
+          <Grid>
+            <Button
+              className={classes.back}
+              color="primary"
+              variant="contained"
+              onClick={this.back}
+            >Back</Button>
 
-                <Button
-                color="secondary"
-                variant="contained"
-                onClick={this.continue}
-                >Continue</Button>
-            </Grid>
+            <Button
+              color="secondary"
+              variant="contained"
+              onClick={this.continue}
+            >Continue</Button>
+          </Grid>
 
         </Grid>
       </MuiThemeProvider>
@@ -168,4 +168,4 @@ export class FormApplicanceInfo extends Component {
   }
 }
 
-export default withStyles(styles)(FormApplicanceInfo);
+export default withStyles(styles)(FormApplianceInfo);

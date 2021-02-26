@@ -58,3 +58,9 @@ export const HOURLY_PATTERNS = {
     0.08, 0.1, 0.08, 0.04, 0.01, 0.005
   ],
 }
+
+export const OUTAGES = {
+  "short": 15,
+  "medium": 60,
+  "long": 180
+}

@@ -8,7 +8,6 @@ export const PerformanceGraph = (props: { data: { [string]: number[] }, outages:
   let { data, outages } = props;
 
   let cols = Object.entries(data).map(([solution, result]) => [solution].concat(result))
-  console.log(data);
 
   return (
     <C3Chart

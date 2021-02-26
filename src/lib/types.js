@@ -52,6 +52,9 @@ export type QuestionnaireResponse = {
   acUsage: number,
   // estimated days of air conditioning per month in the summer
 
+  efficientLights: boolean,
+  // whether the user primarily has LED or halogen bulbs
+
   additionalDevices: DeviceDefinition[],
 }
 
@@ -87,3 +90,5 @@ export type StorageSolution = {
   capacity: number, // watt-hours
   peak_discharge: number, // watts
 }
+
+export type RecommendationPerformance = { [string]: number[] }

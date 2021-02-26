@@ -3,6 +3,8 @@ import FormHousingInfo from './FormHousingInfo';
 import FormApplianceInfo from './FormApplianceInfo';
 import FormApplianceUsage from './FormApplianceUsage';
 import Success from './Success';
+import { Link } from 'react-router-dom';
+import { Button } from '@material-ui/core';
 
 export class UserForm extends Component {
   state = {
@@ -54,7 +56,7 @@ export class UserForm extends Component {
 
   // Handle checkbox change
   handleCheckChange = input => e => {
-    if(this.state[input] === 0)
+    if (this.state[input] === 0)
       this.setState({ [input]: 1 });
     else
       this.setState({ [input]: 0 });
@@ -62,12 +64,14 @@ export class UserForm extends Component {
 
   render() {
     const { step } = this.state;
-    const { priority, location, squareFootage, summerUsage, winterUsage, dishwasher, stove, oven, fridge,
-    freezer, washerDryer, ac, heat, dishwasherUsage, stoveUsage, ovenUsage, secondFridge, secondFreezer, 
-    washerUsage, dryerUsage, acUsage, windOrCentral, windowUnits } = this.state;
-    const values = { priority, location, squareFootage, summerUsage, winterUsage, dishwasher, stove, oven, fridge,
-    freezer, washerDryer, ac, heat, dishwasherUsage, stoveUsage, ovenUsage, secondFridge, secondFreezer, 
-    washerUsage, dryerUsage, acUsage, windOrCentral, windowUnits };
+    const { priority, location, squareFootage, monthlyUsage, dishwasher, stove, oven, fridge,
+      freezer, washerDryer, ac, heat, dishwasherUsage, stoveUsage, ovenUsage, secondFridge, secondFreezer,
+      washerUsage, dryerUsage, acUsage } = this.state;
+    const values = {
+      priority, location, squareFootage, monthlyUsage, dishwasher, stove, oven, fridge,
+      freezer, washerDryer, ac, heat, dishwasherUsage, stoveUsage, ovenUsage, secondFridge, secondFreezer,
+      washerUsage, dryerUsage, acUsage
+    };
 
     switch (step) {
       case 1:
@@ -77,7 +81,7 @@ export class UserForm extends Component {
             handleChange={this.handleFieldChange}
             values={values}
           />
-            
+
         );
       case 2:
         return (
@@ -90,7 +94,7 @@ export class UserForm extends Component {
           />
         );
       case 3:
-        if(values.dishwasher || values.stove || values.washerDryer || values.ac || values.fridge || values.freezer) {
+        if (values.dishwasher || values.stove || values.washerDryer || values.ac || values.fridge || values.freezer) {
           return (
             <FormApplianceUsage
               nextStep={this.nextStep}
@@ -98,11 +102,23 @@ export class UserForm extends Component {
               handleChange={this.handleFieldChange}
               values={values}
             />
-      )};
-          return <Success />;
+          )
+        };
+        return <Link to={{ pathname: "/performance", state: { response: this.state } }}>
+          <Button
+            color="secondary"
+            variant="contained"
+            onClick={this.continue}
+          >Continue</Button>
+        </Link>
       case 4:
-        console.log(this.state);
-        return <Success />;
+        return <Link to={{ pathname: "/performance", state: { response: this.state } }}>
+          <Button
+            color="secondary"
+            variant="contained"
+            onClick={this.continue}
+          >Get recommendations</Button>
+        </Link>
       default:
         (console.log('This is a multi-step form built with React.'))
     }
