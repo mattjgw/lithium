@@ -83,3 +83,7 @@ export const EXAMPLE_RESPONSE: QuestionnaireResponse = {
   "eeBulbs": true,
   "additionalDevices": []
 }
+
+export const STORAGE_DEVICES = {
+
+}

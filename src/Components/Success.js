@@ -28,7 +28,7 @@ export class Success extends Component {
           >
             <AppBar title="Success" />
             <h1>Thank You For Your Submission</h1>
-            <Link to={{ pathname: "/performance", state: { response: this.state } }}>
+            <Link to={{ pathname: "/recommendations", state: { response: this.state } }}>
               <Button
                 color="secondary"
                 variant="contained"
