@@ -71,7 +71,7 @@ const styles = {
   quantity: {
     width: 40
   },
-  windOrCentral: {
+  windowOrCentral: {
     width: 150
   }
 };
@@ -220,12 +220,23 @@ export class FormApplicanceInfo extends Component {
           <FormControlLabel
             control={
               <Checkbox
-                checked={values.washerDryer}
-                onChange={handleCheckChange('washerDryer')}
+                checked={values.washer}
+                onChange={handleCheckChange('washer')}
                 color="secondary"
               />
             }
-            label="Washer/Dryer"
+            label="Washer"
+          />
+          <br />
+          <FormControlLabel
+            control={
+              <Checkbox
+                checked={values.dryer}
+                onChange={handleCheckChange('dryer')}
+                color="secondary"
+              />
+            }
+            label="Dryer"
           />
           <br />
           <FormControlLabel
@@ -250,13 +261,13 @@ export class FormApplicanceInfo extends Component {
             label="Air Conditioning"
           />
           {!!values.ac &&
-            <FormControl className={classes.windOrCentral} >
+            <FormControl className={classes.windowOrCentral} >
               <InputLabel htmlFor="age-native-simple">Wind or Central?</InputLabel>
               <Select
                 style={{ width: 120 }}
                 native
                 label="Wind or Central?"
-                onChange={handleFieldChange('windOrCentral')}
+                onChange={handleFieldChange('windowOrCentral')}
                 inputProps={{
                   id: 'age-native-simple',
                 }}
@@ -266,7 +277,7 @@ export class FormApplicanceInfo extends Component {
               </Select>
             </FormControl>
           }
-          {(values.windOrCentral === '1' && !!values.ac) &&
+          {(values.windowOrCentral === '1' && !!values.ac) &&
             <TextField
               className={classes.quantity}
               id="standard-number"

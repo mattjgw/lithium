@@ -1,9 +1,9 @@
 // @flow
 
-import type { Device } from './types';
+import type { Device, QuestionnaireResponse } from './types';
 
 export const DEVICE_NAMES: Device[] = ["dishwasher", "stove", "oven", "washer",
-  "dryer", "heat", "ac", "fridge", "freezer", "secondFridge", "secondFreezer"]
+  "dryer", "heat", "ac", "fridge", "freezer"]
 
 export const DEVICE_DAILY_FREQ: { [Device]: number } = {
   "dishwasher": 1,
@@ -15,11 +15,6 @@ export const DEVICE_DAILY_FREQ: { [Device]: number } = {
   "ac": 1.5,
   "fridge": 40,
   "freezer": 5,
-  "secondFridge": 40,
-  "secondFreezer": 5,
-  // "microwave": 5,
-  // "tv": 1.62,
-  // "hair dryer": 1.5,
 }
 
 export const DEVICE_CYCLE_LENGTH: { [Device]: number } = {
@@ -32,8 +27,6 @@ export const DEVICE_CYCLE_LENGTH: { [Device]: number } = {
   "ac": 120,
   "fridge": 12,
   "freezer": 10,
-  "secondFridge": 12,
-  "secondFreezer": 10,
 }
 
 export const DEVICE_WATTAGE: { [Device]: number } = {
@@ -46,8 +39,6 @@ export const DEVICE_WATTAGE: { [Device]: number } = {
   "ac": 1300,
   "fridge": 110,
   "freezer": 150,
-  "secondFridge": 90,
-  "secondFreezer": 80,
 }
 
 export const HOURLY_PATTERNS = {
@@ -63,4 +54,31 @@ export const OUTAGES = {
   "short": 15,
   "medium": 60,
   "long": 180
+}
+
+export const EXAMPLE_RESPONSE: QuestionnaireResponse = {
+  "location": "ON",
+  "squareFootage": 1000,
+  "numberOfPeopleInHousehold": 4,
+  "summerUsage": 1500,
+  "winterUsage": 1200,
+  "dishwasher": 1,
+  "stove": 1,
+  "oven": 0,
+  "fridge": 1,
+  "freezer": 0,
+  "washer": 0,
+  "dryer": 0,
+  "heat": 1,
+  "ac": 0,
+  "dishwasherUsage": 3,
+  "stoveUsage": 1,
+  "ovenUsage": 0,
+  "washerUsage": 0,
+  "dryerUsage": 0,
+  "acUsage": 0,
+  "windowOrCentral": 0,
+  "windowUnits": 0,
+  "eeBulbs": true,
+  "additionalDevices": []
 }

@@ -4,6 +4,7 @@ import { Button } from '@material-ui/core';
 import * as React from 'react';
 import { useEffect, useState } from "react";
 import UsageGraph from '../Components/UsageGraph';
+import { EXAMPLE_RESPONSE } from '../lib/data';
 import { generate_model, generate_timestamps, get_devices } from '../lib/model';
 import { simulate_outage } from '../lib/simulator';
 import type { Model, ModelParams, QuestionnaireResponse } from '../lib/types'
@@ -15,37 +16,12 @@ export const GraphTest = (): React.Node => {
   let [showDevices, setShowDevices] = useState(false);
 
   useEffect(() => {
-    let questionnaire: QuestionnaireResponse = {
-      location: "Canada",
-      squareFootage: 450,
-      residents: 4,
-      efficientLights: true,
-      monthlySummerUsage: 600,
-      monthlyWinterUsage: 800,
-      dishwasher: true,
-      stove: true,
-      oven: true,
-      washer: true,
-      dryer: true,
-      heat: true,
-      ac: true,
-      fridge: true,
-      freezer: true,
-      secondFridge: true,
-      secondFreezer: true,
-      dishwasherUsage: 2,
-      stoveUsage: 2,
-      ovenUsage: 2,
-      washerUsage: 2,
-      dryerUsage: 2,
-      acUsage: 15,
-      additionalDevices: [],
-    }
+    let questionnaire: QuestionnaireResponse = EXAMPLE_RESPONSE;
     let params: ModelParams = { summer: true };
     let devices = get_devices(questionnaire, params)
     let daily_target_demand = (params.summer
-      ? questionnaire.monthlySummerUsage
-      : questionnaire.monthlyWinterUsage)
+      ? questionnaire.summerUsage
+      : questionnaire.winterUsage)
       * 1000 // kWh to Wh
       / 30.5; // monthly -> daily
     let model: Model = generate_model(devices, daily_target_demand);

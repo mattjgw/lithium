@@ -19,7 +19,8 @@ export class UserForm extends Component {
     oven: 0,
     fridge: 0,
     freezer: 0,
-    washerDryer: 0,
+    washer: 0,
+    dryer: 0,
     heat: 0,
     ac: 0,
     dishwasherUsage: 0,
@@ -28,7 +29,7 @@ export class UserForm extends Component {
     washerUsage: 0,
     dryerUsage: 0,
     acUsage: 0,
-    windOrCentral: 0,
+    windowOrCentral: 0,
     windowUnits: 0
   };
 
@@ -65,11 +66,11 @@ export class UserForm extends Component {
   render() {
     const { step } = this.state;
     const { priority, location, squareFootage, monthlyUsage, dishwasher, stove, oven, fridge,
-      freezer, washerDryer, ac, heat, dishwasherUsage, stoveUsage, ovenUsage, secondFridge, secondFreezer,
+      freezer, washer, dryer, ac, heat, dishwasherUsage, stoveUsage, ovenUsage, secondFridge, secondFreezer,
       washerUsage, dryerUsage, acUsage } = this.state;
     const values = {
       priority, location, squareFootage, monthlyUsage, dishwasher, stove, oven, fridge,
-      freezer, washerDryer, ac, heat, dishwasherUsage, stoveUsage, ovenUsage, secondFridge, secondFreezer,
+      freezer, washer, dryer, ac, heat, dishwasherUsage, stoveUsage, ovenUsage, secondFridge, secondFreezer,
       washerUsage, dryerUsage, acUsage
     };
 
@@ -94,7 +95,7 @@ export class UserForm extends Component {
           />
         );
       case 3:
-        if (values.dishwasher || values.stove || values.washerDryer || values.ac || values.fridge || values.freezer) {
+        if (values.dishwasher || values.stove || values.washer || values.dryer || values.ac || values.fridge || values.freezer) {
           return (
             <FormApplianceUsage
               nextStep={this.nextStep}

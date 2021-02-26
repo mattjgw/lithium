@@ -117,7 +117,7 @@ export class FormApplianceInfo extends Component {
             />
           }
 
-          {!!values.washerDryer &&
+          {!!values.washer &&
             <ApplianceUsageQuestion
               applianceName='washer'
               applianceKey='washerUsage'
@@ -125,7 +125,7 @@ export class FormApplianceInfo extends Component {
               usage={values.washerUsage}
             />
           }
-          {!!values.washerDryer &&
+          {!!values.dryer &&
             <ApplianceUsageQuestion
               applianceName='dryer'
               applianceKey='dryerUsage'
