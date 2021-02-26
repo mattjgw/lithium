@@ -16,34 +16,7 @@ export const PerformanceTest = (props: {
     }
   }
 }): React.Node => {
-  // let { response } = props.location.state;
-  // console.log(props);
-  let response = {
-    location: "Canada",
-    squareFootage: 450,
-    residents: 4,
-    efficientLights: true,
-    monthlySummerUsage: 600,
-    monthlyWinterUsage: 800,
-    dishwasher: true,
-    stove: true,
-    oven: true,
-    washer: true,
-    dryer: true,
-    heat: true,
-    ac: true,
-    fridge: true,
-    freezer: true,
-    secondFridge: true,
-    secondFreezer: true,
-    dishwasherUsage: 2,
-    stoveUsage: 2,
-    ovenUsage: 2,
-    washerUsage: 2,
-    dryerUsage: 2,
-    acUsage: 15,
-    additionalDevices: [],
-  };
+  let { response } = props.location.state;
   let [data, setData] = useState({});
   let [outages, setOutages] = useState({
     "6-6:15": {
@@ -107,8 +80,8 @@ export const PerformanceTest = (props: {
       let params: ModelParams = { summer: true };
       let devices = get_devices(questionnaire, params)
       let daily_target_demand = (params.summer
-        ? questionnaire.monthlySummerUsage
-        : questionnaire.monthlyWinterUsage)
+        ? questionnaire.summerUsage
+        : questionnaire.winterUsage)
         * 1000
         / 30.5;
       _models.push(generate_model(devices, daily_target_demand));

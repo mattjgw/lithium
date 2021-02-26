@@ -30,7 +30,8 @@ export class UserForm extends Component {
     dryerUsage: 0,
     acUsage: 0,
     windowOrCentral: 0,
-    windowUnits: 0
+    windowUnits: 0,
+    additionalDevices: []
   };
 
   // Proceed to next step
