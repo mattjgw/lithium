@@ -20,24 +20,22 @@ export class Success extends Component {
   render() {
     let values = this.props.values;
     return (
-      <MuiThemeProvider>
-        <>
-          <Dialog
-            open
-            fullWidth
-            maxWidth='sm'
-          >
-            <AppBar title="Success" />
-            <h1>Thank You For Your Submission</h1>
-            <Link to={{ pathname: "/recommendations", state: { response: values } }}>
-              <Button
-                color="secondary"
-                variant="contained"
-              >Continue</Button>
-            </Link>
-          </Dialog>
-        </>
-      </MuiThemeProvider>
+      <>
+        <Dialog
+          open
+          fullWidth
+          maxWidth='sm'
+        >
+          <AppBar title="Success" />
+          <h1>Thank You For Your Submission</h1>
+          <Link to={{ pathname: "/recommendations", state: { response: values } }}>
+            <Button
+              color="secondary"
+              variant="contained"
+            >Continue</Button>
+          </Link>
+        </Dialog>
+      </>
     );
   }
 }

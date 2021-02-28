@@ -23,6 +23,9 @@ import { generate_model, get_devices } from '../lib/model';
 import { simulate_outage } from '../lib/simulator';
 import { assess_recommendation } from '../lib/recommender';
 import { SingleRecommendationGraph } from '../Components/SingleRecommendationGraph';
+import RecommendationPanel from '../Components/RecommendationPanel';
+import TopBar from '../Components/TopBar';
+import { blueGrey, green } from '@material-ui/core/colors';
 
 
 function Copyright() {
@@ -83,41 +86,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-// const tiers = [
-//   {
-//     title: 'Sonnen Eco',
-//     subheader: 'Flexible choice',
-//     output: recommendation.peak_discharge'3500',
-//     capacity: '3000',
-//     description: ['2x Sonnen Eco base units', 'Requires inverter'],
-//     buttonText: 'See details',
-//     buttonVariant: 'outlined',
-//   },
-//   {
-//     title: 'Tesla Powerwall',
-//     subheader: 'All in one',
-//     output: recommendation.peak_discharge'15 000',
-//     capacity: '6500',
-//     description: [
-//       'Inverter included',
-//       'Supports PV systems',
-//     ],
-//     buttonText: 'See details',
-//     buttonVariant: 'contained',
-//   },
-//   {
-//     title: 'Lead-acid battery',
-//     subheader: 'Affordable option',
-//     output: recommendation.peak_discharge'300',
-//     capacity: '450',
-//     description: [
-//       'Requires inverter and charge controller',
-//     ],
-//     buttonText: 'See details',
-//     buttonVariant: 'outlined',
-//   },
-// ];
-
 export const RecommendationsPage = (props: {
   location: {
     state: {
@@ -139,7 +107,17 @@ export const RecommendationsPage = (props: {
   }
   console.log(response);
 
-  const classes = useStyles();
+  const classes = useStyles({
+    palette: {
+      primary: {
+        main: blueGrey[50],
+      },
+      secondary: {
+        main: green[800],
+      },
+    },
+    spacing: 8
+  });
   let [panels, setPanels] = useState([]);
 
   useEffect(() => {
@@ -198,27 +176,7 @@ export const RecommendationsPage = (props: {
   return (
     <div>
       <CssBaseline />
-      <AppBar position="static" color="default" elevation={0} className={classes.appBar}>
-        <Toolbar className={classes.toolbar}>
-          <Typography variant="h6" color="inherit" noWrap className={classes.toolbarTitle}>
-            Company name
-          </Typography>
-          <nav>
-            <Link variant="button" color="textPrimary" href="#" className={classes.link}>
-              Features
-            </Link>
-            <Link variant="button" color="textPrimary" href="#" className={classes.link}>
-              Enterprise
-            </Link>
-            <Link variant="button" color="textPrimary" href="#" className={classes.link}>
-              Support
-            </Link>
-          </nav>
-          <Button href="#" color="primary" variant="outlined" className={classes.link}>
-            Login
-          </Button>
-        </Toolbar>
-      </AppBar>
+      <TopBar />
       {/* Hero unit */}
       <Container maxWidth="sm" component="main" className={classes.heroContent}>
         <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
@@ -233,47 +191,7 @@ export const RecommendationsPage = (props: {
       <Container maxWidth="md" component="main">
         <Grid container spacing={5} alignItems="flex-end">
           {panels.map((panel) => (
-            // Enterprise card is full width at sm breakpoint
-            <Grid item key={panel.title} xs={12} md={4}>
-              <Card>
-                <CardHeader
-                  title={panel.title}
-                  subheader={panel.subheader}
-                  titleTypographyProps={{ align: 'center' }}
-                  subheaderTypographyProps={{ align: 'center' }}
-                  action={panel.title === 'Tesla Powerwall' ? <StarIcon /> : null}
-                  className={classes.cardHeader}
-                />
-                <CardContent>
-                  <div className={classes.cardPricing}>
-                    <Typography component="h2" variant="h3" color="textPrimary">
-                      {panel.capacity}
-                    </Typography>
-                    <Typography variant="h6" color="textSecondary">
-                      Wh
-                    </Typography>
-                  </div>
-                  <div className={classes.cardPricing}>
-                    <Typography component="h4" variant="h4" color="textPrimary">
-                      {panel.output} Watts
-                    </Typography>
-                  </div>
-                  <ul>
-                    {panel.description.map((line) => (
-                      <Typography component="li" variant="subtitle1" align="center" key={line}>
-                        {line}
-                      </Typography>
-                    ))}
-                  </ul>
-                </CardContent>
-                <CardActions>
-                  <Button fullWidth variant={panel.buttonVariant} color="primary">
-                    {panel.buttonText}
-                  </Button>
-                </CardActions>
-                <SingleRecommendationGraph data={panel.perf} />
-              </Card>
-            </Grid>
+            <RecommendationPanel panel={panel} classes={classes} />
           ))}
         </Grid>
       </Container>

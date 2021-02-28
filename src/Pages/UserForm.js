@@ -1,8 +1,11 @@
+import { createMuiTheme, MuiThemeProvider } from '@material-ui/core';
+import { blueGrey, green } from '@material-ui/core/colors';
 import React, { Component } from 'react';
 import FormApplianceInfo from '../Components/FormApplianceInfo';
 import FormApplianceUsage from '../Components/FormApplianceUsage';
 import FormHousingInfo from '../Components/FormHousingInfo';
 import Success from '../Components/Success';
+import TopBar from '../Components/TopBar';
 
 export class UserForm extends Component {
   state = {
@@ -73,43 +76,65 @@ export class UserForm extends Component {
       washerUsage, dryerUsage, acUsage, additionalDevices, summerUsage, winterUsage
     };
 
-    switch (step) {
-      case 1:
-        return (
-          <FormHousingInfo
-            nextStep={this.nextStep}
-            handleChange={this.handleFieldChange}
-            values={values}
-          />
+    const theme = createMuiTheme({
+      palette: {
+        primary: {
+          main: blueGrey[50],
+        },
+        secondary: {
+          main: green[800],
+        },
+      },
+      spacing: 8
+    });
 
-        );
-      case 2:
-        return (
-          <FormApplianceInfo
-            nextStep={this.nextStep}
-            prevStep={this.prevStep}
-            handleCheckChange={this.handleCheckChange}
-            handleFieldChange={this.handleFieldChange}
-            values={values}
-          />
-        );
-      case 3:
-        if (values.dishwasher || values.stove || values.washer || values.dryer || values.ac || values.fridge || values.freezer) {
+    let innerForm = (() => {
+      switch (step) {
+        case 1:
           return (
-            <FormApplianceUsage
+            <FormHousingInfo
               nextStep={this.nextStep}
-              prevStep={this.prevStep}
               handleChange={this.handleFieldChange}
               values={values}
             />
-          )
-        };
-        return <Success values={values} />
-      case 4:
-        return <Success values={values} />
-      default:
-        (console.log('This is a multi-step form built with React.'))
-    }
+
+          );
+        case 2:
+          return (
+            <FormApplianceInfo
+              nextStep={this.nextStep}
+              prevStep={this.prevStep}
+              handleCheckChange={this.handleCheckChange}
+              handleFieldChange={this.handleFieldChange}
+              values={values}
+            />
+          );
+        case 3:
+          if (values.dishwasher || values.stove || values.washer || values.dryer || values.ac || values.fridge || values.freezer) {
+            return (
+              <FormApplianceUsage
+                nextStep={this.nextStep}
+                prevStep={this.prevStep}
+                handleChange={this.handleFieldChange}
+                values={values}
+              />
+            )
+          };
+          return <Success values={values} />
+        case 4:
+          return <Success values={values} />
+        default:
+          (console.log('This is a multi-step form built with React.'))
+      }
+    })();
+
+
+    return <MuiThemeProvider theme={theme}>
+      <TopBar />
+      {innerForm}
+    </MuiThemeProvider>
+
+
   }
 }
 
