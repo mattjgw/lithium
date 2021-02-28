@@ -9,6 +9,7 @@ export const SingleRecommendationGraph = (props: { data: RecommendationPerforman
   let { data } = props;
 
   return Object.entries(data).map(([k, v]) => {
+    v.sort();
     return <C3Chart
       data={{
         columns: [[k].concat(v)],
@@ -22,7 +23,18 @@ export const SingleRecommendationGraph = (props: { data: RecommendationPerforman
         }
       }}
       size={{
-        height: 64,
+        height: 48,
+      }}
+      axis={{
+        x: {
+          show: false,
+        },
+        y: {
+          show: false,
+        }
+      }}
+      title={{
+        text: k
       }}
     />
   })

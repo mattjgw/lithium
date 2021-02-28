@@ -66,11 +66,11 @@ export class UserForm extends Component {
     const { step } = this.state;
     const { priority, location, squareFootage, monthlyUsage, dishwasher, stove, oven, fridge,
       freezer, washer, dryer, ac, heat, dishwasherUsage, stoveUsage, ovenUsage, secondFridge, secondFreezer,
-      washerUsage, dryerUsage, acUsage } = this.state;
+      washerUsage, dryerUsage, acUsage, additionalDevices, summerUsage, winterUsage } = this.state;
     const values = {
       priority, location, squareFootage, monthlyUsage, dishwasher, stove, oven, fridge,
       freezer, washer, dryer, ac, heat, dishwasherUsage, stoveUsage, ovenUsage, secondFridge, secondFreezer,
-      washerUsage, dryerUsage, acUsage
+      washerUsage, dryerUsage, acUsage, additionalDevices, summerUsage, winterUsage
     };
 
     switch (step) {
@@ -104,9 +104,9 @@ export class UserForm extends Component {
             />
           )
         };
-        return <Success />
+        return <Success values={values} />
       case 4:
-        return <Success />
+        return <Success values={values} />
       default:
         (console.log('This is a multi-step form built with React.'))
     }

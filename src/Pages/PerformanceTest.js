@@ -18,61 +18,6 @@ export const PerformanceTest = (props: {
 }): React.Node => {
   let { response } = props.location.state;
   let [data, setData] = useState({});
-  let [outages, setOutages] = useState({
-    "6-6:15": {
-      start: 360,
-      end: 375,
-    },
-    "11:30-11:45": {
-      start: 690,
-      end: 705,
-    },
-    "20:45-21:00": {
-      start: 1245,
-      end: 1260,
-    },
-    "6-6:45": {
-      start: 360,
-      end: 405,
-    },
-    "11:30-12:15": {
-      start: 690,
-      end: 735,
-    },
-    "20:45-21:30": {
-      start: 1245,
-      end: 1290,
-    },
-    "6-9": {
-      start: 360,
-      end: 540,
-    },
-    "11:30-14:30": {
-      start: 690,
-      end: 870,
-    },
-    "20:45-23:45": {
-      start: 1245,
-      end: 1425,
-    }
-  });
-  let [recommendations, setRecommendations] = useState([
-    {
-      name: "nothing",
-      capacity: 0,
-      peak_discharge: 0,
-    },
-    {
-      name: "sonnen eco small",
-      capacity: 5000,
-      peak_discharge: 3000,
-    },
-    {
-      name: "powerwall",
-      capacity: 8000,
-      peak_discharge: 5000,
-    },
-  ]);
   let [models, setModels] = useState(() => {
     let _models: Model[] = []; // generate ten models
     for (let i = 0; i < 90; i++) {

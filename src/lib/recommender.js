@@ -1,8 +1,8 @@
 import { simulate_outage } from './simulator';
-import type { Model, Outage, RecommendationPerformance, SimulatorResult, StorageSolution as StorageRec } from './types'
+import type { Model, Outage, RecommendationPerformance, SimulatorResult, StorageSolution } from './types'
 
 export function assess_recommendation(
-  rec: StorageRec,
+  rec: StorageSolution,
   models: Model[],
   outages: { [string]: Outage }): RecommendationPerformance {
   // Runs each outage type on each model. 

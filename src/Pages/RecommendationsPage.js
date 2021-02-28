@@ -1,6 +1,6 @@
 
 // @flow
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
@@ -16,40 +16,13 @@ import { makeStyles } from '@material-ui/core/styles';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import StarIcon from '@material-ui/icons/StarBorder';
-// export const RecommendationsPage = (props: {
-//   location: {
-//     state: {
-//       response: QuestionnaireResponse
-//     }
-//   }
-// }): React.Node => {
-//   let [recPerf, setRecPerf] = useState({
-//     "tesla": {
-//       "15m": "95%",
-//       "30m": "75%",
-//       "2h": "30%",
-//     },
-//     "sonnen": {
-//       "15m": "90%",
-//       "30m": "60%",
-//       "2h": "25%",
-//     }
-//   });
-//   return <>
-//     <h1>Recommendations</h1>
-//     {Object.entries(recPerf).map(([rec, perf]) => (<>
-//       <h2>{rec}</h2>
-//       {
-//         Object.entries(perf).map(([length, percentage]) => (
-//           <>
-//             <h3>{length}</h3>
-//             <p>{percentage}</p>
-//           </>
-//         ))
-//       }
-//     </>))}
-//   </>
-// }
+
+import type { Outage, Model, ModelParams, QuestionnaireResponse } from '../lib/types'
+import { OUTAGES, STORAGE_DEVICES } from '../lib/data';
+import { generate_model, get_devices } from '../lib/model';
+import { simulate_outage } from '../lib/simulator';
+import { assess_recommendation } from '../lib/recommender';
+import { SingleRecommendationGraph } from '../Components/SingleRecommendationGraph';
 
 
 function Copyright() {
@@ -110,43 +83,117 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const tiers = [
-  {
-    title: 'Sonnen Eco',
-    subheader: 'Flexible choice',
-    price: '3500',
-    capacity: '3000',
-    description: ['2x Sonnen Eco base units', 'Requires inverter'],
-    buttonText: 'See details',
-    buttonVariant: 'outlined',
-  },
-  {
-    title: 'Tesla Powerwall',
-    subheader: 'All in one',
-    price: '15 000',
-    capacity: '6500',
-    description: [
-      'Inverter included',
-      'Supports PV systems',
-    ],
-    buttonText: 'See details',
-    buttonVariant: 'contained',
-  },
-  {
-    title: 'Lead-acid battery',
-    subheader: 'Affordable option',
-    price: '300',
-    capacity: '450',
-    description: [
-      'Requires inverter and charge controller',
-    ],
-    buttonText: 'See details',
-    buttonVariant: 'outlined',
-  },
-];
+// const tiers = [
+//   {
+//     title: 'Sonnen Eco',
+//     subheader: 'Flexible choice',
+//     output: recommendation.peak_discharge'3500',
+//     capacity: '3000',
+//     description: ['2x Sonnen Eco base units', 'Requires inverter'],
+//     buttonText: 'See details',
+//     buttonVariant: 'outlined',
+//   },
+//   {
+//     title: 'Tesla Powerwall',
+//     subheader: 'All in one',
+//     output: recommendation.peak_discharge'15 000',
+//     capacity: '6500',
+//     description: [
+//       'Inverter included',
+//       'Supports PV systems',
+//     ],
+//     buttonText: 'See details',
+//     buttonVariant: 'contained',
+//   },
+//   {
+//     title: 'Lead-acid battery',
+//     subheader: 'Affordable option',
+//     output: recommendation.peak_discharge'300',
+//     capacity: '450',
+//     description: [
+//       'Requires inverter and charge controller',
+//     ],
+//     buttonText: 'See details',
+//     buttonVariant: 'outlined',
+//   },
+// ];
 
-export const RecommendationsPage = (): React$Element<"div"> => {
+export const RecommendationsPage = (props: {
+  location: {
+    state: {
+      response: QuestionnaireResponse
+    }
+  }
+}): React$Element<"div"> => {
+  let response;
+  if (props.location.state) {
+    response = props.location.state.response;
+    localStorage.setItem('response', JSON.stringify(props.location.state));
+  } else {
+    let state = localStorage.getItem('response');
+    if (state != null && state != undefined) {
+      response = JSON.parse(state).response;
+    } else {
+      console.log("ERROR");
+    }
+  }
+  console.log(response);
+
   const classes = useStyles();
+  let [panels, setPanels] = useState([]);
+
+  useEffect(() => {
+    let M = 50;
+
+    // Generate M/2 example summer days and M/2 winter days
+    let models = (() => {
+      let m = [];
+      let summer_devices = get_devices(response, { summer: true });
+      let winter_devices = get_devices(response, { summer: false });
+      for (let i = 0; i < M / 2; i++) {
+
+        m.push(generate_model(summer_devices, response.summerUsage * 1000 / 30))
+        m.push(generate_model(winter_devices, response.winterUsage * 1000 / 30))
+      }
+      return m;
+    })()
+    console.log(models);
+
+    // Choose recommendations
+
+    // Analyze recommendation performance
+    let _panels = [];
+    for (let brand of Object.keys(STORAGE_DEVICES)) {
+      // choose the first for now (placeholder)
+      let recommendation = STORAGE_DEVICES[brand][0];
+
+      // Details to show on the comparison page
+      // Description will contain rec performance on 3 classes of outages
+      let panel = {
+        title: brand,
+        subheader: recommendation.name,
+        output: recommendation.peak_discharge,
+        capacity: recommendation.capacity,
+        description: [],
+        buttonText: 'See details',
+        buttonVariant: 'outlined',
+        perf: {}
+      }
+
+      panel.perf = assess_recommendation(recommendation, models, OUTAGES);
+      for (let type in OUTAGES) {
+        // count successes
+        let successes = panel.perf[type].reduce((a, b) => a + (b === 4), 0)
+
+        let percentage = Math.round(successes * 100 / M);
+        panel.description.push(`Prevents ${percentage}% of ${type} outages`)
+      }
+      _panels.push(panel);
+    }
+
+    setPanels(_panels);
+  }, [])
+
 
   return (
     <div>
@@ -185,22 +232,22 @@ export const RecommendationsPage = (): React$Element<"div"> => {
       {/* End hero unit */}
       <Container maxWidth="md" component="main">
         <Grid container spacing={5} alignItems="flex-end">
-          {tiers.map((tier) => (
+          {panels.map((panel) => (
             // Enterprise card is full width at sm breakpoint
-            <Grid item key={tier.title} xs={12} md={4}>
+            <Grid item key={panel.title} xs={12} md={4}>
               <Card>
                 <CardHeader
-                  title={tier.title}
-                  subheader={tier.subheader}
+                  title={panel.title}
+                  subheader={panel.subheader}
                   titleTypographyProps={{ align: 'center' }}
                   subheaderTypographyProps={{ align: 'center' }}
-                  action={tier.title === 'Tesla Powerwall' ? <StarIcon /> : null}
+                  action={panel.title === 'Tesla Powerwall' ? <StarIcon /> : null}
                   className={classes.cardHeader}
                 />
                 <CardContent>
                   <div className={classes.cardPricing}>
                     <Typography component="h2" variant="h3" color="textPrimary">
-                      {tier.capacity}
+                      {panel.capacity}
                     </Typography>
                     <Typography variant="h6" color="textSecondary">
                       Wh
@@ -208,11 +255,11 @@ export const RecommendationsPage = (): React$Element<"div"> => {
                   </div>
                   <div className={classes.cardPricing}>
                     <Typography component="h4" variant="h4" color="textPrimary">
-                      ${tier.price}
+                      {panel.output} Watts
                     </Typography>
                   </div>
                   <ul>
-                    {tier.description.map((line) => (
+                    {panel.description.map((line) => (
                       <Typography component="li" variant="subtitle1" align="center" key={line}>
                         {line}
                       </Typography>
@@ -220,10 +267,11 @@ export const RecommendationsPage = (): React$Element<"div"> => {
                   </ul>
                 </CardContent>
                 <CardActions>
-                  <Button fullWidth variant={tier.buttonVariant} color="primary">
-                    {tier.buttonText}
+                  <Button fullWidth variant={panel.buttonVariant} color="primary">
+                    {panel.buttonText}
                   </Button>
                 </CardActions>
+                <SingleRecommendationGraph data={panel.perf} />
               </Card>
             </Grid>
           ))}
