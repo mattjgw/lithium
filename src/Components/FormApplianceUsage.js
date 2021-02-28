@@ -1,15 +1,10 @@
-import React, { Component } from 'react';
-import { createMuiTheme, ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles';
-import { withStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import TopBar from './TopBar';
-import blueGrey from '@material-ui/core/colors/blueGrey';
-import green from '@material-ui/core/colors/green';
 import { Typography } from '@material-ui/core';
-import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
+import { withStyles } from '@material-ui/core/styles';
+import TextField from '@material-ui/core/TextField';
+import React, { Component } from 'react';
 import ApplianceUsageQuestion from './ApplianceUsageQuestion';
-
 
 const styles = {
   buttons: {

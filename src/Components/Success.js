@@ -1,9 +1,8 @@
-import React, { Component } from 'react';
-import Dialog from '@material-ui/core/Dialog';
-import AppBar from '@material-ui/core/AppBar';
-import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles';
-import { Link } from 'react-router-dom';
 import { Button } from '@material-ui/core';
+import AppBar from '@material-ui/core/AppBar';
+import Dialog from '@material-ui/core/Dialog';
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 export class Success extends Component {
   continue = e => {

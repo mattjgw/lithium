@@ -1,45 +1,19 @@
 
 // @flow
-import React, { useEffect, useState } from 'react';
-import AppBar from '@material-ui/core/AppBar';
-import Box from '@material-ui/core/Box';
-import Button from '@material-ui/core/Button';
-import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import CardHeader from '@material-ui/core/CardHeader';
 import Container from '@material-ui/core/Container';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
 import Link from '@material-ui/core/Link';
 import { makeStyles } from '@material-ui/core/styles';
-import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import StarIcon from '@material-ui/icons/StarBorder';
-
-import type { Outage, Model, ModelParams, QuestionnaireResponse } from '../lib/types'
-import { OUTAGES, STORAGE_DEVICES } from '../lib/data';
-import { generate_model, get_devices } from '../lib/model';
-import { simulate_outage } from '../lib/simulator';
-import { assess_recommendation } from '../lib/recommender';
-import { SingleRecommendationGraph } from '../Components/SingleRecommendationGraph';
+import React, { useEffect, useState } from 'react';
 import RecommendationPanel from '../Components/RecommendationPanel';
 import TopBar from '../Components/TopBar';
-import { blueGrey, green } from '@material-ui/core/colors';
+import { OUTAGES, STORAGE_DEVICES } from '../lib/data';
+import { generate_model, get_devices } from '../lib/model';
+import { assess_recommendation } from '../lib/recommender';
+import type { QuestionnaireResponse } from '../lib/types';
 
-
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
 
 const useStyles = makeStyles((theme) => ({
   '@global': {
@@ -99,7 +73,7 @@ export const RecommendationsPage = (props: {
     localStorage.setItem('response', JSON.stringify(props.location.state));
   } else {
     let state = localStorage.getItem('response');
-    if (state != null && state != undefined) {
+    if (state !== null && state !== undefined) {
       response = JSON.parse(state).response;
     } else {
       console.log("ERROR");
@@ -107,17 +81,7 @@ export const RecommendationsPage = (props: {
   }
   console.log(response);
 
-  const classes = useStyles({
-    palette: {
-      primary: {
-        main: blueGrey[50],
-      },
-      secondary: {
-        main: green[800],
-      },
-    },
-    spacing: 8
-  });
+  const classes = useStyles();
   let [panels, setPanels] = useState([]);
 
   useEffect(() => {

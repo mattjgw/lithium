@@ -1,10 +1,7 @@
-import React, { Component } from 'react';
-import { createMuiTheme, ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles';
-import { withStyles } from '@material-ui/core/styles';
-import blueGrey from '@material-ui/core/colors/blueGrey';
-import green from '@material-ui/core/colors/green';
 import { Typography } from '@material-ui/core';
+import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
+import React, { Component } from 'react';
 
 const styles = {
   question: {
@@ -34,7 +31,6 @@ const styles = {
 
 
 export class ApplianceUsageQuestion extends Component {
-
   render() {
     const { usage, handleChange, applianceName, applianceKey } = this.props;
     const { classes } = this.props;

@@ -1,16 +1,12 @@
-import React, { Component } from 'react';
-import { createMuiTheme, ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles';
-import { withStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import TopBar from './TopBar';
-import blueGrey from '@material-ui/core/colors/blueGrey';
-import green from '@material-ui/core/colors/green';
 import { Typography } from '@material-ui/core';
-import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+import FormControl from '@material-ui/core/FormControl';
 import Grid from '@material-ui/core/Grid';
 import InputLabel from '@material-ui/core/InputLabel';
-import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
+import { withStyles } from '@material-ui/core/styles';
+import TextField from '@material-ui/core/TextField';
+import React, { Component } from 'react';
 
 const styles = {
   title: {
@@ -53,7 +49,7 @@ export class FormPriority extends Component {
   };
 
   render() {
-    const { values, handleChange } = this.props;
+    const { handleChange } = this.props;
     const { classes } = this.props;
     return (
       <Grid className={classes.shift}>

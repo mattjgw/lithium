@@ -1,5 +1,3 @@
-import { createMuiTheme, MuiThemeProvider } from '@material-ui/core';
-import { blueGrey, green } from '@material-ui/core/colors';
 import React, { Component } from 'react';
 import FormApplianceInfo from '../Components/FormApplianceInfo';
 import FormApplianceUsage from '../Components/FormApplianceUsage';
@@ -76,17 +74,6 @@ export class UserForm extends Component {
       washerUsage, dryerUsage, acUsage, additionalDevices, summerUsage, winterUsage
     };
 
-    const theme = createMuiTheme({
-      palette: {
-        primary: {
-          main: blueGrey[50],
-        },
-        secondary: {
-          main: green[800],
-        },
-      },
-      spacing: 8
-    });
 
     let innerForm = (() => {
       switch (step) {
@@ -129,11 +116,10 @@ export class UserForm extends Component {
     })();
 
 
-    return <MuiThemeProvider theme={theme}>
+    return <>
       <TopBar />
       {innerForm}
-    </MuiThemeProvider>
-
+    </>
 
   }
 }

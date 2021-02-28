@@ -16,7 +16,7 @@ export function assess_recommendation(
     for (let model of models) {
       // randomize start time
       let start_time = Math.floor(Math.random() * Math.floor(60 * 24 - length));
-      let sim_result = simulate_outage(model, {
+      let sim_result: SimulatorResult = simulate_outage(model, {
         start: start_time,
         end: start_time + length
       });

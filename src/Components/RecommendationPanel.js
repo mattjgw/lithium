@@ -39,7 +39,7 @@ export const RecommendationPanel = (props: {
         <div className={classes.cardPricing}>
           <Typography component="h4" variant="h4" color="textPrimary">
             {panel.output} Watts
-                    </Typography>
+          </Typography>
         </div>
         <ul>
           {panel.description.map((line) => (
@@ -50,7 +50,7 @@ export const RecommendationPanel = (props: {
         </ul>
       </CardContent>
       <CardActions>
-        <Button fullWidth variant={panel.buttonVariant} color="primary">
+        <Button fullWidth variant={panel.buttonVariant} color="secondary">
           {panel.buttonText}
         </Button>
       </CardActions>
