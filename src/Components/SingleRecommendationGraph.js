@@ -7,9 +7,11 @@ import type { RecommendationPerformance } from "../lib/types"
 
 export const SingleRecommendationGraph = (props: { data: RecommendationPerformance }): React.Node => {
   let { data } = props;
+  for (let k in data) {
+    data[k].sort();
+  }
 
   return Object.entries(data).map(([k, v]) => {
-    v.sort();
     return <C3Chart
       data={{
         columns: [[k].concat(v)],

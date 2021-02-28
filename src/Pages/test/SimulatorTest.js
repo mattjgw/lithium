@@ -2,9 +2,9 @@
 
 import * as React from 'react';
 import { useEffect, useState } from "react";
-import { EXAMPLE_RESPONSE } from '../lib/data';
-import { generate_model, get_devices } from '../lib/model';
-import type { QuestionnaireResponse, ModelParams, Model } from '../lib/types';
+import { EXAMPLE_RESPONSE } from '../../lib/data';
+import { generate_model, get_devices } from '../../lib/model';
+import type { QuestionnaireResponse, ModelParams, Model } from '../../lib/types';
 
 export const SimulatorTest = (): React.Node => {
   let [done, setDone] = useState(false)

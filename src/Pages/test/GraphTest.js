@@ -3,11 +3,11 @@
 import { Button } from '@material-ui/core';
 import * as React from 'react';
 import { useEffect, useState } from "react";
-import UsageGraph from '../Components/UsageGraph';
-import { EXAMPLE_RESPONSE } from '../lib/data';
-import { generate_model, generate_timestamps, get_devices } from '../lib/model';
-import { simulate_outage } from '../lib/simulator';
-import type { Model, ModelParams, QuestionnaireResponse } from '../lib/types'
+import UsageGraph from '../../Components/UsageGraph';
+import { EXAMPLE_RESPONSE } from '../../lib/data';
+import { generate_model, generate_timestamps, get_devices } from '../../lib/model';
+import { simulate_outage } from '../../lib/simulator';
+import type { Model, ModelParams, QuestionnaireResponse } from '../../lib/types'
 
 export const GraphTest = (): React.Node => {
   let [totalDemand: { [string]: number[]}, setTotalDemand] = useState({});
