@@ -1,6 +1,6 @@
 // @flow
 
-import type { Device, QuestionnaireResponse } from './types';
+import type { Device, QuestionnaireResponse, StorageSolution } from './types';
 
 // defined devices that we know the duty cycle and wattages of
 export const DEVICE_NAMES: Device[] = ["dishwasher", "stove", "oven", "washer",
@@ -84,6 +84,31 @@ export const EXAMPLE_RESPONSE: QuestionnaireResponse = {
   "additionalDevices": []
 }
 
-export const STORAGE_DEVICES = {
-
+export const STORAGE_DEVICES: { [string]: StorageSolution[] } = {
+  "Tesla": [
+    {
+      name: "Powerwall",
+      capacity: 13500,
+      peak_discharge: 5800,
+    },
+  ],
+  "Orison": [
+    {
+      name: "Panel",
+      capacity: 2200,
+      peak_discharge: 1800,
+    }
+  ],
+  "LG Chem": [
+    {
+      name: "RESU7H",
+      capacity: 6600,
+      peak_discharge: 5000,
+    },
+    {
+      name: "RESU10H",
+      capacity: 9300,
+      peak_discharge: 5000,
+    }
+  ]
 }
