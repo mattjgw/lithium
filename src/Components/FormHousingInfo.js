@@ -45,7 +45,11 @@ const styles = {
 export class FormPriority extends Component {
   continue = e => {
     e.preventDefault();
-    this.props.nextStep();
+    if(this.props.values.location !== '' && this.props.values.squareFootage !== 0 
+    && this.props.values.numberOfPeopleInHousehold !== 0 && this.props.values.summerUsage !== 0 
+    && this.props.values.winterUsage !== 0 ){
+      this.props.nextStep();
+    }
   };
 
   render() {
