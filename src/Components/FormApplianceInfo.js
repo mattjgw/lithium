@@ -263,6 +263,7 @@ export class FormApplianceInfo extends Component {
             id="standard-number"
             label="Quantity"
             type="number"
+            InputProps={{ inputProps: { min: 0 } }}
             value={values.windowUnits}
             onChange={handleFieldChange('windowUnits')}
             InputLabelProps={{

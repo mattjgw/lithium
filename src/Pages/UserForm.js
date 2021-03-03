@@ -67,11 +67,11 @@ export class UserForm extends Component {
     const { step } = this.state;
     const { priority, location, squareFootage, monthlyUsage, dishwasher, stove, oven, fridge,
       freezer, washer, dryer, ac, heat, dishwasherUsage, stoveUsage, ovenUsage, secondFridge, secondFreezer,
-      washerUsage, dryerUsage, acUsage, additionalDevices, summerUsage, winterUsage } = this.state;
+      washerUsage, dryerUsage, acUsage, additionalDevices, summerUsage, winterUsage, windowOrCentral } = this.state;
     const values = {
       priority, location, squareFootage, monthlyUsage, dishwasher, stove, oven, fridge,
       freezer, washer, dryer, ac, heat, dishwasherUsage, stoveUsage, ovenUsage, secondFridge, secondFreezer,
-      washerUsage, dryerUsage, acUsage, additionalDevices, summerUsage, winterUsage
+      washerUsage, dryerUsage, acUsage, additionalDevices, summerUsage, winterUsage, windowOrCentral
     };
 
 

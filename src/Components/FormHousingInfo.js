@@ -96,7 +96,6 @@ export class FormPriority extends Component {
         <TextField
           className={classes.textBox}
           placeholder="Square Footage"
-          type='number'
           label="Square Footage"
           onChange={handleChange('squareFootage')}
           margin="normal"
@@ -109,7 +108,6 @@ export class FormPriority extends Component {
         <TextField
           className={classes.textBox}
           placeholder="Size of houshold"
-          type='number'
           label="Size of houshold"
           onChange={handleChange('numberOfPeopleInHousehold')}
           margin="normal"
@@ -122,7 +120,6 @@ export class FormPriority extends Component {
         <TextField
           className={classes.textBox}
           placeholder="Monthly usage"
-          type='number'
           label="Monthly usage"
           onChange={handleChange('summerUsage')}
           margin="normal"
@@ -135,7 +132,6 @@ export class FormPriority extends Component {
         <TextField
           className={classes.textBox}
           placeholder="Monthly usage"
-          type='number'
           label="Monthly usage"
           onChange={handleChange('winterUsage')}
           margin="normal"

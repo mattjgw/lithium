@@ -73,6 +73,7 @@ export class FormApplianceUsage extends Component {
           <ApplianceUsageQuestion
             applianceName='dishwasher'
             applianceKey='dishwasherUsage'
+            quantity={values.dishwasher}
             handleChange={handleChange}
             usage={values.dishwasherUsage}
           />
@@ -81,6 +82,7 @@ export class FormApplianceUsage extends Component {
           <ApplianceUsageQuestion
             applianceName='stove'
             applianceKey='stoveUsage'
+            quantity={values.stove}
             handleChange={handleChange}
             usage={values.stoveUsage}
           />
@@ -89,6 +91,7 @@ export class FormApplianceUsage extends Component {
           <ApplianceUsageQuestion
             applianceName='oven'
             applianceKey='ovenUsage'
+            quantity={values.oven}
             handleChange={handleChange}
             usage={values.ovenUsage}
           />
@@ -115,6 +118,7 @@ export class FormApplianceUsage extends Component {
           <ApplianceUsageQuestion
             applianceName='dryer'
             applianceKey='dryerUsage'
+            quantity={values.dryer}
             handleChange={handleChange}
             usage={values.dryerUsage}
           />
