@@ -242,18 +242,18 @@ export class FormApplianceInfo extends Component {
         />
         {!!values.ac &&
           <FormControl className={classes.windowOrCentral} >
-            <InputLabel htmlFor="age-native-simple">Wind or Central?</InputLabel>
+            <InputLabel htmlFor="age-native-simple">Window or Central?</InputLabel>
             <Select
               style={{ width: 120 }}
               native
-              label="Wind or Central?"
+              label="Window or Central?"
               onChange={handleFieldChange('windowOrCentral')}
               inputProps={{
                 id: 'age-native-simple',
               }}
             >
               <option value={0}>Central</option>
-              <option value={1}>Wind</option>
+              <option value={1}>Window</option>
             </Select>
           </FormControl>
         }
