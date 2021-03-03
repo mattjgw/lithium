@@ -95,13 +95,22 @@ export class FormApplianceUsage extends Component {
         }
 
         {!!values.washer &&
-          <ApplianceUsageQuestion
-            applianceName='washer'
-            applianceKey='washerUsage'
-            handleChange={handleChange}
-            usage={values.washerUsage}
+          <Typography className={classes.question}>How many loads of laundry do you do per week?</Typography>
+        }
+
+        {
+          <TextField
+            id="standard-number"
+            label="Number of uses"
+            type="number"
+            value={values.washerUsage}
+            onChange={handleChange('washerUsage')}
+            InputLabelProps={{
+              shrink: true,
+            }}
           />
         }
+        <br />
         {!!values.dryer &&
           <ApplianceUsageQuestion
             applianceName='dryer'
