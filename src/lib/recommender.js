@@ -1,8 +1,8 @@
 import { simulate_outage } from './simulator';
-import type { Model, Outage, RecommendationPerformance, SimulatorResult, StorageSolution as StorageRec } from './types'
+import type { Model, Outage, RecommendationPerformance, SimulatorResult, StorageSolution } from './types'
 
 export function assess_recommendation(
-  rec: StorageRec,
+  rec: StorageSolution,
   models: Model[],
   outages: { [string]: Outage }): RecommendationPerformance {
   // Runs each outage type on each model. 
@@ -16,7 +16,7 @@ export function assess_recommendation(
     for (let model of models) {
       // randomize start time
       let start_time = Math.floor(Math.random() * Math.floor(60 * 24 - length));
-      let sim_result = simulate_outage(model, {
+      let sim_result: SimulatorResult = simulate_outage(model, {
         start: start_time,
         end: start_time + length
       });

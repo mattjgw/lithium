@@ -32,7 +32,6 @@ export class TopBar extends Component {
             <Button color="inherit">Home</Button>
             <Button color="inherit">About</Button>
             <Button color="inherit">My House Profile</Button>
-            <Link to="/airtable"><Button color="inherit">Airtable Test</Button></Link>
           </div>
         </Toolbar>
       </AppBar>

@@ -1,30 +1,10 @@
-import React, { Component } from 'react';
-import RadioGroup from '@material-ui/core/RadioGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Radio from '@material-ui/core/Radio';
-import { createMuiTheme, ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles';
-import { withStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import TopBar from './TopBar';
-import blueGrey from '@material-ui/core/colors/blueGrey';
-import green from '@material-ui/core/colors/green';
 import { Typography } from '@material-ui/core';
-import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
+import { withStyles } from '@material-ui/core/styles';
+import TextField from '@material-ui/core/TextField';
+import React, { Component } from 'react';
 import ApplianceUsageQuestion from './ApplianceUsageQuestion';
-
-
-const theme = createMuiTheme({
-  palette: {
-    primary: {
-      main: blueGrey[50],
-    },
-    secondary: {
-      main: green[800],
-    },
-  },
-  spacing: 8
-});
 
 const styles = {
   buttons: {
@@ -69,7 +49,7 @@ const styles = {
 };
 
 
-export class FormApplianceInfo extends Component {
+export class FormApplianceUsage extends Component {
   continue = e => {
     e.preventDefault();
     this.props.nextStep();
@@ -84,88 +64,83 @@ export class FormApplianceInfo extends Component {
     const { values, handleChange } = this.props;
     const { classes } = this.props;
     return (
-      <MuiThemeProvider theme={theme}>
-        <TopBar />
+      <Grid className={classes.shift}>
 
-        <Grid className={classes.shift}>
+        <Typography className={classes.title}>Questionnaire</Typography>
+        <Typography className={classes.subTitle}>Appliance Usage</Typography>
 
-          <Typography className={classes.title}>Questionnaire</Typography>
-          <Typography className={classes.subTitle}>Appliance Usage</Typography>
+        {!!values.dishwasher &&
+          <ApplianceUsageQuestion
+            applianceName='dishwasher'
+            applianceKey='dishwasherUsage'
+            handleChange={handleChange}
+            usage={values.dishwasherUsage}
+          />
+        }
+        {!!values.stove &&
+          <ApplianceUsageQuestion
+            applianceName='stove'
+            applianceKey='stoveUsage'
+            handleChange={handleChange}
+            usage={values.stoveUsage}
+          />
+        }
+        {!!values.oven &&
+          <ApplianceUsageQuestion
+            applianceName='oven'
+            applianceKey='ovenUsage'
+            handleChange={handleChange}
+            usage={values.ovenUsage}
+          />
+        }
 
-          {!!values.dishwasher &&
-            <ApplianceUsageQuestion
-              applianceName='dishwasher'
-              applianceKey='dishwasherUsage'
-              handleChange={handleChange}
-              usage={values.dishwasherUsage}
-            />
-          }
-          {!!values.stove &&
-            <ApplianceUsageQuestion
-              applianceName='stove'
-              applianceKey='stoveUsage'
-              handleChange={handleChange}
-              usage={values.stoveUsage}
-            />
-          }
-          {!!values.oven &&
-            <ApplianceUsageQuestion
-              applianceName='oven'
-              applianceKey='ovenUsage'
-              handleChange={handleChange}
-              usage={values.ovenUsage}
-            />
-          }
+        {!!values.washer &&
+          <ApplianceUsageQuestion
+            applianceName='washer'
+            applianceKey='washerUsage'
+            handleChange={handleChange}
+            usage={values.washerUsage}
+          />
+        }
+        {!!values.dryer &&
+          <ApplianceUsageQuestion
+            applianceName='dryer'
+            applianceKey='dryerUsage'
+            handleChange={handleChange}
+            usage={values.dryerUsage}
+          />
+        }
+        {!!values.ac &&
+          <Typography className={classes.question}>In the summer, how many days a month do you use your air conditioner?</Typography>}
 
-          {!!values.washerDryer &&
-            <ApplianceUsageQuestion
-              applianceName='washer'
-              applianceKey='washerUsage'
-              handleChange={handleChange}
-              usage={values.washerUsage}
-            />
-          }
-          {!!values.washerDryer &&
-            <ApplianceUsageQuestion
-              applianceName='dryer'
-              applianceKey='dryerUsage'
-              handleChange={handleChange}
-              usage={values.dryerUsage}
-            />
-          }
-          {!!values.ac &&
-            <Typography className={classes.question}>In the summer, how many days a month do you use your air conditioner?</Typography>}
+        {!!values.ac &&
+          <TextField
+            className={classes.textBox}
+            placeholder="Days per month"
+            label="Days per month"
+            onChange={handleChange('acUsage')}
+            margin="normal"
+            fullWidth
+          />
+        }
 
-          {!!values.ac &&
-            <TextField
-              className={classes.textBox}
-              placeholder="Days per month"
-              label="Days per month"
-              onChange={handleChange('acUsage')}
-              margin="normal"
-              fullWidth
-            />
-          }
+        <Grid>
+          <Button
+            className={classes.back}
+            color="primary"
+            variant="contained"
+            onClick={this.back}
+          >Back</Button>
 
-          <Grid>
-            <Button
-              className={classes.back}
-              color="primary"
-              variant="contained"
-              onClick={this.back}
-            >Back</Button>
-
-            <Button
-              color="secondary"
-              variant="contained"
-              onClick={this.continue}
-            >Continue</Button>
-          </Grid>
-
+          <Button
+            color="secondary"
+            variant="contained"
+            onClick={this.continue}
+          >Continue</Button>
         </Grid>
-      </MuiThemeProvider>
+      </Grid>
     );
   }
 }
 
-export default withStyles(styles)(FormApplianceInfo);
+export default withStyles(styles)(FormApplianceUsage);

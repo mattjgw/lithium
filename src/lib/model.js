@@ -26,12 +26,12 @@ export function get_devices(questionnaire: QuestionnaireResponse, params: ModelP
   }
 
   // lights
-  for (let i = 0; i < questionnaire.residents; i++) {
+  for (let i = 0; i < questionnaire.numberOfPeopleInHousehold; i++) {
     devices.push({
       name: `lights${i}`,
       freq: 6,
-      cycle_length: 1,
-      wattage: questionnaire.efficientLights ? 20 : 100,
+      cycle_length: 60,
+      wattage: questionnaire.eeBulbs ? 20 : 100,
       pattern: null,
     })
   }

@@ -9,8 +9,6 @@ export type Device = "dishwasher" |
   "ac" |
   "fridge" |
   "freezer" |
-  "secondFridge" |
-  "secondFreezer" |
   "custom"
 
 export type QuestionnaireResponse = {
@@ -21,23 +19,22 @@ export type QuestionnaireResponse = {
   // square feet of house: used to estimate air conditioning
   // and heating usage (cycle length and frequency)
 
-  residents: number, // number of people who live in the house
+  numberOfPeopleInHousehold: number, // number of people who live in the house
 
-  monthlySummerUsage: number, // kWh per month
-  monthlyWinterUsage: number, // kWh per month
+  summerUsage: number, // kWh per month
+  winterUsage: number, // kWh per month
   // used to scale total energy consumption
 
-  dishwasher: boolean,
-  stove: boolean,
-  oven: boolean,
-  washer: boolean,
-  dryer: boolean,
-  heat: boolean,
-  ac: boolean,
-  fridge: boolean,
-  freezer: boolean,
-  secondFridge: boolean,
-  secondFreezer: boolean,
+  dishwasher: number,
+  stove: number,
+  oven: number,
+  washer: number,
+  dryer: number,
+  heat: number,
+  ac: number,
+  fridge: number,
+  freezer: number,
+  windowUnits: number,
   // indicates whether the user owns each device,
   // leads to more detailed questions about usage
 
@@ -52,7 +49,7 @@ export type QuestionnaireResponse = {
   acUsage: number,
   // estimated days of air conditioning per month in the summer
 
-  efficientLights: boolean,
+  eeBulbs: boolean,
   // whether the user primarily has LED or halogen bulbs
 
   additionalDevices: DeviceDefinition[],

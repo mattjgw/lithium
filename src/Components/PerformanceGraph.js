@@ -1,8 +1,8 @@
 // @flow
 
+import 'c3/c3.css';
 import * as React from 'react';
 import C3Chart from 'react-c3js';
-import 'c3/c3.css';
 
 export const PerformanceGraph = (props: { data: { [string]: number[] }, outages: string[] }): React.Node => {
   let { data, outages } = props;

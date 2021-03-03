@@ -1,6 +1,7 @@
 import type { Model, Outage, SimulatorResult } from './types'
 
 export function simulate_outage(model: Model, outage: Outage): SimulatorResult {
+  // debugger;
   let result = {
     peak_demand: 0,
     total_demand: 0
