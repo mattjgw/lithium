@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import homescreen from '../Images/homescreen.png';
 import { createMuiTheme, ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
@@ -6,6 +7,7 @@ import TopBar from './TopBar';
 import blueGrey from '@material-ui/core/colors/blueGrey';
 import green from '@material-ui/core/colors/green';
 import Grid from '@material-ui/core/Grid';
+import { Typography } from '@material-ui/core';
 
 const theme = createMuiTheme({
   palette: {
@@ -21,13 +23,47 @@ const theme = createMuiTheme({
 
 const styles = {
     shift: {
-        marginLeft: 20,
+        marginLeft: 130,
         marginTop: 20
-    }
+    },
+
+    title: {
+        //height: 80,
+        fontSize: 32,
+        marginTop: 20,
+        fontWeight: 'bold',
+        width: 600
+    },
+
+    subtitle: {
+        //height: 60,
+        fontSize: 24,
+        marginTop: 20,
+        width: 600
+    },
+
+    subtitle2: {
+        //height: 100,
+        fontSize: 22,
+        marginTop: 20,
+        color: '#2e7d32',
+        width: 500
+    },
+
+    image: {
+        height: 700,
+        width: 600,
+        marginTop: 40,
+        marginLeft: 100
+    },
+
+    flex: {
+        display: 'flex'
+    },
 };
 
 
-export class FormPriority extends Component {
+export class HomePage extends Component {
   continue = e => {
     e.preventDefault();
     this.props.nextStep();
@@ -37,19 +73,34 @@ export class FormPriority extends Component {
     const { classes } = this.props;
     return (
       <MuiThemeProvider theme= {theme}> 
-        <TopBar/>
+            <TopBar />
+            <Grid className={classes.flex}>
 
-        <Grid className={classes.shift}>
+                <Grid className={classes.shift}>
+                    <Typography className={classes.title}>Welcome to Lithium.</Typography>
+                    <Typography className={classes.subtitle}>We are a home power recommendation engine to help you become informed about power options for your home.</Typography>
+                    <Typography className={classes.subtitle}>Our goal is to give you personalized information about which home power devices are best suited for your home.</Typography>
+                    <Typography className={classes.subtitle2}>We&#39;ll ask you for some information about your home and give you curated recommendations.</Typography>
+                    <Typography className={classes.subtitle2}>Ready to give it a try? Click the button to get started.</Typography>
+                    <Typography className={classes.title}> </Typography>
+                    <Typography className={classes.title}> </Typography>
 
-            <Button
-            color="secondary"
-            variant="contained"
-            onClick={this.continue}
-            >Continue</Button>
-        </Grid>
+                    <Button
+                        color="secondary"
+                        variant="contained"
+                        onClick={this.continue}
+                        >Start Questionnaire
+                    </Button>
+
+                </Grid>
+
+                <img className={classes.image} src={homescreen} alt="home page image" /> 
+
+            </Grid>
+
       </MuiThemeProvider>
     );
   }
 }
 
-export default withStyles(styles)(FormPriority);
+export default withStyles(styles)(HomePage)
