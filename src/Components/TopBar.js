@@ -29,9 +29,10 @@ export class TopBar extends Component {
             Lithium
           </Typography>
           <div style={{ float: "right" }}>
+          <Link to={{ pathname: "/" }} style={{ textDecoration: 'none' }}>
             <Button color="inherit">Home</Button>
+          </Link>
             <Button color="inherit">About</Button>
-            <Button color="inherit">My House Profile</Button>
           </div>
         </Toolbar>
       </AppBar>
