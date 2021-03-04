@@ -186,7 +186,7 @@ export class FormApplianceInfo extends Component {
               color="secondary"
             />
           }
-          label="Freezer"
+          label="Separate freezer"
         />
         {!!values.freezer &&
           <TextField
@@ -284,7 +284,7 @@ export class FormApplianceInfo extends Component {
               color="secondary"
             />
           }
-          label="Energy efficient light bulbs"
+          label="Energy-efficient light bulbs"
         />
         <br />
         <Grid>
