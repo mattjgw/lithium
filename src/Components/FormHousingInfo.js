@@ -111,8 +111,8 @@ export class FormPriority extends Component {
         <TextField
           className={classes.textBox}
           type="number"
-          placeholder="Size of houshold"
-          label="Size of houshold"
+          placeholder="Size of household"
+          label="Size of household"
           value={values.numberOfPeopleInHousehold}
           onChange={handleChange('numberOfPeopleInHousehold')}
           margin="normal"
