@@ -5,6 +5,7 @@ import { HashRouter, Route, Switch } from 'react-router-dom';
 import { NotFoundPage } from './Pages/NotFoundPage';
 import { RecommendationsPage } from './Pages/RecommendationsPage';
 import { UserForm } from './Pages/UserForm';
+import HomePage from './Pages/HomePage';
 
 const App = () => {
   const theme = createMuiTheme({
@@ -24,7 +25,8 @@ const App = () => {
       <MuiThemeProvider theme={theme}>
         <HashRouter>
           <Switch>
-            <Route exact path="/" component={UserForm}></Route>
+            <Route exact path="/" component={HomePage}></Route>
+            <Route exact path="/survey" component={UserForm}></Route>
             <Route path="/recommendations" component={RecommendationsPage}></Route>
             <Route path="/" component={NotFoundPage}></Route>
             {/* <Route path="/airtable" component={AirtableTest}></Route>
