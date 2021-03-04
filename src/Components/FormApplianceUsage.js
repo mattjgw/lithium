@@ -32,8 +32,9 @@ const styles = {
     marginBottom: 20
   },
   textBox: {
-    height: 120,
-    width: 300
+    height: 70,
+    width: 300,
+    marginTop: -10
   },
   options: {
     height: 140,
@@ -123,6 +124,7 @@ export class FormApplianceUsage extends Component {
             usage={values.dryerUsage}
           />
         }
+        <br />
         {!!values.ac &&
           <Typography className={classes.question}>In the summer, how many days a month do you use your air conditioner?</Typography>}
 
