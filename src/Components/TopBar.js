@@ -20,18 +20,15 @@ export class TopBar extends Component {
 
   render() {
     return (
-      <AppBar position="static" color="primary">
+      <AppBar position="static" color="primary" >
         <Toolbar>
-          <IconButton edge="start" color="inherit" aria-label="menu">
-            <MenuIcon />
-          </IconButton>
           <Typography variant="h6">
             Lithium
           </Typography>
           <div style={{ float: "right" }}>
-          <Link to={{ pathname: "/" }} style={{ textDecoration: 'none' }}>
-            <Button color="inherit">Home</Button>
-          </Link>
+            <Link to={{ pathname: "/" }} style={{ textDecoration: 'none' }}>
+              <Button color="inherit">Home</Button>
+            </Link>
             <Button color="inherit">About</Button>
           </div>
         </Toolbar>

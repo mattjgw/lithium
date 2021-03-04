@@ -99,7 +99,7 @@ export class FormApplianceUsage extends Component {
         }
 
         {!!values.washer &&
-          <Typography className={classes.question}>How many loads of laundry do you do per week?</Typography>
+          <Typography className={classes.question}>How many loads of laundry does your household wash in an average week?</Typography>
         }
 
         {!!values.washer &&
@@ -134,11 +134,10 @@ export class FormApplianceUsage extends Component {
             placeholder="Days per month"
             label="Days per month"
             onChange={handleChange('acUsage')}
-            margin="normal"
+            margin="small"
             fullWidth
           />
         }
-
         <Grid>
           <Button
             className={classes.back}
