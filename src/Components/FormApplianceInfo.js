@@ -95,6 +95,7 @@ export class FormApplianceInfo extends Component {
         {!!values.dishwasher &&
           <TextField
             className={classes.quantity}
+            InputProps={{ inputProps: { min: 0 } }}
             id="standard-number"
             label="Quantity"
             type="number"
@@ -118,6 +119,7 @@ export class FormApplianceInfo extends Component {
         {!!values.stove &&
           <TextField
             className={classes.quantity}
+            InputProps={{ inputProps: { min: 0 } }}
             id="standard-number"
             label="Quantity"
             type="number"
@@ -141,6 +143,7 @@ export class FormApplianceInfo extends Component {
         {!!values.oven &&
           <TextField
             className={classes.quantity}
+            InputProps={{ inputProps: { min: 0 } }}
             id="standard-number"
             label="Quantity"
             type="number"
@@ -164,6 +167,7 @@ export class FormApplianceInfo extends Component {
         {!!values.fridge &&
           <TextField
             className={classes.quantity}
+            InputProps={{ inputProps: { min: 0 } }}
             id="standard-number"
             label="Quantity"
             type="number"
@@ -187,6 +191,7 @@ export class FormApplianceInfo extends Component {
         {!!values.freezer &&
           <TextField
             className={classes.quantity}
+            InputProps={{ inputProps: { min: 0 } }}
             id="standard-number"
             label="Quantity"
             type="number"
@@ -242,18 +247,18 @@ export class FormApplianceInfo extends Component {
         />
         {!!values.ac &&
           <FormControl className={classes.windowOrCentral} >
-            <InputLabel htmlFor="age-native-simple">Wind or Central?</InputLabel>
+            <InputLabel htmlFor="age-native-simple">Window or Central?</InputLabel>
             <Select
               style={{ width: 120 }}
               native
-              label="Wind or Central?"
+              label="Window or Central?"
               onChange={handleFieldChange('windowOrCentral')}
               inputProps={{
                 id: 'age-native-simple',
               }}
             >
               <option value={0}>Central</option>
-              <option value={1}>Wind</option>
+              <option value={1}>Window</option>
             </Select>
           </FormControl>
         }
@@ -263,6 +268,7 @@ export class FormApplianceInfo extends Component {
             id="standard-number"
             label="Quantity"
             type="number"
+            InputProps={{ inputProps: { min: 0 } }}
             value={values.windowUnits}
             onChange={handleFieldChange('windowUnits')}
             InputLabelProps={{

@@ -45,11 +45,15 @@ const styles = {
 export class FormPriority extends Component {
   continue = e => {
     e.preventDefault();
-    this.props.nextStep();
+    if(this.props.values.location !== '' && this.props.values.squareFootage !== 0 
+    && this.props.values.numberOfPeopleInHousehold !== 0 && this.props.values.summerUsage !== 0 
+    && this.props.values.winterUsage !== 0 ){
+      this.props.nextStep();
+    }
   };
 
   render() {
-    const { handleChange } = this.props;
+    const { handleChange, values } = this.props;
     const { classes } = this.props;
     return (
       <Grid className={classes.shift}>
@@ -67,6 +71,7 @@ export class FormPriority extends Component {
             inputProps={{
               id: 'age-native-simple',
             }}
+            value={values.location}
           >
             <option aria-label="None" value="" />
             <option value={'ON'}>Ontario</option>
@@ -91,9 +96,10 @@ export class FormPriority extends Component {
         <br />
         <TextField
           className={classes.textBox}
+          type="number"
           placeholder="Square Footage"
-          type='number'
           label="Square Footage"
+          value={values.squareFootage}
           onChange={handleChange('squareFootage')}
           margin="normal"
           fullWidth
@@ -104,9 +110,10 @@ export class FormPriority extends Component {
         <br />
         <TextField
           className={classes.textBox}
+          type="number"
           placeholder="Size of houshold"
-          type='number'
           label="Size of houshold"
+          value={values.numberOfPeopleInHousehold}
           onChange={handleChange('numberOfPeopleInHousehold')}
           margin="normal"
           fullWidth
@@ -117,9 +124,10 @@ export class FormPriority extends Component {
         <br />
         <TextField
           className={classes.textBox}
+          type="number"
           placeholder="Monthly usage"
-          type='number'
           label="Monthly usage"
+          value={values.summerUsage}
           onChange={handleChange('summerUsage')}
           margin="normal"
           fullWidth
@@ -130,9 +138,10 @@ export class FormPriority extends Component {
         <br />
         <TextField
           className={classes.textBox}
+          type="number"
           placeholder="Monthly usage"
-          type='number'
           label="Monthly usage"
+          value={values.winterUsage}
           onChange={handleChange('winterUsage')}
           margin="normal"
           fullWidth

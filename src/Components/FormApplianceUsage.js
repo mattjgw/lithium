@@ -73,6 +73,7 @@ export class FormApplianceUsage extends Component {
           <ApplianceUsageQuestion
             applianceName='dishwasher'
             applianceKey='dishwasherUsage'
+            quantity={values.dishwasher}
             handleChange={handleChange}
             usage={values.dishwasherUsage}
           />
@@ -81,6 +82,7 @@ export class FormApplianceUsage extends Component {
           <ApplianceUsageQuestion
             applianceName='stove'
             applianceKey='stoveUsage'
+            quantity={values.stove}
             handleChange={handleChange}
             usage={values.stoveUsage}
           />
@@ -89,23 +91,34 @@ export class FormApplianceUsage extends Component {
           <ApplianceUsageQuestion
             applianceName='oven'
             applianceKey='ovenUsage'
+            quantity={values.oven}
             handleChange={handleChange}
             usage={values.ovenUsage}
           />
         }
 
         {!!values.washer &&
-          <ApplianceUsageQuestion
-            applianceName='washer'
-            applianceKey='washerUsage'
-            handleChange={handleChange}
-            usage={values.washerUsage}
+          <Typography className={classes.question}>How many loads of laundry do you do per week?</Typography>
+        }
+
+        {!!values.washer &&
+          <TextField
+            id="standard-number"
+            label="Number of uses"
+            type="number"
+            value={values.washerUsage}
+            onChange={handleChange('washerUsage')}
+            InputLabelProps={{
+              shrink: true,
+            }}
           />
         }
+        <br />
         {!!values.dryer &&
           <ApplianceUsageQuestion
             applianceName='dryer'
             applianceKey='dryerUsage'
+            quantity={values.dryer}
             handleChange={handleChange}
             usage={values.dryerUsage}
           />
