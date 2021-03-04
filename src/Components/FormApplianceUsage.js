@@ -101,7 +101,7 @@ export class FormApplianceUsage extends Component {
           <Typography className={classes.question}>How many loads of laundry do you do per week?</Typography>
         }
 
-        {
+        {!!values.washer &&
           <TextField
             id="standard-number"
             label="Number of uses"

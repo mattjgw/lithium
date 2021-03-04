@@ -42,6 +42,7 @@ export class ApplianceUsageQuestion extends Component {
       <TextField
         id="standard-number"
         label="Number of uses"
+        InputProps={{ inputProps: { min: 0 } }}
         type="number"
         value={usage}
         onChange={handleChange(applianceKey)}

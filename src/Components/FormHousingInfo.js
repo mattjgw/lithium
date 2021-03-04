@@ -53,7 +53,7 @@ export class FormPriority extends Component {
   };
 
   render() {
-    const { handleChange } = this.props;
+    const { handleChange, values } = this.props;
     const { classes } = this.props;
     return (
       <Grid className={classes.shift}>
@@ -71,6 +71,7 @@ export class FormPriority extends Component {
             inputProps={{
               id: 'age-native-simple',
             }}
+            value={values.location}
           >
             <option aria-label="None" value="" />
             <option value={'ON'}>Ontario</option>
@@ -95,8 +96,10 @@ export class FormPriority extends Component {
         <br />
         <TextField
           className={classes.textBox}
+          type="number"
           placeholder="Square Footage"
           label="Square Footage"
+          value={values.squareFootage}
           onChange={handleChange('squareFootage')}
           margin="normal"
           fullWidth
@@ -107,8 +110,10 @@ export class FormPriority extends Component {
         <br />
         <TextField
           className={classes.textBox}
+          type="number"
           placeholder="Size of houshold"
           label="Size of houshold"
+          value={values.numberOfPeopleInHousehold}
           onChange={handleChange('numberOfPeopleInHousehold')}
           margin="normal"
           fullWidth
@@ -119,8 +124,10 @@ export class FormPriority extends Component {
         <br />
         <TextField
           className={classes.textBox}
+          type="number"
           placeholder="Monthly usage"
           label="Monthly usage"
+          value={values.summerUsage}
           onChange={handleChange('summerUsage')}
           margin="normal"
           fullWidth
@@ -131,8 +138,10 @@ export class FormPriority extends Component {
         <br />
         <TextField
           className={classes.textBox}
+          type="number"
           placeholder="Monthly usage"
           label="Monthly usage"
+          value={values.winterUsage}
           onChange={handleChange('winterUsage')}
           margin="normal"
           fullWidth

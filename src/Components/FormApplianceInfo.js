@@ -95,6 +95,7 @@ export class FormApplianceInfo extends Component {
         {!!values.dishwasher &&
           <TextField
             className={classes.quantity}
+            InputProps={{ inputProps: { min: 0 } }}
             id="standard-number"
             label="Quantity"
             type="number"
@@ -118,6 +119,7 @@ export class FormApplianceInfo extends Component {
         {!!values.stove &&
           <TextField
             className={classes.quantity}
+            InputProps={{ inputProps: { min: 0 } }}
             id="standard-number"
             label="Quantity"
             type="number"
@@ -141,6 +143,7 @@ export class FormApplianceInfo extends Component {
         {!!values.oven &&
           <TextField
             className={classes.quantity}
+            InputProps={{ inputProps: { min: 0 } }}
             id="standard-number"
             label="Quantity"
             type="number"
@@ -164,6 +167,7 @@ export class FormApplianceInfo extends Component {
         {!!values.fridge &&
           <TextField
             className={classes.quantity}
+            InputProps={{ inputProps: { min: 0 } }}
             id="standard-number"
             label="Quantity"
             type="number"
@@ -187,6 +191,7 @@ export class FormApplianceInfo extends Component {
         {!!values.freezer &&
           <TextField
             className={classes.quantity}
+            InputProps={{ inputProps: { min: 0 } }}
             id="standard-number"
             label="Quantity"
             type="number"

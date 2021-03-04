@@ -9,10 +9,10 @@ export class UserForm extends Component {
   state = {
     step: 1,
     location: '',
-    squareFootage: 0,
-    numberOfPeopleInHousehold: 0,
-    summerUsage: 0,
-    winterUsage: 0,
+    squareFootage: '',
+    numberOfPeopleInHousehold: '',
+    summerUsage: '',
+    winterUsage: '',
     dishwasher: 0,
     stove: 0,
     oven: 0,
@@ -67,11 +67,11 @@ export class UserForm extends Component {
     const { step } = this.state;
     const { priority, location, squareFootage, monthlyUsage, dishwasher, stove, oven, fridge,
       freezer, washer, dryer, ac, heat, dishwasherUsage, stoveUsage, ovenUsage, secondFridge, secondFreezer,
-      washerUsage, dryerUsage, acUsage, additionalDevices, summerUsage, winterUsage, windowOrCentral } = this.state;
+      washerUsage, dryerUsage, acUsage, additionalDevices, summerUsage, winterUsage, windowOrCentral, numberOfPeopleInHousehold } = this.state;
     const values = {
       priority, location, squareFootage, monthlyUsage, dishwasher, stove, oven, fridge,
       freezer, washer, dryer, ac, heat, dishwasherUsage, stoveUsage, ovenUsage, secondFridge, secondFreezer,
-      washerUsage, dryerUsage, acUsage, additionalDevices, summerUsage, winterUsage, windowOrCentral
+      washerUsage, dryerUsage, acUsage, additionalDevices, summerUsage, winterUsage, windowOrCentral, numberOfPeopleInHousehold
     };
 
 
