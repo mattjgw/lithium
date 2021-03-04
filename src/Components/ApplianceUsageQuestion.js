@@ -34,10 +34,10 @@ export class ApplianceUsageQuestion extends Component {
   render() {
     const { usage, handleChange, applianceName, applianceKey, quantity } = this.props;
     const { classes } = this.props;
-    const plural = quantity > 1 ? 's' : ''; 
+    const plural = quantity > 1 ? 's' : '';
 
     return (<>
-      <Typography className={classes.question}>How many times do you use your {applianceName}{plural} in an average week?</Typography>
+      <Typography className={classes.question}>How many times does your household use your {applianceName}{plural} in an average week?</Typography>
 
       <TextField
         id="standard-number"
