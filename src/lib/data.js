@@ -12,8 +12,8 @@ export const DEVICE_DAILY_FREQ: { [Device]: number } = {
   "oven": 0.45,
   "washer": 0.36,
   "dryer": 0.25,
-  "heat": 3,
-  "ac": 1.5,
+  "heat": 4,
+  "ac": 4,
   "fridge": 40,
   "freezer": 5,
 }
@@ -24,8 +24,8 @@ export const DEVICE_CYCLE_LENGTH: { [Device]: number } = {
   "oven": 30,
   "washer": 55,
   "dryer": 75,
-  "heat": 15,
-  "ac": 120,
+  "heat": 30,
+  "ac": 60,
   "fridge": 12,
   "freezer": 10,
 }
@@ -42,6 +42,12 @@ export const DEVICE_WATTAGE: { [Device]: number } = {
   "freezer": 150,
 }
 
+export const DEVICE_PATTERNS = {
+  "dishwasher": "meals",
+  "stove": "meals",
+  "oven": "meals",
+}
+
 export const HOURLY_PATTERNS = {
   "meals": [
     0.01, 0.005, 0.005, 0.005, 0.005, 0.01,
@@ -52,9 +58,9 @@ export const HOURLY_PATTERNS = {
 }
 
 export const OUTAGES = {
-  "short": 15,
-  "medium": 60,
-  "long": 180
+  "15m": 15,
+  "1h": 60,
+  "3h": 180
 }
 
 export const EXAMPLE_RESPONSE: QuestionnaireResponse = {
