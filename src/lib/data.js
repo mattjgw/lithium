@@ -57,11 +57,11 @@ export const HOURLY_PATTERNS = {
   ],
 }
 
-export const OUTAGES = {
-  "15m": 15,
-  "1h": 60,
-  "3h": 180
-}
+export const OUTAGES = [
+  15,
+  60,
+  180
+]
 
 export const EXAMPLE_RESPONSE: QuestionnaireResponse = {
   "location": "ON",

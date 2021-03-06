@@ -106,31 +106,42 @@ export const RecommendationsPage = (props: {
     // Analyze recommendation performance
     let _panels = [];
     for (let brand of Object.keys(STORAGE_DEVICES)) {
-      // choose the first for now (placeholder)
-      let recommendation = STORAGE_DEVICES[brand][0];
+      // start with the base model
+      let recommendation = [STORAGE_DEVICES[brand][0]];
+      let perf;
 
-      // Details to show on the comparison page
-      // Description will contain rec performance on 3 classes of outages
-      let panel = {
-        title: brand,
-        subheader: recommendation.name,
-        output: recommendation.peak_discharge,
-        capacity: recommendation.capacity,
-        description: [],
-        buttonText: 'See details',
-        buttonVariant: 'outlined',
-        perf: {}
+      while (true) {
+        perf = assess_recommendation(recommendation, models, OUTAGES);
+        let percentages = {};
+        for (let [name, result] of Object.entries(perf)) {
+          // count successes
+          let successes = result.reduce((a, b) => a + (b === 4), 0);
+          let percentage = Math.round(successes * 100 / M);
+          percentages[name] = percentage;
+        }
+
+        let percentages_list = Object.values(percentages);
+        if (percentages_list[0] < 90 || percentages_list[1] < 75 || percentages_list[2] < 50) {
+          recommendation.push(STORAGE_DEVICES[brand][0]);
+        } else {
+          let panel = {
+            title: brand,
+            subheader: recommendation.name,
+            output: recommendation.peak_discharge,
+            capacity: recommendation.capacity,
+            description: [],
+            buttonText: 'See details',
+            buttonVariant: 'outlined',
+            perf: perf,
+          }
+
+          for (let [name, percentage] of Object.entries(percentages)) {
+            panel.description.push(`Prevents ${percentage}% of ${name} outages`)
+          }
+          _panels.push(panel);
+          break;
+        }
       }
-
-      panel.perf = assess_recommendation(recommendation, models, OUTAGES);
-      for (let type in OUTAGES) {
-        // count successes
-        let successes = panel.perf[type].reduce((a, b) => a + (b === 4), 0)
-
-        let percentage = Math.round(successes * 100 / M);
-        panel.description.push(`Prevents ${percentage}% of ${type} outages`)
-      }
-      _panels.push(panel);
     }
 
     setPanels(_panels);
