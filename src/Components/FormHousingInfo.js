@@ -1,4 +1,4 @@
-import { Typography } from '@material-ui/core';
+import { Tooltip, Typography } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import FormControl from '@material-ui/core/FormControl';
 import Grid from '@material-ui/core/Grid';
@@ -6,6 +6,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
+import HelpIcon from '@material-ui/icons/Help';
 import React, { Component } from 'react';
 
 const styles = {
@@ -38,16 +39,16 @@ const styles = {
   shift: {
     marginLeft: 20,
     marginTop: 20
-  }
+  },
 };
 
 
 export class FormPriority extends Component {
   continue = e => {
     e.preventDefault();
-    if(this.props.values.location !== '' && this.props.values.squareFootage !== 0 
-    && this.props.values.numberOfPeopleInHousehold !== 0 && this.props.values.summerUsage !== 0 
-    && this.props.values.winterUsage !== 0 ){
+    if (this.props.values.location !== '' && this.props.values.squareFootage !== 0
+      && this.props.values.numberOfPeopleInHousehold !== 0 && this.props.values.summerUsage !== 0
+      && this.props.values.winterUsage !== 0) {
       this.props.nextStep();
     }
   };
@@ -61,7 +62,14 @@ export class FormPriority extends Component {
         <Typography className={classes.title}>Questionnaire</Typography>
         <Typography className={classes.subTitle}>Housing Information</Typography>
 
-        <Typography className={classes.question}>What province/territory do you live in?</Typography>
+        <Typography className={classes.question}>
+          What province/territory do you live in?&nbsp;
+          <Tooltip
+            title="We'll use this information to estimate the types of power outages you're most likely to experience."
+            placement="right" arrow>
+            <HelpIcon fontSize="small" />
+          </Tooltip>
+        </Typography>
         <br />
         <FormControl>
           <InputLabel htmlFor="age-native-simple"></InputLabel>
@@ -92,7 +100,14 @@ export class FormPriority extends Component {
         </FormControl>
         <br />
 
-        <Typography className={classes.question}>What is the square footage of your home?</Typography>
+        <Typography className={classes.question}>
+          What is the square footage of your home?&nbsp;
+          <Tooltip
+            title="If you're not sure, some estimates are about 500 sq. ft. for a studio apartment, 800 sq. ft. for a 1 bedroom apartment, and 1200 sq. ft. for a townhouse. Please include all living space, including basements!"
+            placement="right" arrow>
+            <HelpIcon fontSize="small" />
+          </Tooltip>
+        </Typography>
         <br />
         <TextField
           className={classes.textBox}
@@ -106,7 +121,9 @@ export class FormPriority extends Component {
         />
         <br />
 
-        <Typography className={classes.question}>How many people live in your home?</Typography>
+        <Typography className={classes.question}>
+          How many people live in your home?&nbsp;
+        </Typography>
         <br />
         <TextField
           className={classes.textBox}
@@ -120,7 +137,11 @@ export class FormPriority extends Component {
         />
         <br />
 
-        <Typography className={classes.question}>What is your average monthly power usage during the summer (kWh)?</Typography>
+        <Typography className={classes.question}>
+          What is your average monthly power usage during the summer (kWh)?&nbsp;
+          <Tooltip title="You can find this information on a recent power bill." placement="right" arrow><HelpIcon fontSize="small" /></Tooltip>
+        </Typography>
+
         <br />
         <TextField
           className={classes.textBox}
@@ -134,7 +155,10 @@ export class FormPriority extends Component {
         />
         <br />
 
-        <Typography className={classes.question}>What is your average monthly power usage during the winter (kWh)?</Typography>
+        <Typography className={classes.question}>
+          What is your average monthly power usage during the winter (kWh)?&nbsp;
+          <Tooltip title="You can find this information on a recent power bill." placement="right" arrow><HelpIcon fontSize="small" /></Tooltip>
+        </Typography>
         <br />
         <TextField
           className={classes.textBox}

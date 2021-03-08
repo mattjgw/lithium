@@ -1,6 +1,6 @@
 // @flow
 
-import { DEVICE_CYCLE_LENGTH, DEVICE_DAILY_FREQ, DEVICE_NAMES, DEVICE_WATTAGE } from "./data";
+import { DEVICE_CYCLE_LENGTH, DEVICE_DAILY_FREQ, DEVICE_NAMES, DEVICE_PATTERNS, DEVICE_WATTAGE, HOURLY_PATTERNS } from "./data";
 import type { QuestionnaireResponse, Model, ModelParams, DeviceDefinition } from './types'
 
 // parses questionnaire and params into a list of devices to simulate
@@ -10,19 +10,58 @@ export function get_devices(questionnaire: QuestionnaireResponse, params: ModelP
 
   for (let name of DEVICE_NAMES) {
     // special cases
-    if (name === "ac" && !params.summer) {
-      continue;
-    } else if (name === "heat" && params.summer) {
-      continue;
-    }
+    if (name === "ac") {
+      if (!params.summer) {
+        continue;
+      }
 
-    devices.push({
-      name: name,
-      freq: DEVICE_DAILY_FREQ[name],
-      cycle_length: DEVICE_CYCLE_LENGTH[name],
-      wattage: DEVICE_WATTAGE[name],
-      pattern: null
-    })
+      if (Math.random() < (questionnaire.acUsage / 30)) {
+        // take into account how many days in a month AC is used
+        continue;
+      }
+
+      if (questionnaire.windowUnits > 0) {
+        for (let i = 0; i < questionnaire.windowUnits; i++) {
+          devices.push({
+            name: name,
+            freq: DEVICE_DAILY_FREQ[name],
+            cycle_length: DEVICE_CYCLE_LENGTH[name],
+            wattage: DEVICE_WATTAGE[name] * (questionnaire.squareFootage / 1000) / questionnaire.windowUnits,
+            pattern: null
+          })
+        }
+      } else {
+        // central air
+        devices.push({
+          name: name,
+          freq: DEVICE_DAILY_FREQ[name],
+          cycle_length: DEVICE_CYCLE_LENGTH[name],
+          wattage: DEVICE_WATTAGE[name] * (questionnaire.squareFootage / 1000),
+          pattern: null
+        })
+      }
+
+    } else if (name === "heat") {
+      if (params.summer) {
+        continue;
+      }
+
+      devices.push({
+        name: name,
+        freq: DEVICE_DAILY_FREQ[name],
+        cycle_length: DEVICE_CYCLE_LENGTH[name],
+        wattage: DEVICE_WATTAGE[name] * (questionnaire.squareFootage / 1000),
+        pattern: null
+      })
+    } else {
+      devices.push({
+        name: name,
+        freq: DEVICE_DAILY_FREQ[name],
+        cycle_length: DEVICE_CYCLE_LENGTH[name],
+        wattage: DEVICE_WATTAGE[name],
+        pattern: null
+      })
+    }
   }
 
   // lights
@@ -74,6 +113,14 @@ export function generate_model(devices: DeviceDefinition[], daily_target_demand:
       } else {
         // Start a new cycle if random value is above threshold
         let threshold = device.freq / minutes;
+        // Adjust threshold if relevant hourly pattern
+        let pattern_name = DEVICE_PATTERNS[device.name];
+        if (pattern_name !== undefined) {
+          let hour = Math.floor(i / 24);
+          let modifier = HOURLY_PATTERNS[pattern_name][hour];
+          threshold *= modifier * 24;
+        }
+
         if (Math.random() < threshold) {
           device_cycles[device.name] = device.cycle_length
         }
