@@ -168,7 +168,7 @@ export const RecommendationsPage = (props: {
       </Container>
       {/* End hero unit */}
       <Container maxWidth="lg" component="main">
-        <Grid container spacing={2} alignItems="flex-end">
+        <Grid container spacing={2} alignItems="flex-start">
           {panels.map((panel) => (
             <RecommendationPanel panel={panel} classes={classes} />
           ))}

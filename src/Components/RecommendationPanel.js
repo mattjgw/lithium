@@ -50,14 +50,14 @@ export const RecommendationPanel = (props: {
             kW output
           </Typography>
         </div>
-        <div className={classes.cardPricing}>
+        {panel.capacity > 0 && <div className={classes.cardPricing}>
           <Typography component="h4" variant="h4" color="textPrimary">
-            {panel.capacity === 0 ? "--" : Math.round(panel.capacity / 100) / 10}
+            {Math.round(panel.capacity / 100) / 10}
           </Typography>
           <Typography variant="h6" color="textSecondary">
             kWh capacity
           </Typography>
-        </div>
+        </div>}
         <ul>
           {panel.description.map((line) => (
             <Typography component="li" variant="subtitle1" align="center" key={line}>
