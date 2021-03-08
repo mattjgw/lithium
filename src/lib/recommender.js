@@ -12,7 +12,15 @@ export function assess_recommendation(
 
   let perf: RecommendationPerformance = {};
   for (let length of outages) {
-    let name = `${Math.floor(length / 60)}:` + `${length % 60}`.padStart(2, "0")
+    let name = "";
+    if (length < 60) {
+      name = `${length} minutes`;
+    } else if (length < 120) {
+      name = `1 hour` + (length % 60 === 0 ? "" : ` ${length % 60} minutes`);
+    } else {
+      name = `${Math.floor(length / 60)} hours` + (length % 60 === 0 ? "" : ` ${length % 60} minutes`);
+    }
+
     perf[name] = [];
     for (let model of models) {
       // randomize start time
