@@ -94,27 +94,129 @@ export const STORAGE_DEVICES: { [string]: StorageSolution[] } = {
   "Tesla": [
     {
       name: "Powerwall",
+      type: "Home battery",
       capacity: 13500,
       peak_discharge: 5800,
+      cost: 12000,
+    },
+    {
+      name: "2x Powerwall",
+      type: "Home battery",
+      capacity: 13500 * 2,
+      peak_discharge: 5800 * 2,
+      cost: 12000 * 2,
+    },
+    {
+      name: "3x Powerwall",
+      type: "Home battery",
+      capacity: 13500 * 3,
+      peak_discharge: 5800 * 3,
+      cost: 12000 * 3,
+    },
+    {
+      name: "4x Powerwall",
+      type: "Home battery",
+      capacity: 13500 * 4,
+      peak_discharge: 5800 * 4,
+      cost: 12000 * 4,
     },
   ],
   "Orison": [
     {
       name: "Panel",
+      type: "Home battery",
       capacity: 2200,
       peak_discharge: 1800,
+      cost: 2200,
+    },
+    {
+      name: "Panel and Panel+",
+      type: "Home battery",
+      capacity: 2200 * 2,
+      peak_discharge: 1800 * 2,
+      cost: 2200 + 1600,
+    },
+    {
+      name: "Panel and 2x Panel+",
+      type: "Home battery",
+      capacity: 2200 * 3,
+      peak_discharge: 1800 * 3,
+      cost: 2200 + 1600 * 2,
+    },
+    {
+      name: "Panel and 3x Panel+",
+      type: "Home battery",
+      capacity: 2200 * 4,
+      peak_discharge: 1800 * 4,
+      cost: 2200 + 1600 * 3,
+    },
+    {
+      name: "Panel and 4x Panel+",
+      type: "Home battery",
+      capacity: 2200 * 5,
+      peak_discharge: 1800 * 5,
+      cost: 2200 + 1600 * 4,
+    },
+    {
+      name: "Panel and 5x Panel+",
+      type: "Home battery",
+      capacity: 2200 * 6,
+      peak_discharge: 1800 * 6,
+      cost: 2200 + 1600 * 5,
     }
   ],
   "LG Chem": [
     {
       name: "RESU7H",
+      type: "Home battery",
       capacity: 6600,
       peak_discharge: 5000,
+      cost: 6260,
+
     },
     {
       name: "RESU10H",
+      type: "Home battery",
       capacity: 9300,
       peak_discharge: 5000,
+      cost: 8100,
+    },
+    {
+      name: "2x RESU7H",
+      type: "Home battery",
+      capacity: 6600 * 2,
+      peak_discharge: 5000 * 2,
+      cost: 6260 * 2,
+    },
+    {
+      name: "RESU7H + RESU10H",
+      type: "Home battery",
+      capacity: 6600 + 9300,
+      peak_discharge: 5000 * 2,
+      cost: 6260 + 8100,
+    },
+    {
+      name: "2x RESU10H",
+      type: "Home battery",
+      capacity: 9300 * 2,
+      peak_discharge: 5000 * 2,
+      cost: 8100 * 2,
+    },
+    {
+      name: "3x RESU10H",
+      type: "Home battery",
+      capacity: 9300 * 3,
+      peak_discharge: 5000 * 3,
+      cost: 8100 * 3,
+    }
+  ],
+  "Generac": [
+    {
+      name: "Home Standby Generator",
+      type: "Generator",
+      capacity: 0,
+      peak_discharge: 16000,
+      cost: 5429,
     }
   ]
 }

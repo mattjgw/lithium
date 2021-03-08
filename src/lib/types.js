@@ -86,6 +86,7 @@ export type StorageSolution = {
   name: string,
   capacity: number, // watt-hours
   peak_discharge: number, // watts
+  cost: number, // dollars
 }
 
 export type RecommendationPerformance = { [string]: number[] }
