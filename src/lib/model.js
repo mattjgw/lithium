@@ -53,10 +53,18 @@ export function get_devices(questionnaire: QuestionnaireResponse, params: ModelP
         wattage: DEVICE_WATTAGE[name] * (questionnaire.squareFootage / 1000),
         pattern: null
       })
-    } else {
+    } else if (name === "fridge" || name === "freezer") {
       devices.push({
         name: name,
         freq: DEVICE_DAILY_FREQ[name],
+        cycle_length: DEVICE_CYCLE_LENGTH[name],
+        wattage: DEVICE_WATTAGE[name],
+        pattern: null
+      })
+    } else {
+      devices.push({
+        name: name,
+        freq: questionnaire[name + "Usage"] / 7,
         cycle_length: DEVICE_CYCLE_LENGTH[name],
         wattage: DEVICE_WATTAGE[name],
         pattern: null
@@ -68,9 +76,9 @@ export function get_devices(questionnaire: QuestionnaireResponse, params: ModelP
   for (let i = 0; i < questionnaire.numberOfPeopleInHousehold; i++) {
     devices.push({
       name: `lights${i}`,
-      freq: 6,
+      freq: 8,
       cycle_length: 60,
-      wattage: questionnaire.eeBulbs ? 20 : 100,
+      wattage: questionnaire.eeBulbs ? 40 : 200,
       pattern: null,
     })
   }
@@ -111,7 +119,7 @@ export function generate_model(devices: DeviceDefinition[], daily_target_demand:
         total_demand[i] += device.wattage
         device_demand[device.name][i] += device.wattage
       } else {
-        // Start a new cycle if random value is above threshold
+        // Start a new cycle if random value is below threshold
         let threshold = device.freq / minutes;
         // Adjust threshold if relevant hourly pattern
         let pattern_name = DEVICE_PATTERNS[device.name];
@@ -135,6 +143,8 @@ export function generate_model(devices: DeviceDefinition[], daily_target_demand:
 
   // Scale values to match power bill
   let scaling_factor = daily_target_demand / daily_actual_demand;
+  console.log(scaling_factor);
+
   total_demand = total_demand.map((watts) => watts * scaling_factor);
   for (let device of devices) {
     device_demand[device.name] = device_demand[device.name].map((watts) => watts * scaling_factor)
