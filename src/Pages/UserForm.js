@@ -2,12 +2,14 @@ import React, { Component } from 'react';
 import FormApplianceInfo from '../Components/FormApplianceInfo';
 import FormApplianceUsage from '../Components/FormApplianceUsage';
 import FormHousingInfo from '../Components/FormHousingInfo';
+import FormOutageDefinition from '../Components/FormOutageDefinition';
 import Success from '../Components/Success';
 import TopBar from '../Components/TopBar';
 
 export class UserForm extends Component {
   state = {
     step: 1,
+    priority: '',
     location: '',
     squareFootage: '',
     numberOfPeopleInHousehold: '',
@@ -79,7 +81,7 @@ export class UserForm extends Component {
       switch (step) {
         case 1:
           return (
-            <FormHousingInfo
+            <FormOutageDefinition
               nextStep={this.nextStep}
               handleChange={this.handleFieldChange}
               values={values}
@@ -87,6 +89,16 @@ export class UserForm extends Component {
 
           );
         case 2:
+          return (
+            <FormHousingInfo
+              nextStep={this.nextStep}
+              prevStep={this.prevStep}
+              handleChange={this.handleFieldChange}
+              values={values}
+            />
+
+          );
+        case 3:
           return (
             <FormApplianceInfo
               nextStep={this.nextStep}
@@ -96,7 +108,7 @@ export class UserForm extends Component {
               values={values}
             />
           );
-        case 3:
+        case 4:
           if (values.dishwasher || values.stove || values.washer || values.dryer || values.ac || values.fridge || values.freezer) {
             return (
               <FormApplianceUsage
@@ -108,7 +120,7 @@ export class UserForm extends Component {
             )
           };
           return <Success values={values} />
-        case 4:
+        case 5:
           return <Success values={values} />
         default:
           (console.log('This is a multi-step form built with React.'))
