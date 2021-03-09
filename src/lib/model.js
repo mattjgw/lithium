@@ -143,7 +143,6 @@ export function generate_model(devices: DeviceDefinition[], daily_target_demand:
 
   // Scale values to match power bill
   let scaling_factor = daily_target_demand / daily_actual_demand;
-  console.log(scaling_factor);
 
   total_demand = total_demand.map((watts) => watts * scaling_factor);
   for (let device of devices) {

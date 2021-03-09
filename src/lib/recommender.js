@@ -33,7 +33,6 @@ export function assess_recommendation(
       if (sim_result.peak_demand > rec.peak_discharge && rec.capacity > 0 && sim_result.total_demand > rec.capacity) {
         perf[name].push(1);
       } else if (sim_result.peak_demand > rec.peak_discharge) {
-        console.log(rec.peak_discharge);
         perf[name].push(2);
       } else if (sim_result.total_demand > rec.capacity && rec.capacity) {
         perf[name].push(3);
