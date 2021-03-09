@@ -13,7 +13,7 @@ export const DEVICE_DAILY_FREQ: { [Device]: number } = {
   "washer": 0.36,
   "dryer": 0.25,
   "heat": 4,
-  "ac": 4,
+  "ac": 20,
   "fridge": 40,
   "freezer": 5,
 }
@@ -25,7 +25,7 @@ export const DEVICE_CYCLE_LENGTH: { [Device]: number } = {
   "washer": 55,
   "dryer": 75,
   "heat": 30,
-  "ac": 60,
+  "ac": 20,
   "fridge": 12,
   "freezer": 10,
 }
@@ -57,33 +57,33 @@ export const HOURLY_PATTERNS = {
   ],
 }
 
-export const OUTAGES = {
-  "15m": 15,
-  "1h": 60,
-  "3h": 180
-}
+export const OUTAGES = [
+  15,
+  60,
+  180
+]
 
 export const EXAMPLE_RESPONSE: QuestionnaireResponse = {
   "location": "ON",
   "squareFootage": 1000,
   "numberOfPeopleInHousehold": 4,
-  "summerUsage": 1500,
-  "winterUsage": 1200,
+  "summerUsage": 800,
+  "winterUsage": 600,
   "dishwasher": 1,
   "stove": 1,
   "oven": 0,
   "fridge": 1,
-  "freezer": 0,
-  "washer": 0,
-  "dryer": 0,
+  "freezer": 1,
+  "washer": 1,
+  "dryer": 1,
   "heat": 1,
   "ac": 0,
-  "dishwasherUsage": 3,
-  "stoveUsage": 1,
-  "ovenUsage": 0,
-  "washerUsage": 0,
-  "dryerUsage": 0,
-  "acUsage": 0,
+  "dishwasherUsage": 7,
+  "stoveUsage": 20,
+  "ovenUsage": 5,
+  "washerUsage": 3,
+  "dryerUsage": 2,
+  "acUsage": 15,
   "windowOrCentral": 0,
   "windowUnits": 0,
   "eeBulbs": true,
@@ -94,27 +94,129 @@ export const STORAGE_DEVICES: { [string]: StorageSolution[] } = {
   "Tesla": [
     {
       name: "Powerwall",
+      type: "Home battery",
       capacity: 13500,
       peak_discharge: 5800,
+      cost: 12000,
+    },
+    {
+      name: "2x Powerwall",
+      type: "Home battery",
+      capacity: 13500 * 2,
+      peak_discharge: 5800 * 2,
+      cost: 12000 * 2,
+    },
+    {
+      name: "3x Powerwall",
+      type: "Home battery",
+      capacity: 13500 * 3,
+      peak_discharge: 5800 * 3,
+      cost: 12000 * 3,
+    },
+    {
+      name: "4x Powerwall",
+      type: "Home battery",
+      capacity: 13500 * 4,
+      peak_discharge: 5800 * 4,
+      cost: 12000 * 4,
     },
   ],
   "Orison": [
     {
       name: "Panel",
+      type: "Home battery",
       capacity: 2200,
       peak_discharge: 1800,
+      cost: 2200,
+    },
+    {
+      name: "Panel and Panel+",
+      type: "Home battery",
+      capacity: 2200 * 2,
+      peak_discharge: 1800 * 2,
+      cost: 2200 + 1600,
+    },
+    {
+      name: "Panel and 2x Panel+",
+      type: "Home battery",
+      capacity: 2200 * 3,
+      peak_discharge: 1800 * 3,
+      cost: 2200 + 1600 * 2,
+    },
+    {
+      name: "Panel and 3x Panel+",
+      type: "Home battery",
+      capacity: 2200 * 4,
+      peak_discharge: 1800 * 4,
+      cost: 2200 + 1600 * 3,
+    },
+    {
+      name: "Panel and 4x Panel+",
+      type: "Home battery",
+      capacity: 2200 * 5,
+      peak_discharge: 1800 * 5,
+      cost: 2200 + 1600 * 4,
+    },
+    {
+      name: "Panel and 5x Panel+",
+      type: "Home battery",
+      capacity: 2200 * 6,
+      peak_discharge: 1800 * 6,
+      cost: 2200 + 1600 * 5,
     }
   ],
   "LG Chem": [
     {
       name: "RESU7H",
+      type: "Home battery",
       capacity: 6600,
       peak_discharge: 5000,
+      cost: 6260,
+
     },
     {
       name: "RESU10H",
+      type: "Home battery",
       capacity: 9300,
       peak_discharge: 5000,
+      cost: 8100,
+    },
+    {
+      name: "2x RESU7H",
+      type: "Home battery",
+      capacity: 6600 * 2,
+      peak_discharge: 5000 * 2,
+      cost: 6260 * 2,
+    },
+    {
+      name: "RESU7H + RESU10H",
+      type: "Home battery",
+      capacity: 6600 + 9300,
+      peak_discharge: 5000 * 2,
+      cost: 6260 + 8100,
+    },
+    {
+      name: "2x RESU10H",
+      type: "Home battery",
+      capacity: 9300 * 2,
+      peak_discharge: 5000 * 2,
+      cost: 8100 * 2,
+    },
+    {
+      name: "3x RESU10H",
+      type: "Home battery",
+      capacity: 9300 * 3,
+      peak_discharge: 5000 * 3,
+      cost: 8100 * 3,
+    }
+  ],
+  "Generac": [
+    {
+      name: "Home Standby Generator",
+      type: "Generator",
+      capacity: 0,
+      peak_discharge: 16000,
+      cost: 5429,
     }
   ]
 }

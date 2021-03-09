@@ -106,11 +106,29 @@ export const RecommendationsPage = (props: {
     // Analyze recommendation performance
     let _panels = [];
     for (let brand of Object.keys(STORAGE_DEVICES)) {
-      // choose the first for now (placeholder)
+      // start with the base model
       let recommendation = STORAGE_DEVICES[brand][0];
+      let perf;
+      let percentages: { [string]: number } = {};
 
-      // Details to show on the comparison page
-      // Description will contain rec performance on 3 classes of outages
+      for (recommendation of STORAGE_DEVICES[brand]) {
+        perf = assess_recommendation(recommendation, models, OUTAGES);
+        percentages = {};
+        for (let [name, result] of Object.entries(perf)) {
+          // count successes
+          let successes = result.reduce((a, b) => a + (b === 4), 0);
+          let percentage = Math.round(successes * 100 / M);
+          percentages[name] = percentage;
+        }
+
+        let percentages_list: number[] = Object.values(percentages);
+        if (percentages_list[0] < 90 || percentages_list[1] < 75 || percentages_list[2] < 50) {
+          continue;
+        } else {
+          break;
+        }
+      }
+
       let panel = {
         title: brand,
         subheader: recommendation.name,
@@ -119,16 +137,13 @@ export const RecommendationsPage = (props: {
         description: [],
         buttonText: 'See details',
         buttonVariant: 'outlined',
-        perf: {}
+        perf: perf,
+        cost: recommendation.cost,
+        type: recommendation.type,
       }
 
-      panel.perf = assess_recommendation(recommendation, models, OUTAGES);
-      for (let type in OUTAGES) {
-        // count successes
-        let successes = panel.perf[type].reduce((a, b) => a + (b === 4), 0)
-
-        let percentage = Math.round(successes * 100 / M);
-        panel.description.push(`Prevents ${percentage}% of ${type} outages`)
+      for (let [name, percentage] of Object.entries(percentages)) {
+        panel.description.push(`Prevents ${percentage}% of ${name} outages`)
       }
       _panels.push(panel);
     }
@@ -147,13 +162,13 @@ export const RecommendationsPage = (props: {
           Recommendations
         </Typography>
         <Typography variant="h5" align="center" color="textSecondary" component="p">
-          These are your recommended storage devices: we've provided 3 choices from 3 leading brands that
-          we hope will help you make an informed decision about your home power system.
+          According to your household's needs and power consumption patterns, we've provided 4 power solution choices
+          from leading brands that we hope will help you make an informed decision about your home power system.
         </Typography>
       </Container>
       {/* End hero unit */}
-      <Container maxWidth="md" component="main">
-        <Grid container spacing={5} alignItems="flex-end">
+      <Container maxWidth="lg" component="main">
+        <Grid container spacing={2} alignItems="flex-start">
           {panels.map((panel) => (
             <RecommendationPanel panel={panel} classes={classes} />
           ))}
