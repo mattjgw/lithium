@@ -57,11 +57,23 @@ export const HOURLY_PATTERNS = {
   ],
 }
 
-export const OUTAGES = [
-  15,
-  60,
-  180
-]
+export const OUTAGES = {
+  "short": [
+    15,
+    30,
+    60,
+  ],
+  "medium": [
+    30,
+    120,
+    360,
+  ],
+  "long": [
+    120,
+    360,
+    1440,
+  ]
+}
 
 export const EXAMPLE_RESPONSE: QuestionnaireResponse = {
   "location": "ON",
@@ -87,7 +99,8 @@ export const EXAMPLE_RESPONSE: QuestionnaireResponse = {
   "windowOrCentral": 0,
   "windowUnits": 0,
   "eeBulbs": true,
-  "additionalDevices": []
+  "additionalDevices": [],
+  "priority": "short",
 }
 
 export const STORAGE_DEVICES: { [string]: StorageSolution[] } = {

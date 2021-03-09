@@ -53,6 +53,7 @@ export type QuestionnaireResponse = {
   // whether the user primarily has LED or halogen bulbs
 
   additionalDevices: DeviceDefinition[],
+  priority: "short" | "medium" | "long",
 }
 
 export type ModelParams = {

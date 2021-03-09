@@ -5,6 +5,7 @@ import { withStyles } from '@material-ui/core/styles';
 import React, { Component } from 'react';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormControl from '@material-ui/core/FormControl';
 import Radio from '@material-ui/core/Radio';
 
 const styles = {
@@ -59,30 +60,44 @@ export class FormOutageDefinition extends Component {
         <Typography className={classes.subTitle}>Outage Definition</Typography>
 
         <Typography className={classes.question}>Which of these statements applies most to you?</Typography>
-
         <RadioGroup className={classes.options} aria-label="priority" color="inherit" name="priority" value={values.priority} onChange={handleChange('priority')}>
-            <FormControlLabel 
-                value='1'
-                control={<Radio />} 
+          <Grid container spacing={1}>
+            <Grid item md={12}>
+              <FormControlLabel
+                value='short'
+                control={<Radio />}
                 label="I'd like to avoid the inconvenience of minor power outages: 
-                it's important to me that my appliances and devices have a continuous source of power." />
-            <FormControlLabel 
-                value='2'
-                control={<Radio />} 
+                  it's important to me that my appliances and devices have a continuous source of power.
+                  (We'll adjust our recommendations for 15 minute to 2 hour power outages.)" />
+            </Grid>
+            <Grid item md={12}>
+              <FormControlLabel
+                value='medium'
+                control={<Radio />}
                 label="I experience regular extended power outages 
-                and want a solution that will keep my home up and running throughout the day." />
-            <FormControlLabel 
-                value='3'
-                control={<Radio />} 
+                  and want a solution that will keep my home up and running throughout the day.
+                  (We'll adjust our recommendations for 30 minute to 6 hour power outages.)" />
+            </Grid>
+            <Grid item md={12}>
+              <FormControlLabel
+                value='long'
+                control={<Radio />}
                 label="I need to ensure that I have sufficient power to weather a storm 
-                or natural disaster, getting me through a worst-case scenario." />
+              or natural disaster, getting me through a worst-case scenario.
+              (We'll adjust our recommendations to handle power outages up to 24 hours." />
+            </Grid>
+            <Grid item md={12}>
+              <Button
+                color="secondary"
+                variant="contained"
+                onClick={this.continue}
+              >Continue</Button>
+            </Grid>
+          </Grid>
+
         </RadioGroup>
 
-        <Button
-          color="secondary"
-          variant="contained"
-          onClick={this.continue}
-        >Continue</Button>
+
       </Grid>
     );
   }
