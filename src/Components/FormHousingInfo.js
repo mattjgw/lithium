@@ -139,7 +139,9 @@ export class FormPriority extends Component {
 
         <Typography className={classes.question}>
           What is your average monthly power usage during the summer (kWh)?&nbsp;
-          <Tooltip title="You can find this information on a recent power bill." placement="right" arrow><HelpIcon fontSize="small" /></Tooltip>
+          {/*See https://energyrates.ca/residential-electricity-natural-gas/ for reference*/}
+          <Tooltip title="You can find this information on a recent power bill. For context,
+           the average Ontario household using about 800 kWh of electricity per month." placement="right" arrow><HelpIcon fontSize="small" /></Tooltip>
         </Typography>
 
         <br />
@@ -157,7 +159,8 @@ export class FormPriority extends Component {
 
         <Typography className={classes.question}>
           What is your average monthly power usage during the winter (kWh)?&nbsp;
-          <Tooltip title="You can find this information on a recent power bill." placement="right" arrow><HelpIcon fontSize="small" /></Tooltip>
+          <Tooltip title="You can find this information on a recent power bill. For context,
+           the average Ontario household using about 800 kWh of electricity per month." placement="right" arrow><HelpIcon fontSize="small" /></Tooltip>
         </Typography>
         <br />
         <TextField
