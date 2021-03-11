@@ -112,7 +112,7 @@ export const RecommendationsPage = (props: {
       let percentages: { [string]: number } = {};
 
       for (recommendation of STORAGE_DEVICES[brand]) {
-        perf = assess_recommendation(recommendation, models, OUTAGES);
+        perf = assess_recommendation(recommendation, models, OUTAGES[response.priority]);
         percentages = {};
         for (let [name, result] of Object.entries(perf)) {
           // count successes

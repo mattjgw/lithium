@@ -40,10 +40,14 @@ const styles = {
     marginLeft: 20,
     marginTop: 20
   },
+  back: {
+    marginTop: -10,
+    marginRight: 10
+  }
 };
 
 
-export class FormPriority extends Component {
+export class FormHousingInfo extends Component {
   continue = e => {
     e.preventDefault();
     if (this.props.values.location !== '' && this.props.values.squareFootage !== 0
@@ -51,6 +55,11 @@ export class FormPriority extends Component {
       && this.props.values.winterUsage !== 0) {
       this.props.nextStep();
     }
+  };
+
+  back = e => {
+    e.preventDefault();
+    this.props.prevStep();
   };
 
   render() {
@@ -175,14 +184,23 @@ export class FormPriority extends Component {
         />
         <br />
 
-        <Button
-          color="secondary"
-          variant="contained"
-          onClick={this.continue}
-        >Continue</Button>
+        <Grid>
+          <Button
+            className={classes.back}
+            color="primary"
+            variant="contained"
+            onClick={this.back}
+          >Back</Button>
+
+          <Button
+            color="secondary"
+            variant="contained"
+            onClick={this.continue}
+          >Continue</Button>
+        </Grid>
       </Grid>
     );
   }
 }
 
-export default withStyles(styles)(FormPriority);
+export default withStyles(styles)(FormHousingInfo);
