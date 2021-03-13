@@ -8,6 +8,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
+import LinearProgress from '@material-ui/core/LinearProgress';
 import React, { Component } from 'react';
 
 const styles = {
@@ -56,7 +57,11 @@ const styles = {
   },
   windowOrCentral: {
     width: 150
-  }
+  },
+  progressBar: {
+    width: 600,
+    marginBottom: 20
+  },
 };
 
 
@@ -72,12 +77,13 @@ export class FormApplianceInfo extends Component {
   };
 
   render() {
-    const { values, handleCheckChange, handleFieldChange } = this.props;
+    const { values, handleCheckChange, handleFieldChange, progress } = this.props;
     const { classes } = this.props;
     return (
       <Grid className={classes.shift}>
 
         <Typography className={classes.title}>Questionnaire</Typography>
+        <LinearProgress className={classes.progressBar} color='secondary' variant="determinate" value={progress} />
         <Typography className={classes.subTitle}>Appliance Information</Typography>
 
         <Typography className={classes.question}>Which of the following appliances do you own?</Typography>

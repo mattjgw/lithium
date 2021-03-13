@@ -5,7 +5,7 @@ import { withStyles } from '@material-ui/core/styles';
 import React, { Component } from 'react';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormControl from '@material-ui/core/FormControl';
+import LinearProgress from '@material-ui/core/LinearProgress';
 import Radio from '@material-ui/core/Radio';
 
 const styles = {
@@ -39,6 +39,10 @@ const styles = {
     marginLeft: 20,
     marginTop: 20
   },
+  progressBar: {
+    width: 600,
+    marginBottom: 20
+  },
 };
 
 
@@ -51,12 +55,13 @@ export class FormOutageDefinition extends Component {
   };
 
   render() {
-    const { handleChange, values } = this.props;
+    const { handleChange, values, progress } = this.props;
     const { classes } = this.props;
     return (
       <Grid className={classes.shift}>
 
         <Typography className={classes.title}>Questionnaire</Typography>
+        <LinearProgress className={classes.progressBar} color='secondary' variant="determinate" value={progress} />
         <Typography className={classes.subTitle}>Outage Definition</Typography>
 
         <Typography className={classes.question}>Which of these statements applies most to you?</Typography>

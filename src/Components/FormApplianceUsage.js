@@ -3,6 +3,7 @@ import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
+import LinearProgress from '@material-ui/core/LinearProgress';
 import React, { Component } from 'react';
 import ApplianceUsageQuestion from './ApplianceUsageQuestion';
 
@@ -46,7 +47,11 @@ const styles = {
   back: {
     marginTop: -10,
     marginRight: 10
-  }
+  },
+  progressBar: {
+    width: 600,
+    marginBottom: 20
+  },
 };
 
 
@@ -62,12 +67,13 @@ export class FormApplianceUsage extends Component {
   };
 
   render() {
-    const { values, handleChange } = this.props;
+    const { values, handleChange, progress } = this.props;
     const { classes } = this.props;
     return (
       <Grid className={classes.shift}>
 
         <Typography className={classes.title}>Questionnaire</Typography>
+        <LinearProgress className={classes.progressBar} color='secondary' variant="determinate" value={progress} />
         <Typography className={classes.subTitle}>Appliance Usage</Typography>
 
         {!!values.dishwasher &&
