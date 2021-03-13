@@ -85,6 +85,7 @@ export class UserForm extends Component {
               nextStep={this.nextStep}
               handleChange={this.handleFieldChange}
               values={values}
+              progress={20}
             />
 
           );
@@ -95,6 +96,7 @@ export class UserForm extends Component {
               prevStep={this.prevStep}
               handleChange={this.handleFieldChange}
               values={values}
+              progress={40}
             />
 
           );
@@ -106,6 +108,7 @@ export class UserForm extends Component {
               handleCheckChange={this.handleCheckChange}
               handleFieldChange={this.handleFieldChange}
               values={values}
+              progress={60}
             />
           );
         case 4:
@@ -116,6 +119,7 @@ export class UserForm extends Component {
                 prevStep={this.prevStep}
                 handleChange={this.handleFieldChange}
                 values={values}
+                progress={80}
               />
             )
           };

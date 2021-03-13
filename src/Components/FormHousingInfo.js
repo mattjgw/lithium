@@ -7,6 +7,7 @@ import Select from '@material-ui/core/Select';
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import HelpIcon from '@material-ui/icons/Help';
+import LinearProgress from '@material-ui/core/LinearProgress';
 import React, { Component } from 'react';
 
 const styles = {
@@ -43,7 +44,11 @@ const styles = {
   back: {
     marginTop: -10,
     marginRight: 10
-  }
+  },
+  progressBar: {
+    width: 600,
+    marginBottom: 20
+  },
 };
 
 
@@ -63,12 +68,13 @@ export class FormHousingInfo extends Component {
   };
 
   render() {
-    const { handleChange, values } = this.props;
+    const { handleChange, values, progress } = this.props;
     const { classes } = this.props;
     return (
       <Grid className={classes.shift}>
 
         <Typography className={classes.title}>Questionnaire</Typography>
+        <LinearProgress className={classes.progressBar} color='secondary' variant="determinate" value={progress} />
         <Typography className={classes.subTitle}>Housing Information</Typography>
 
         <Typography className={classes.question}>
