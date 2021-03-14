@@ -28,6 +28,9 @@ export const UsageGraph = (props: { data: { [any]: number[] }, axis: number[] })
         groups: [[...Object.keys(data)]],
         order: 'desc',
       }}
+      legend={{
+        position: 'right'
+      }}
       interaction={{
         enabled: false
       }}
@@ -45,11 +48,13 @@ export const UsageGraph = (props: { data: { [any]: number[] }, axis: number[] })
             values: ticks,
             format: "%H",
           },
-          padding: { left: 0 }
+          padding: { left: 0 },
+          label: "Time of day (hours)"
         },
         y: {
           min: 0,
           padding: 0,
+          label: "Electricity demand (watts)"
         },
       }}
     />

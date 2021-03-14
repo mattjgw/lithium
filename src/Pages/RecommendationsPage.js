@@ -8,9 +8,10 @@ import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import React, { useEffect, useState } from 'react';
 import RecommendationPanel from '../Components/RecommendationPanel';
+import UsageGraph from '../Components/UsageGraph';
 import TopBar from '../Components/TopBar';
 import { OUTAGES, STORAGE_DEVICES } from '../lib/data';
-import { generate_model, get_devices } from '../lib/model';
+import { generate_model, generate_timestamps, get_devices } from '../lib/model';
 import { assess_recommendation } from '../lib/recommender';
 import type { QuestionnaireResponse } from '../lib/types';
 
@@ -83,6 +84,7 @@ export const RecommendationsPage = (props: {
 
   const classes = useStyles();
   let [panels, setPanels] = useState([]);
+  let [exampleDemand, setExampleDemand] = useState(null);
 
   useEffect(() => {
     let M = 50;
@@ -99,6 +101,8 @@ export const RecommendationsPage = (props: {
       }
       return m;
     })()
+
+    setExampleDemand(models[models.length - 1].device_demand);
     console.log(models);
 
     // Choose recommendations
@@ -174,6 +178,15 @@ export const RecommendationsPage = (props: {
           ))}
         </Grid>
       </Container>
+      <br />
+      {exampleDemand &&
+        <Container maxwidth="md" component="main">
+          <Typography component="h2" variant="h5" align="center" color="textPrimary" gutterBottom>
+            Example consumption pattern over a 24 hour period
+        </Typography>
+          <UsageGraph data={exampleDemand} axis={generate_timestamps()} />
+        </Container>
+      }
     </div>
   );
 }

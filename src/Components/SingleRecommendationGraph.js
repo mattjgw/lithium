@@ -18,6 +18,20 @@ export const SingleRecommendationGraph = (props: { data: RecommendationPerforman
         type: "bar",
         color: (color, d) => [null, "red", "orange", "yellow", "green"][d.value]
       }}
+      tooltip={{
+        format: {
+          title: function (d) { return 'Result' },
+          value: function (value, ratio, id) {
+            return [
+              "error",
+              "Insufficient output and capacity",
+              "Insufficient output",
+              "Insufficient capacity",
+              "Outage prevented"
+            ][value]
+          }
+        }
+      }}
       legend={{ show: false }}
       bar={{
         width: {
