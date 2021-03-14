@@ -192,6 +192,7 @@ export class FormHousingInfo extends Component {
 
         <Grid>
           <Button
+            testID = 'backButton'
             className={classes.back}
             color="primary"
             variant="contained"
@@ -199,6 +200,7 @@ export class FormHousingInfo extends Component {
           >Back</Button>
 
           <Button
+            testID ='continueButton'
             color="secondary"
             variant="contained"
             onClick={this.continue}

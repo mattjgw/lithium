@@ -93,6 +93,7 @@ export class FormOutageDefinition extends Component {
             </Grid>
             <Grid item md={12}>
               <Button
+                testId = 'continueButton'
                 color="secondary"
                 variant="contained"
                 onClick={this.continue}
