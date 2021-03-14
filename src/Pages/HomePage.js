@@ -85,6 +85,7 @@ export class HomePage extends Component {
 
                     <Link to={{ pathname: "/survey" }} style={{ textDecoration: 'none' }} color="secondary">
                         <Button
+                            TestId = "startButton"
                             color="secondary"
                             variant="contained"
                             onClick={this.continue}
