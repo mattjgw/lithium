@@ -7,7 +7,9 @@ import CardContent from '@material-ui/core/CardContent';
 import CardHeader from '@material-ui/core/CardHeader';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
+import Tooltip from '@material-ui/core/Tooltip';
 import StarIcon from '@material-ui/icons/StarBorder';
+import HelpIcon from '@material-ui/icons/Help';
 import React from 'react';
 import { SingleRecommendationGraph } from '../Components/SingleRecommendationGraph';
 
@@ -47,7 +49,8 @@ export const RecommendationPanel = (props: {
             {Math.round(panel.output / 100) / 10}
           </Typography>
           <Typography variant="h6" color="textSecondary">
-            kW output
+            kW output&nbsp;
+            <Tooltip title="This is the peak output: a higher number means you can power more devices simultaneously." placement="right" arrow><HelpIcon fontSize="small" /></Tooltip>
           </Typography>
         </div>
         {panel.capacity > 0 && <div className={classes.cardPricing}>
@@ -55,7 +58,8 @@ export const RecommendationPanel = (props: {
             {Math.round(panel.capacity / 100) / 10}
           </Typography>
           <Typography variant="h6" color="textSecondary">
-            kWh capacity
+            kWh capacity&nbsp;
+            <Tooltip title="This is the total capacity: a higher number means you can withstand longer power outages." placement="right" arrow><HelpIcon fontSize="small" /></Tooltip>
           </Typography>
         </div>}
         <ul>
